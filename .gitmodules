@@ -1,0 +1,3 @@
+[submodule "ZeroNet"]
+	path = ZeroNet
+	url = git@github.com:HelloZeroNet/ZeroNet.git
