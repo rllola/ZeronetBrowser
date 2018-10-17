@@ -1,0 +1,36 @@
+language: generic
+matrix:
+    include:
+      - os: linux
+        dist: trusty
+        sudo: true
+        addons:
+          apt:
+            update: true
+            sources:
+              - ubuntu-toolchain-r-test
+            packages:
+              - python-gevent
+              - python-greenlet
+              - python-minimal
+              - python-msgpack
+              - python-wheel
+      - os: osx
+
+install:
+  - pip install pyinstaller
+  - echo "import zeronet" > ZeroNet/src/__init__.py
+script:
+  - pyinstaller browser.spec
+
+before_deploy:
+  - zip build-$TRAVIS_OS_NAME.zip dist/ZeronetBrowser
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: $GH_TOKEN
+  file:
+    - build-$TRAVIS_OS_NAME.zip
+  on:
+    tags: true
