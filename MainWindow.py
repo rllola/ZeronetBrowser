@@ -1,6 +1,7 @@
 from Browser import Browser
 from NavigationBar import NavigationBar
 from PyQt5.QtWidgets import QMainWindow, QToolBar
+from PyQt5.QtCore import QUrl
 
 class MainWindow(QMainWindow):
 
@@ -13,6 +14,7 @@ class MainWindow(QMainWindow):
 
         # Navigation bar
         self.navigation = NavigationBar()
+        self.navigation.url_bar.returnPressed.connect(self.navigate_to_url)
 
         # Get everything fitting in the main window
         self.addToolBar(self.navigation)
@@ -25,3 +27,21 @@ class MainWindow(QMainWindow):
         url_array = q.toString().split('/')[3:]
         formatted_url = '/'.join(str(x) for x in url_array)
         self.navigation.url_bar.setText('zero://' + formatted_url)
+        self.navigation.url_bar.setCursorPosition(0)
+
+    def navigate_to_url(self):
+        # Get url
+        url = self.navigation.url_bar.text()
+
+        if url.startswith('zero://') :
+            # ZeroNet protocol
+            url_array = url.split('/')
+            url = 'http://127.0.0.1:43110/' + url_array[2]
+        elif url.startswith('http://'):
+            # http protocol
+            pass
+        else :
+            # Nothing mentionned
+            url = 'http://127.0.0.1:43110/' + url
+
+        self.browser.setUrl(QUrl(url))
