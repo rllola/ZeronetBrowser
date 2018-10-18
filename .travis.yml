@@ -10,6 +10,8 @@ matrix:
             sources:
               - ubuntu-toolchain-r-test
             packages:
+              - glibc
+              - binutils
               - python-setuptools
               - python-gevent
               - python-greenlet
