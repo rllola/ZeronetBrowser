@@ -22,7 +22,7 @@ matrix:
         sudo: true
 
 install:
-  - sudo pip install pyinstaller
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo pip install pyinstaller; else pip install --force-reinstall --no-binary :all: pyinstaller; fi
   - echo "import zeronet" > ZeroNet/src/__init__.py
 script:
   - pyinstaller browser.spec
