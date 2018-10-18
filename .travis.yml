@@ -20,6 +20,7 @@ matrix:
 
 install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo pip install pyinstaller; else pip install --user pyinstaller; fi
+  - sudo pip install six
   - echo "import zeronet" > ZeroNet/src/__init__.py
 script:
   - pyinstaller browser.spec
