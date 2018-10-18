@@ -10,7 +10,7 @@ matrix:
             sources:
               - ubuntu-toolchain-r-test
             packages:
-              - glibc
+              - libc-bin
               - binutils
               - python-setuptools
               - python-gevent
