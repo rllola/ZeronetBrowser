@@ -2,3 +2,4 @@ venv/
 *.pyc
 build/
 dist/
+.vagrant/
