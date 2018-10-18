@@ -12,6 +12,8 @@ matrix:
             packages:
               - libc-bin
               - binutils
+              - python-all
+              - python-all-dev
               - python-setuptools
               - python-gevent
               - python-greenlet
