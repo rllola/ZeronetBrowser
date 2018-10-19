@@ -1,31 +1,15 @@
-language: generic
 matrix:
     include:
       - os: linux
+        language: python
         dist: trusty
         sudo: true
-        addons:
-          apt:
-            update: true
-            sources:
-              - ubuntu-toolchain-r-test
-            packages:
-              - libc-bin
-              - binutils
-              - python-all
-              - python-all-dev
-              - python-setuptools
-              - python-gevent
-              - python-greenlet
-              - python-minimal
-              - python-msgpack
-              - python-wheel
       - os: osx
+        language: generic
         sudo: true
 
 install:
   - sudo pip install pyinstaller
-  - locate setuptools
   - echo "import zeronet" > ZeroNet/src/__init__.py
 script:
   - pyinstaller browser.spec
