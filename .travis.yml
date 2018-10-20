@@ -4,15 +4,9 @@ matrix:
         language: python
         dist: trusty
         sudo: true
-        addons:
-          apt:
-            update: true
-            sources:
-              - ubuntu-toolchain-r-test
-            packages:
-              - python-pyqt5
-              - python-pyqt5.qtwebengine
-              - python-pyqt5.qtwebkit
+        before_install:
+          - sudo apt-get update
+          - sudo apt-get install -y python-pyqt5 python-pyqt5.qtwebengine python-pyqt5.qtwebkit
       - os: osx
         language: generic
         sudo: true
