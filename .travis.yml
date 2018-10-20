@@ -4,6 +4,12 @@ matrix:
         language: python
         dist: trusty
         sudo: true
+        addons:
+          apt:
+            packages:
+            - python-pyqt5
+            - python-pyqt5.qtwebengine
+            - python-pyqt5.qtwebkit
       - os: osx
         language: generic
         sudo: true
@@ -16,7 +22,7 @@ script:
   - pyinstaller browser.spec
 
 before_deploy:
-  - zip build-$TRAVIS_OS_NAME.zip dist/ZeronetBrowser
+  - zip build-$TRAVIS_OS_NAME.zip dist/ZeronetBrowser/*
 deploy:
   provider: releases
   skip_cleanup: true

@@ -21,10 +21,6 @@ a = Analysis(['launch.py'],
              cipher=block_cipher,
              noarchive=False)
 
-for module in a.pure:
-    print(module)
-
-
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 
