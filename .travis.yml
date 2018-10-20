@@ -7,10 +7,12 @@ matrix:
         addons:
           apt:
             update: true
+            sources:
+              - ubuntu-toolchain-r-test
             packages:
-            - python-pyqt5
-            - python-pyqt5.qtwebengine
-            - python-pyqt5.qtwebkit
+              - python-pyqt5
+              - python-pyqt5.qtwebengine
+              - python-pyqt5.qtwebkit
       - os: osx
         language: generic
         sudo: true
