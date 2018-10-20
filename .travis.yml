@@ -6,6 +6,7 @@ matrix:
         sudo: true
         addons:
           apt:
+            update: true
             packages:
             - python-pyqt5
             - python-pyqt5.qtwebengine
