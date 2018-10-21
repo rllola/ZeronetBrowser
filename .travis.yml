@@ -17,7 +17,7 @@ matrix:
         sudo: true
 
 install:
-  - sudo pip install pyinstaller
+  - sudo pip install pyinstaller pyinstaller-hooks
   - sudo pip install --upgrade setuptools
   - echo "import zeronet" > ZeroNet/src/__init__.py
 script:
