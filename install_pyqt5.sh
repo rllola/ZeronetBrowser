@@ -8,8 +8,8 @@ sudo apt-get install -qq qtdeclarative5-dev libqt5svg5-dev qtmultimedia5-dev
 export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
 
 # Library versions
-PYQT_VERSION=5.7.1
-SIP_VERSION=4.19
+PYQT_VERSION=5.11.3
+SIP_VERSION=4.19.13
 
 # Install sip
 wget --retry-connrefused https://sourceforge.net/projects/pyqt/files/sip/sip-$SIP_VERSION/sip-$SIP_VERSION.tar.gz
