@@ -7,6 +7,7 @@ matrix:
         virtualenv:
           system_site_packages: true
         before_install:
+          - sudo pip install enum34
           - bash install_pyqt5.sh
       - os: osx
         language: generic
