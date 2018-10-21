@@ -6,6 +6,8 @@ matrix:
         sudo: required
         virtualenv:
           system_site_packages: true
+        before_install:
+          - bash install_pyqt5.sh
       - os: osx
         language: generic
         sudo: true
