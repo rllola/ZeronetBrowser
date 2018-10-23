@@ -1,0 +1,37 @@
+git:
+    submodules: true
+
+matrix:
+    include:
+      - os: linux
+        language: python
+        python: "2.7"
+        sudo: required
+        virtualenv:
+          system_site_packages: true
+        before_install:
+          - sudo pip install enum34
+          - bash install_pyqt5.sh
+      - os: osx
+        language: generic
+        sudo: true
+
+install:
+  - sudo pip install pyinstaller pyinstaller-hooks
+  - sudo pip install --upgrade setuptools
+  - echo "import zeronet" > ZeroNet/src/__init__.py
+script:
+  - python test.py
+  - pyinstaller browser.spec
+
+before_deploy:
+  - zip -r build-$TRAVIS_OS_NAME.zip dist/ZeronetBrowser
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: $GH_TOKEN
+  file:
+    - build-$TRAVIS_OS_NAME.zip
+  on:
+    tags: true

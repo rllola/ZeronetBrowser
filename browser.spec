@@ -10,7 +10,7 @@ a = Analysis(['launch.py'],
              pathex=['/home/lola/Workspace/ZeroNet/Browser/ZeroNet/src', '/home/lola/Workspace/ZeroNet/Browser/ZeroNet/plugins', '/home/lola/Workspace/ZeroNet/Browser/ZeroNet/src/lib', '/home/lola/Workspace/ZeroNet/Browser'],
              binaries=[],
              datas=[],
-             hiddenimports=['gevent', 'ConfigParser', 'json', 'sqlite3', 'msgpack', 'setuptools', 'cgi', 'xml.dom', 'posixpath'],
+             hiddenimports=['gevent', 'ConfigParser', 'json', 'sqlite3', 'PyQt5', 'msgpack', 'setuptools', 'cgi', 'xml.dom', 'posixpath'],
              #hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
@@ -20,10 +20,6 @@ a = Analysis(['launch.py'],
              win_private_assemblies=False,
              cipher=block_cipher,
              noarchive=False)
-
-for module in a.pure:
-    print(module)
-
 
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
