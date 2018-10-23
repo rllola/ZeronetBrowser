@@ -5,7 +5,7 @@
 #                                                                             #
 # Vagrantfile project: ZeroNet Browser                                        #
 # Description:                                                                #
-# Will start a ubuntu 18.04 box with Zeronet browser starting                 #                                                                 #
+# Will start a ubuntu 14.04 box with Zeronet browser starting                 # 
 # Author: Lola                                                                #
 #                                                                             #
 ###############################################################################
@@ -15,7 +15,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.box = "ubuntu/bionic64"
+  config.vm.box = "ubuntu/trusty64"
 
   # Forwarding zeronet ports
   config.vm.network "forwarded_port", guest: 43110, host: 43110
@@ -23,7 +23,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provider "virtualbox" do |vb|
      vb.name = "ZeroNet Browser"
-     vb.gui = true
+     #vb.gui = true
      vb.customize ["modifyvm", :id, "--memory", "1572"]
      vb.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
   end
