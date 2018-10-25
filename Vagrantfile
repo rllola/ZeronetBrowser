@@ -5,7 +5,7 @@
 #                                                                             #
 # Vagrantfile project: ZeroNet Browser                                        #
 # Description:                                                                #
-# Will start a ubuntu 14.04 box with Zeronet browser starting                 # 
+# Will start a ubuntu 14.04 box with Zeronet browser starting                 #
 # Author: Lola                                                                #
 #                                                                             #
 ###############################################################################
