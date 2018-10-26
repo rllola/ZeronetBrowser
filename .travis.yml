@@ -11,6 +11,7 @@ matrix:
         virtualenv:
           system_site_packages: true
         before_install:
+          - sudo apt-get update
           - sudo apt-get install -y python-pyqt5
       - os: osx
         language: generic
