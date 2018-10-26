@@ -7,11 +7,12 @@ matrix:
         language: python
         python: "2.7"
         sudo: required
+        dist: xenial
         virtualenv:
           system_site_packages: true
         before_install:
-          - sudo pip install enum34
-          - bash install_pyqt5.sh
+          - sudo apt-get update
+          - sudo apt-get install -y python-pyqt5 msgpack-python python-gevent python-dev
       - os: osx
         language: generic
         sudo: true
