@@ -16,6 +16,9 @@ matrix:
       - os: osx
         language: generic
         sudo: true
+        before_install:
+          - brew install sip --without-python
+          - brew install pyqt5 --without-python
 
 install:
   - sudo pip install pyinstaller pyinstaller-hooks
