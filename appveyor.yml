@@ -6,15 +6,14 @@ image: Visual Studio 2017
 environment:
   matrix:
     - PYTHON: "C:\\Python27-x64"
-      MINGW: "C:\\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1"
 
 build: off
 
 init:
-  - "SET PATH=%MINGW%;%MINGW%\\mingw64\\bin;%PATH%"
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
   - python -m pip install --upgrade pip setuptools
   - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent
+  - choco install make
 
 install:
   - curl -LO https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.13/sip-4.19.13.zip
