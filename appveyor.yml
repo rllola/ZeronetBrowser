@@ -13,7 +13,7 @@ init:
   - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent
 
 install:
-  - wget --retry 999 --connect-timeout 6 https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.13/sip-4.19.13.zip/download
+  - curl --retry 999 --connect-timeout 6 https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.13/sip-4.19.13.zip/download
   - dir
   - 7z x sip-4.19.13.zip -osip-4.19.13
   - cd sip-4.19.13
