@@ -10,6 +10,7 @@ environment:
 build: off
 
 init:
+  - C:\cygwin\setup-x86.exe -qnNdO -R C:/cygwin -s http://cygwin.mirror.constant.com -l C:/cygwin/var/cache/setup -P autoconf -P automake -P bison -P gcc-core -P gcc-g++ -P mingw-runtime -P mingw-binutils -P mingw-gcc-core -P mingw-gcc-g++ -P mingw-pthreads -P mingw-w32api -P libtool -P make -P python -P gettext-devel -P gettext -P intltool -P libiconv -P pkg-config -P git -P wget -P curl
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
   - python -m pip install --upgrade pip setuptools
   - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent
@@ -22,15 +23,15 @@ install:
   - cd sip-4.19.13
   - python configure.py --platform win32-g++
   - dir
-  - C:\cygwin64\bin\make.exe .
-  - C:\cygwin64\bin\make.exe install
+  - make
+  - make install
   - cd ..
   - curl -LO https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.11.3/PyQt5_gpl-5.11.3.zip
   - 7z x PyQt5_gpl-5.11.3.zip
   - cd PyQt5_gpl-5.11.3
   - python configure.py
-  - C:\cygwin64\bin\make.exe .
-  - C:\cygwin64\bin\make.exe install
+  - make
+  - make install
   - cd ..
   - echo "import zeronet" > ZeroNet/src/__init__.py
 
