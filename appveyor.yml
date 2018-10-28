@@ -20,7 +20,7 @@ install:
   - 7z x sip-4.19.13.zip
   - dir
   - cd sip-4.19.13
-  - python configure.py
+  - python configure.py --platform win32-g++
   - dir
   - C:\cygwin64\bin\make.exe .
   - C:\cygwin64\bin\make.exe install
