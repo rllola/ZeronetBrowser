@@ -10,7 +10,7 @@ environment:
 build: off
 
 init:
-  - "SET PATH=C:\\cygwin64\\bin;%PYTHON%;%PYTHON%\\Scripts;%PATH%"
+  - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
   - python -m pip install --upgrade pip setuptools
   - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent
 
@@ -22,15 +22,15 @@ install:
   - cd sip-4.19.13
   - python configure.py
   - dir
-  - make
-  - make install
+  - C:\cygwin64\bin\make.exe
+  - C:\cygwin64\bin\make.exe install
   - cd ..
   - curl -LO https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.11.3/PyQt5_gpl-5.11.3.zip
   - 7z x PyQt5_gpl-5.11.3.zip
   - cd PyQt5_gpl-5.11.3
   - python configure.py
-  - make
-  - make install
+  - C:\cygwin64\bin\make.exe
+  - C:\cygwin64\bin\make.exe install
   - cd ..
   - echo "import zeronet" > ZeroNet/src/__init__.py
 
