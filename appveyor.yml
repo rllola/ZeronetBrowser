@@ -13,7 +13,7 @@ init:
   - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent
 
 install:
-  - conda install pyqt5
+  - C:\Miniconda install pyqt5
   - echo "import zeronet" > ZeroNet/src/__init__.py
 
 
