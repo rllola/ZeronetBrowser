@@ -14,7 +14,7 @@ init:
 
 install:
   - set PATH=C:\Miniconda-x64;C:\Miniconda-x64\Scripts;%PATH%
-  - conda install -c inso pyqt5
+  - conda install -c ipa pyqt5
   - echo "import zeronet" > ZeroNet/src/__init__.py
 
 
