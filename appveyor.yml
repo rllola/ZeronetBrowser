@@ -6,14 +6,17 @@ image: Visual Studio 2017
 environment:
   matrix:
     - PYTHON: "C:\\Python27-x64"
+      MSYS2: "C:\\msys64"
 
 build: off
 
 init:
+  - cd C:\\msys64
+  - dir
+  - "SET PATH=%MSYS2%;%PATH%"
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
   - python -m pip install --upgrade pip setuptools
   - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent
-  - choco install make
 
 install:
   - curl -LO https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.13/sip-4.19.13.zip
