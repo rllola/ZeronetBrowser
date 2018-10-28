@@ -10,6 +10,8 @@ environment:
 build: off
 
 init:
+  - cd C:\cygwin64
+  - dir
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
   - python -m pip install --upgrade pip setuptools
   - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent
