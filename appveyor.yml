@@ -13,16 +13,16 @@ init:
   - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent
 
 install:
-  - curl --retry 999 -O https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.13/sip-4.19.13.zip
+  - curl -O https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.13/sip-4.19.13.zip
   - dir
-  - 7z x sip-4.19.13.zip -osip-4.19.13
+  - 7z e sip-4.19.13.zip -osip-4.19.13
   - cd sip-4.19.13
   - python configure.py
   - make
   - make install
   - cd ..
-  - curl --retry 999 -O https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.11.3/PyQt5_gpl-5.11.3.zip
-  - 7z x PyQt5_gpl-5.11.3.zip -oPyQt5_gpl-5.11.3
+  - curl -O https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.11.3/PyQt5_gpl-5.11.3.zip
+  - 7z e PyQt5_gpl-5.11.3.zip -oPyQt5_gpl-5.11.3
   - cd PyQt5_gpl-5.11.3
   - python configure.py
   - make
