@@ -13,7 +13,8 @@ init:
   - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent
 
 install:
-  - C:\Miniconda install pyqt5
+  - set PATH=C:\Miniconda-x64;C:\Miniconda-x64\Scripts;%PATH%
+  - conda install pyqt5
   - echo "import zeronet" > ZeroNet/src/__init__.py
 
 
