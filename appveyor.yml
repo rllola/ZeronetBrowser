@@ -17,7 +17,12 @@ install:
   - dir
   - 7z x sip-4.19.13.zip
   - dir
-  - cd sip-4.19.13 && dir && python configure.py && make && make install
+  - cd sip-4.19.13
+  - python configure.py
+  - dir
+  - make
+  - make install
+  - cd ..
   - curl -LO https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.11.3/PyQt5_gpl-5.11.3.zip
   - 7z x PyQt5_gpl-5.11.3.zip
   - cd PyQt5_gpl-5.11.3
