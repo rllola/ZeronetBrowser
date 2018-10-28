@@ -11,6 +11,8 @@ environment:
 build: off
 
 init:
+  - cd C:\\msys64\\mingw64\\bin
+  - dir
   - "SET PATH=%MSYS2%\\mingw64\\bin;%PATH%"
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
   - python -m pip install --upgrade pip setuptools
