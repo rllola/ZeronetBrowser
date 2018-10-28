@@ -1,0 +1,35 @@
+platform:
+  - x64
+
+environment:
+  matrix:
+    - PYTHON: "C:\\Python27-x64"
+
+build: off
+
+init:
+  - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
+  - python -m pip install --upgrade pip setuptools
+  - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent
+
+install:
+  - curl https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.13/sip-4.19.13.zip
+  - dir
+  - unzip sip-4.19.13.zip
+  - cd sip-4.19.13
+  - python configure.py
+  - make
+  - make install
+  - cd ..
+  - curl https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.11.3/PyQt5_gpl-5.11.3.zip
+  - unzip PyQt5_gpl-5.11.3.zip
+  - cd PyQt5_gpl-5.11.3
+  - python configure.py
+  - make
+  - make install
+  - cd ..
+  - echo "import zeronet" > ZeroNet/src/__init__.py
+
+
+test_script:
+- python test.py
