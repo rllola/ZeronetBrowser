@@ -6,14 +6,10 @@ image: Visual Studio 2017
 environment:
   matrix:
     - PYTHON: "C:\\Python27-x64"
-      MSYS2: "C:\\msys64"
 
 build: off
 
 init:
-  - cd C:\\msys64\\mingw64\\bin
-  - dir
-  - "SET PATH=%MSYS2%\\mingw64\\bin;%PATH%"
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
   - python -m pip install --upgrade pip setuptools
   - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent
@@ -26,15 +22,13 @@ install:
   - cd sip-4.19.13
   - python configure.py
   - dir
-  - make
-  - make install
+  - cmake --build . --target INSTALL --config Release
   - cd ..
   - curl -LO https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.11.3/PyQt5_gpl-5.11.3.zip
   - 7z x PyQt5_gpl-5.11.3.zip
   - cd PyQt5_gpl-5.11.3
   - python configure.py
-  - make
-  - make install
+  - cmake --build . --target INSTALL --config Release
   - cd ..
   - echo "import zeronet" > ZeroNet/src/__init__.py
 
