@@ -10,11 +10,11 @@ build: off
 init:
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
   - python -m pip install --upgrade pip setuptools
-  - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent
+  - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent enum34
 
 install:
   - set PATH=C:\Miniconda-x64;C:\Miniconda-x64\Scripts;%PATH%
-  - conda install -c inso pyqt5 
+  - conda install -c inso pyqt5
   - echo "import zeronet" > ZeroNet/src/__init__.py
 
 
