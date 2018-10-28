@@ -1,6 +1,6 @@
 import unittest
 import sys
-import PyQt5
+from PyQt5 import QtWidgets
 #from PyQt5.QtWidgets import QApplication
 
 class TestBuild(unittest.TestCase):
