@@ -22,14 +22,14 @@ install:
   - cd sip-4.19.13
   - python configure.py
   - dir
-  - ps : C:\cygwin64\bin\make.exe
+  - C:\cygwin64\bin\make.exe .
   - C:\cygwin64\bin\make.exe install
   - cd ..
   - curl -LO https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.11.3/PyQt5_gpl-5.11.3.zip
   - 7z x PyQt5_gpl-5.11.3.zip
   - cd PyQt5_gpl-5.11.3
   - python configure.py
-  - ps : C:\cygwin64\bin\make.exe
+  - C:\cygwin64\bin\make.exe .
   - C:\cygwin64\bin\make.exe install
   - cd ..
   - echo "import zeronet" > ZeroNet/src/__init__.py
