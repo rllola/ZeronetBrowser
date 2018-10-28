@@ -4,8 +4,9 @@ platform:
 image: Visual Studio 2017
 
 environment:
-  - PYTHON: "C:\\Python27-x64"
-  - MINGW: "C:\\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1"
+  matrix:
+    - PYTHON: "C:\\Python27-x64"
+      MINGW: "C:\\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1"
 
 build: off
 
