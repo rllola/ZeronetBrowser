@@ -1,7 +1,10 @@
 import unittest
 import sys
 
+import PyQt5
+
 print sys.path
+print sys.modules
 
 from PyQt5.QtWidgets import QApplication
 

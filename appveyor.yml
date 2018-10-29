@@ -35,6 +35,7 @@ install:
   - nmake install
   - cd ..
   - echo "import zeronet" > ZeroNet/src/__init__.py
+  - dir C:\Python27-x64\Lib\site-packages
   - SET PYTHONPATH=C:\Python27-x64\Lib\site-packages;%PYTHONPATH%
   - cmd: echo %PYTHONPATH%
 
