@@ -34,7 +34,7 @@ install:
   - curl -LO https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.11.3/PyQt5_gpl-5.11.3.zip
   - 7z x PyQt5_gpl-5.11.3.zip
   - cd PyQt5_gpl-5.11.3
-  - python configure.py
+  - python configure.py --confirm-license --qmake=C:\Qt\5.11.1\msvc2017_64\bin\qmake.exe
   - nmake
   - nmake install
   - cd ..
