@@ -12,6 +12,8 @@ build: off
 init:
   - cd C:\Qt\5.11.1\msvc2017_64
   - dir
+  - cd bin
+  - dir
   - SET PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
   - python -m pip install --upgrade pip setuptools
   - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent
