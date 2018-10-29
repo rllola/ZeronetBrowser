@@ -15,8 +15,8 @@ init:
   - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent
 
 install:
+  - SET PATH=C:\Qt\5.11.1\msvc2017_64;%PATH%
   - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
-  - SET PATH=C:\cygwin64\bin;%PATH%
   - curl -LO https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.13/sip-4.19.13.zip
   - dir
   - 7z x sip-4.19.13.zip
