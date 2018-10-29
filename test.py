@@ -3,8 +3,7 @@ import sys
 
 print sys.path
 
-import PyQt5
-#from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication
 
 class TestBuild(unittest.TestCase):
 
