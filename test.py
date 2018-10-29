@@ -1,5 +1,8 @@
 import unittest
 import sys
+
+print sys.path
+
 from PyQt5.QtWidgets import QApplication
 
 class TestBuild(unittest.TestCase):
