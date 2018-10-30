@@ -22,7 +22,7 @@ install:
   - 7z x sip-4.19.13.zip
   - dir
   - cd sip-4.19.13
-  - python configure.py
+  - python configure.py --sip-module PyQt5.sip --no-tools
   - dir
   - nmake
   - nmake install
@@ -35,7 +35,7 @@ install:
   - nmake install
   - cd ..
   - echo "import zeronet" > ZeroNet/src/__init__.py
-  - dir C:\Python27-x64\Lib\site-packages
+  - dir C:\Python27-x64\Lib\site-packages\PyQt5
   - SET PYTHONPATH=C:\Python27-x64\Lib\site-packages;%PYTHONPATH%
   - cmd: echo %PYTHONPATH%
 
