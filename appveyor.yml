@@ -11,7 +11,8 @@ build: off
 
 init:
   - dir C:\Windows
-  - dir C:\Windows\SYSTEM32
+  - dir C:\Windows\System32
+  - dir C:\Windows\System
   - SET PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
   - python -m pip install --upgrade pip setuptools
   - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent enum34
@@ -42,7 +43,7 @@ install:
   - dir C:\Python27-x64\libs
   - dir C:\Python27-x64\Scripts
   - dir C:\Python27-x64\DLLs
-  - SET PYTHONPATH=C:\Python27-x64\Lib\site-packages;C:\Python27-x64\libs;C:\Python27-x64\Lib\site-packages\PyQt5;%PYTHONPATH%
+  - SET PYTHONPATH=C:\Python27-x64\Lib\site-packages;C:\Python27-x64\libs;C:\Windows\System;%PYTHONPATH%
   - cmd: type C:\Python27-x64\Lib\site-packages\PyQt5\__init__.py
   - cmd: echo %PYTHONPATH%
   - cmd: echo %PYTHON%
