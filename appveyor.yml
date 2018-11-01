@@ -10,9 +10,8 @@ environment:
 build: off
 
 init:
-  - dir C:\Windows
-  - dir C:\Windows\System32
-  - dir C:\Windows\System
+  - dir C:\Qt\5.10.1\msvc2017_64\bin
+  - dir C:\Qt\5.10.1
   - SET PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
   - python -m pip install --upgrade pip setuptools
   - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent enum34
