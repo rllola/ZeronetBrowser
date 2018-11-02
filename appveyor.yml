@@ -16,7 +16,7 @@ init:
   - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent enum34
 
 install:
-  - SET PATH=C:\Qt\5.10.1\msvc2017_64;%PATH%
+  - SET PATH=C:\Qt\5.10.1\msvc2017_64\bin;%PATH%
   - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
   - curl -LO https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.13/sip-4.19.13.zip
   - dir
