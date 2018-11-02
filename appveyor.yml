@@ -11,8 +11,8 @@ build: off
 
 init:
   - dir C:\Qt\5.10.1\msvc2017_64\bin
-  - dir C:\Qt\5.10.1
-  - SET PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
+  - C:\Qt\5.10.1\msvc2017_64\bin\qtenv2.bat
+  - SET PATH=%PYTHON%;%PYTHON%\Scripts;C:\Qt\5.10.1\msvc2017_64\bin;%PATH%
   - python -m pip install --upgrade pip setuptools
   - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent enum34
 
