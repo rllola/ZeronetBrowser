@@ -42,7 +42,7 @@ install:
   - dir C:\Python27-x64\Scripts
   - dir C:\Python27-x64\DLLs
   - SET PYTHONPATH=C:\Python27-x64\Lib\site-packages;C:\Python27-x64\libs;%PYTHONPATH%
-  - cmd: copy C:\Qt\5.10.1\msvc2017_64\bin\*.dll C:\Python27-x64\Lib\site-packages\PyQt5
+  #- cmd: copy C:\Qt\5.10.1\msvc2017_64\bin\*.dll C:\Python27-x64\Lib\site-packages\PyQt5
   - cmd: type C:\Python27-x64\Lib\site-packages\PyQt5\__init__.py
   - cmd: echo %PYTHONPATH%
   - cmd: echo %PYTHON%
