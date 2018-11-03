@@ -13,6 +13,7 @@ artifacts:
 build: off
 
 init:
+  - dir libeay32.dll /s
   - SET PATH=%PYTHON%;%PYTHON%\Scripts;C:\Qt\5.10.1\msvc2017_64\bin;%PATH%
   - python -m pip install --upgrade pip setuptools
   - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent enum34 cffi pypiwin32
