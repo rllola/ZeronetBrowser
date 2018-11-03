@@ -1,0 +1,37 @@
+platform:
+  - x64
+
+image: Visual Studio 2017
+
+environment:
+  matrix:
+    - PYTHON: "C:\\Python27-x64"
+
+build: off
+
+init:
+  - SET PATH=%PYTHON%;%PYTHON%\Scripts;C:\Qt\5.10.1\msvc2017_64\bin;%PATH%
+  - python -m pip install --upgrade pip setuptools
+  - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent enum34
+
+install:
+  - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
+  - curl -LO https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.13/sip-4.19.13.zip
+  - 7z x sip-4.19.13.zip
+  - cd sip-4.19.13
+  - python configure.py
+  - nmake
+  - nmake install
+  - cd ..
+  - curl -LO https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.10.1/PyQt5_gpl-5.10.1.zip
+  - 7z x PyQt5_gpl-5.10.1.zip
+  - cd PyQt5_gpl-5.10.1
+  - python configure.py --confirm-license --disable=QtNfc --qmake=C:\Qt\5.10.1\msvc2017_64\bin\qmake.exe
+  - nmake
+  - nmake install
+  - cd ..
+  - echo "import zeronet" > ZeroNet/src/__init__.py
+  - SET PYTHONPATH=C:\Python27-x64\Lib\site-packages;C:\Python27-x64\libs;%PYTHONPATH%
+
+test_script:
+  - python test.py
