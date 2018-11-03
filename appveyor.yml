@@ -7,6 +7,9 @@ environment:
   matrix:
     - PYTHON: "C:\\Python27-x64"
 
+artifacts:
+  - path: build-windows.zip
+
 build: off
 
 init:
@@ -35,3 +38,16 @@ install:
 
 test_script:
   - python test.py
+
+after_test:
+  - 7z a build-windows.zip dist/ZeronetBrowser/*
+
+deploy:
+  provider: GitHub
+  auth_token:
+    secure: 6eX2olaIxe4TsfETod+SYOyDsIKwmDivjirb7RPvl/Zd4zYW3dzGr4MieJ2BP89P # your encrypted token from GitHub
+  artifact: build-windows.zip
+  prerelease: true
+  force_update: true
+  on:
+    appveyor_repo_tag: true        # deploy on tag push only
