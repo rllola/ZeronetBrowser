@@ -14,6 +14,7 @@ build: off
 
 init:
   - dir C:\OpenSSL-v11-Win64\bin
+  - dir C:\windows\system32
   - SET PATH=%PYTHON%;%PYTHON%\Scripts;C:\Qt\5.10.1\msvc2017_64\bin;%PATH%
   - python -m pip install --upgrade pip setuptools
   - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent enum34 cffi pypiwin32
