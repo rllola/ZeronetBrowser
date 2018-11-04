@@ -16,6 +16,18 @@ class MainWindow(QMainWindow):
         self.navigation = NavigationBar()
         self.navigation.url_bar.returnPressed.connect(self.navigate_to_url)
 
+        # Back
+        self.navigation.back_btn.triggered.connect(self.browser.back)
+
+        # Next
+        self.navigation.next_btn.triggered.connect(self.browser.forward)
+
+        # Reload
+        self.navigation.reload_btn.triggered.connect(self.browser.reload)
+
+        # Home
+        self.navigation.home_btn.triggered.connect(self.go_home)
+
         # Get everything fitting in the main window
         self.addToolBar(self.navigation)
         self.setCentralWidget(self.browser)
@@ -45,3 +57,6 @@ class MainWindow(QMainWindow):
             url = 'http://127.0.0.1:43110/' + url
 
         self.browser.setUrl(QUrl(url))
+
+    def go_home(self):
+        self.browser.setUrl(QUrl("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/"))
