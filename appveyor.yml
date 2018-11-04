@@ -14,7 +14,8 @@ build: off
 
 init:
   - dir C:\windows\system32
-  - SET PATH=%PYTHON%;%PYTHON%\Scripts;C:\Qt\5.10.1\msvc2017_64\bin;C:\windows\system32;%PATH%
+  - cmd: copy C:\windows\system32\libeay32.dll C:\Qt\5.10.1\msvc2017_64\bin
+  - SET PATH=%PYTHON%;%PYTHON%\Scripts;C:\Qt\5.10.1\msvc2017_64\bin;%PATH%
   - python -m pip install --upgrade pip setuptools
   - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent enum34 cffi pypiwin32
 
