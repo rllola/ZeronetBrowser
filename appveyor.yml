@@ -13,9 +13,12 @@ artifacts:
 build: off
 
 init:
+  - dir C:\windows\system32
+  - cmd: copy C:\windows\system32\libeay32.dll C:\Qt\5.10.1\msvc2017_64\bin
+  - cmd: copy C:\windows\system32\ssleay32.dll C:\Qt\5.10.1\msvc2017_64\bin
   - SET PATH=%PYTHON%;%PYTHON%\Scripts;C:\Qt\5.10.1\msvc2017_64\bin;%PATH%
   - python -m pip install --upgrade pip setuptools
-  - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent enum34
+  - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent enum34 cffi pypiwin32
 
 install:
   - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
@@ -38,6 +41,8 @@ install:
 
 test_script:
   - python test.py
+  - dir C:\Qt\5.10.1\msvc2017_64\bin
+  - pyinstaller browser.spec
 
 after_test:
   - 7z a build-windows.zip dist/ZeronetBrowser/*
