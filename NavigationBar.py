@@ -13,12 +13,12 @@ class NavigationBar(QToolBar):
 
         # Going backward button
         self.back_btn = QAction( QIcon(os.path.join('icons','321-arrow-left2.svg')), 'Back', self)
-        # self.back_btn.setDisabled(True)
+        self.back_btn.setDisabled(True)
         self.addAction(self.back_btn)
 
         # Going forward button
         self.next_btn = QAction( QIcon(os.path.join('icons','317-arrow-right2.svg')), 'Next', self)
-        # self.next_btn.setDisabled(True)
+        self.next_btn.setDisabled(True)
         self.addAction(self.next_btn)
 
         # Reload button
