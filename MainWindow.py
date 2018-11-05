@@ -41,6 +41,16 @@ class MainWindow(QMainWindow):
         self.navigation.url_bar.setText('zero://' + formatted_url)
         self.navigation.url_bar.setCursorPosition(0)
 
+        if (self.browser.can_go_back()):
+            self.navigation.back_btn.setDisabled(False)
+        else:
+            self.navigation.back_btn.setDisabled(True)
+
+        if (self.browser.can_go_forward()):
+            self.navigation.next_btn.setDisabled(False)
+        else:
+            self.navigation.next_btn.setDisabled(True)
+
     def navigate_to_url(self):
         # Get url
         url = self.navigation.url_bar.text()
