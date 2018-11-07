@@ -24,6 +24,8 @@ class MainWindow(QMainWindow):
 
         # Reload
         self.navigation.reload_btn.triggered.connect(self.browser.reload)
+        self.navigation.shortcut_reload.activated.connect(self.browser.reload)
+        self.navigation.shortcut_reload_f5.activated.connect(self.browser.reload)
 
         # Home
         self.navigation.home_btn.triggered.connect(self.go_home)
