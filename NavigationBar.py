@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QToolBar, QLineEdit, QAction
-from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QToolBar, QLineEdit, QAction, QShortcut
+from PyQt5.QtGui import QIcon, QKeySequence
 from PyQt5.QtCore import QSize
 
 import os
@@ -24,6 +24,10 @@ class NavigationBar(QToolBar):
         # Reload button
         self.reload_btn = QAction( QIcon(os.path.join('icons','133-spinner11.svg')), 'Reload', self)
         self.addAction(self.reload_btn)
+
+        # Shortcut reload
+        self.shortcut_reload = QShortcut(QKeySequence('Ctrl+R'), self)
+        self.shortcut_reload_f5 = QShortcut(QKeySequence('F5'), self)
 
         # Home button
         self.home_btn = QAction( QIcon(os.path.join('icons','001-home.svg')), 'Home', self)
