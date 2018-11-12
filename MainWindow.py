@@ -12,13 +12,18 @@ class MainWindow(QMainWindow):
         # Tabs
         self.tabs = QTabWidget()
         self.tabs.setTabsClosable(True)
+        self.tabs.tabCloseRequested.connect(self.close_tab)
 
         # New tab button
         #self.tab_add_button_index = self.tabs.addTab(QWidget(), '+')
-        #self.tabs.tabBarClicked.connect(self.tab_bar_clicked)
         self.add_tab_button = QToolButton()
         self.add_tab_button.setText('+')
-        self.add_tab_button.setStyleSheet('border: none; margin: 4px 20px 4px 0px; height: 480px; border-left: 1px solid lightgrey; padding: 0px 12px 0px 12px; font-weight: bold; color: #5d5b59')
+        self.add_tab_button.setStyleSheet(
+            'QToolButton {border: none; margin: 4px 20px 4px 0px; height: 480px; border-left: 1px solid lightgrey; padding: 0px 4px 0px 4px; font-weight: bold; color: #5d5b59}'
+            'QToolButton:hover { background-color: lightgrey }'
+            'QToolButton:pressed { background-color: grey }'
+            )
+        self.add_tab_button.clicked.connect(self.new_tab_clicked)
         self.tabs.setCornerWidget(self.add_tab_button)
 
 
@@ -91,13 +96,15 @@ class MainWindow(QMainWindow):
     def go_home(self):
         self.tabs.currentWidget().setUrl(QUrl("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/"))
 
-    def tab_bar_clicked(self, index):
-        if index == self.tab_add_button_index:
-            self.add_new_tab("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/", "Home")
-
+    def new_tab_clicked(self):
+        index = self.add_new_tab("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/", "Home")
+        self.tabs.setCurrentIndex(index)
 
     def add_new_tab(self, qurl, label):
+        # Instead of browser it should be called WebView !
         browser = Browser()
-        self.tabs.addTab(browser, label)
-
         browser.urlChanged.connect(lambda qurl, browser=browser: self.update_url_bar(qurl, browser))
+        return self.tabs.addTab(browser, label)
+
+    def close_tab(self, index):
+        self.tabs.removeTab(index)
