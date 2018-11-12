@@ -1,7 +1,7 @@
 from Browser import Browser
 from NavigationBar import NavigationBar
 from PyQt5.QtWebEngineWidgets import QWebEngineView
-from PyQt5.QtWidgets import QMainWindow, QToolBar, QTabWidget, QToolButton, QWidget
+from PyQt5.QtWidgets import QMainWindow, QToolBar, QTabWidget, QToolButton
 from PyQt5.QtCore import QUrl
 
 class MainWindow(QMainWindow):
@@ -11,18 +11,19 @@ class MainWindow(QMainWindow):
 
         # Tabs
         self.tabs = QTabWidget()
-        
+        self.tabs.setTabsClosable(True)
+
         # New tab button
-        self.tab_add_button_index = self.tabs.addTab(QWidget(), '+')
-        self.tabs.tabBarClicked.connect(self.tab_bar_clicked)
+        #self.tab_add_button_index = self.tabs.addTab(QWidget(), '+')
+        #self.tabs.tabBarClicked.connect(self.tab_bar_clicked)
+        self.add_tab_button = QToolButton()
+        self.add_tab_button.setText('+')
+        self.add_tab_button.setStyleSheet('border: none; margin: 4px 20px 4px 0px; height: 480px; border-left: 1px solid lightgrey; padding: 0px 12px 0px 12px; font-weight: bold; color: #5d5b59')
+        self.tabs.setCornerWidget(self.add_tab_button)
+
 
         # Add new tab
-        index = self.add_new_tab("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/", "Home")
-        self.tabs.setCurrentIndex(0)
-
-
-        # Browser view
-        # self.tabs.currentWidget().urlChanged.connect(self.update_url_bar)
+        self.add_new_tab("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/", "Home")
 
         # Navigation bar
         self.navigation = NavigationBar()
@@ -97,10 +98,6 @@ class MainWindow(QMainWindow):
 
     def add_new_tab(self, qurl, label):
         browser = Browser()
-        index = self.tab_add_button_index
-        # Not really optimize. Should query for position.
-        # indexOf(QWidget *w) ?
-        self.tab_add_button_index += 1
+        self.tabs.addTab(browser, label)
 
         browser.urlChanged.connect(lambda qurl, browser=browser: self.update_url_bar(qurl, browser))
-        return self.tabs.insertTab(index, browser, label)
