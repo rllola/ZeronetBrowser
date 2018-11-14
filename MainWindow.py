@@ -107,4 +107,7 @@ class MainWindow(QMainWindow):
         return self.tabs.addTab(browser, label)
 
     def close_tab(self, index):
+        if self.tabs.count() == 1:
+            self.tabs.currentWidget().setUrl(QUrl("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/"))
+            return
         self.tabs.removeTab(index)
