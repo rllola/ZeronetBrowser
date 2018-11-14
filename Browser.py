@@ -1,8 +1,6 @@
-import PyQt5
 from PyQt5.QtCore import QUrl
 from PyQt5.QtWebEngineWidgets import QWebEngineView
-from optparse import OptionParser
-import os
+
 
 class Browser(QWebEngineView):
     def __init__(self, *args, **kwargs):

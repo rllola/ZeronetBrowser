@@ -1,6 +1,7 @@
 from Browser import Browser
 from NavigationBar import NavigationBar
-from PyQt5.QtWidgets import QMainWindow, QToolBar
+from PyQt5.QtWebEngineWidgets import QWebEngineView
+from PyQt5.QtWidgets import QMainWindow, QToolBar, QTabWidget, QToolButton
 from PyQt5.QtCore import QUrl
 
 class MainWindow(QMainWindow):
@@ -8,47 +9,69 @@ class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
         super(MainWindow,self).__init__(*args, **kwargs)
 
-        # Browser view
-        self.browser = Browser()
-        self.browser.urlChanged.connect(self.update_url_bar)
+        # Tabs
+        self.tabs = QTabWidget()
+        self.tabs.setTabsClosable(True)
+        self.tabs.tabCloseRequested.connect(self.close_tab)
+
+        # New tab button
+        #self.tab_add_button_index = self.tabs.addTab(QWidget(), '+')
+        self.add_tab_button = QToolButton()
+        self.add_tab_button.setText('+')
+        self.add_tab_button.setStyleSheet(
+            'QToolButton {border: none; margin: 4px 20px 4px 0px; height: 480px; border-left: 1px solid lightgrey; padding: 0px 4px 0px 4px; font-weight: bold; color: #5d5b59}'
+            'QToolButton:hover { background-color: lightgrey }'
+            'QToolButton:pressed { background-color: grey }'
+            )
+        self.add_tab_button.clicked.connect(self.new_tab_clicked)
+        self.tabs.setCornerWidget(self.add_tab_button)
+
+
+        # Add new tab
+        self.add_new_tab("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/", "Home")
 
         # Navigation bar
         self.navigation = NavigationBar()
         self.navigation.url_bar.returnPressed.connect(self.navigate_to_url)
 
         # Back
-        self.navigation.back_btn.triggered.connect(self.browser.back)
+        self.navigation.back_btn.triggered.connect(lambda : self.tabs.currentWidget().back())
 
         # Next
-        self.navigation.next_btn.triggered.connect(self.browser.forward)
+        self.navigation.next_btn.triggered.connect(lambda : self.tabs.currentWidget().forward())
 
         # Reload
-        self.navigation.reload_btn.triggered.connect(self.browser.reload)
-        self.navigation.shortcut_reload.activated.connect(self.browser.reload)
-        self.navigation.shortcut_reload_f5.activated.connect(self.browser.reload)
+        self.navigation.reload_btn.triggered.connect(lambda : self.tabs.currentWidget().reload())
+        self.navigation.shortcut_reload.activated.connect(lambda : self.tabs.currentWidget().reload())
+        self.navigation.shortcut_reload_f5.activated.connect(lambda : self.tabs.currentWidget().reload())
 
         # Home
         self.navigation.home_btn.triggered.connect(self.go_home)
 
         # Get everything fitting in the main window
         self.addToolBar(self.navigation)
-        self.setCentralWidget(self.browser)
+        self.setCentralWidget(self.tabs)
         self.show()
         self.setWindowTitle("ZeroNet Browser")
         self.showMaximized()
 
-    def update_url_bar(self, q):
+    def update_url_bar(self, q, browser=None):
+
+        if browser != self.tabs.currentWidget():
+            # If this signal is not from the current tab, ignore
+            return
+
         url_array = q.toString().split('/')[3:]
         formatted_url = '/'.join(str(x) for x in url_array)
         self.navigation.url_bar.setText('zero://' + formatted_url)
         self.navigation.url_bar.setCursorPosition(0)
 
-        if (self.browser.can_go_back()):
+        if (self.tabs.currentWidget().can_go_back()):
             self.navigation.back_btn.setDisabled(False)
         else:
             self.navigation.back_btn.setDisabled(True)
 
-        if (self.browser.can_go_forward()):
+        if (self.tabs.currentWidget().can_go_forward()):
             self.navigation.next_btn.setDisabled(False)
         else:
             self.navigation.next_btn.setDisabled(True)
@@ -68,7 +91,23 @@ class MainWindow(QMainWindow):
             # Nothing mentionned
             url = 'http://127.0.0.1:43110/' + url
 
-        self.browser.setUrl(QUrl(url))
+        self.tabs.currentWidget().setUrl(QUrl(url))
 
     def go_home(self):
-        self.browser.setUrl(QUrl("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/"))
+        self.tabs.currentWidget().setUrl(QUrl("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/"))
+
+    def new_tab_clicked(self):
+        index = self.add_new_tab("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/", "Home")
+        self.tabs.setCurrentIndex(index)
+
+    def add_new_tab(self, qurl, label):
+        # Instead of browser it should be called WebView !
+        browser = Browser()
+        browser.urlChanged.connect(lambda qurl, browser=browser: self.update_url_bar(qurl, browser))
+        return self.tabs.addTab(browser, label)
+
+    def close_tab(self, index):
+        if self.tabs.count() == 1:
+            self.tabs.currentWidget().setUrl(QUrl("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/"))
+            return
+        self.tabs.removeTab(index)
