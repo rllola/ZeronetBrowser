@@ -2,6 +2,7 @@ from Browser import Browser
 from NavigationBar import NavigationBar
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 from PyQt5.QtWidgets import QMainWindow, QToolBar, QTabWidget, QToolButton
+from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QUrl
 
 class MainWindow(QMainWindow):
@@ -53,6 +54,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.tabs)
         self.show()
         self.setWindowTitle("ZeroNet Browser")
+        self.setWindowIcon(QIcon("icons/zeronet-logo.svg"))
         self.showMaximized()
 
     def update_url_bar(self, q, browser=None):
