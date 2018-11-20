@@ -1,16 +1,18 @@
 # -*- mode: python -*-
 
 from PyInstaller.utils.hooks import collect_data_files
+from sys import platform
 
 block_cipher = None
 
-datas=Tree('ZeroNet', prefix='ZeroNet', excludes=['.github','*.pyc', 'data', 'log'])
+datas = Tree('ZeroNet', prefix='ZeroNet', excludes=['.github','*.pyc', 'data', 'log'])
+datas += Tree('icons', prefix='icons', excludes=[])
 
 a = Analysis(['launch.py'],
              pathex=['/home/lola/Workspace/ZeroNet/Browser/ZeroNet/src', '/home/lola/Workspace/ZeroNet/Browser/ZeroNet/plugins', '/home/lola/Workspace/ZeroNet/Browser/ZeroNet/src/lib', '/home/lola/Workspace/ZeroNet/Browser'],
              binaries=[],
              datas=[],
-             hiddenimports=['gevent', 'ConfigParser', 'json', 'sqlite3', 'PyQt5', 'msgpack', 'setuptools', 'cgi', 'xml.dom', 'posixpath'],
+             hiddenimports=['gevent', 'ConfigParser', 'json', 'sqlite3', 'PyQt5', 'msgpack', 'setuptools', 'cgi', 'xml.dom', 'posixpath', 'logging.handlers'],
              #hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
@@ -35,7 +37,9 @@ exe = EXE(pyz,
           upx=True,
           console=True )
 
-datas += [('index.html', 'index.html', 'DATA')]
+if platform.startswith("linux"):
+    # linux; add .desktop
+    datas += [('install.sh', 'install.sh', 'DATA')]
 
 coll = COLLECT(exe,
                a.binaries,
