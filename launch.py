@@ -13,7 +13,9 @@ if __name__ == '__main__':
     p = Process(target=zeronet.main)
     p.start()
 
-    #time.sleep(5)
+    time.sleep(5)
+
+    print os.environ['PATH']
 
     # Start the PyQt application
     app = QApplication(sys.argv)

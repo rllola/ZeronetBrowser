@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=0.1
+Name=ZeroNet Browser
+Comment=ZeroNet browser is a dedicated browser for ZeroNet protocol.
+Exec=$HOME/.local/share/ZeronetBrowser/ZeronetBrowser
+Path=$HOME/.local/share/ZeronetBrowser/
+Icon=$HOME/.local/share/ZeronetBrowser/icons/zeronet-logo.svg
+Terminal=true
+Type=Application
+Categories=Utility;
