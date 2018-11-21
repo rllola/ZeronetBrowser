@@ -12,9 +12,9 @@ matrix:
           system_site_packages: true
         before_install:
           - sudo apt-get update
-          - sudo apt-get install -y msgpack-python python-gevent python-dev
+          - sudo apt-get install -y msgpack-python python-gevent python-dev build-essential libgl1-mesa-dev
           - chmod +x get-pyqt5-linux.sh
-          - travis_wait 20 ./get-pyqt5-linux.sh
+          - ./get-pyqt5-linux.sh
       - os: osx
         language: generic
         sudo: true
