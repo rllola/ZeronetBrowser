@@ -15,6 +15,7 @@ matrix:
           - sudo apt-get update
           - sudo apt-get install -y msgpack-python python-gevent python-dev build-essential libgl1-mesa-dev qt510-meta-full
           - sudo chmod +x /opt/qt510/bin/qt510-env.sh
+          - ls /opt/qt510/bin/
           - /opt/qt510/bin/qt510-env.sh
           - chmod +x get-pyqt5-linux.sh
           - ./get-pyqt5-linux.sh
