@@ -7,6 +7,7 @@ echo "=========== Install QT5 ==========="
 #qtchooser -print-env
 #qmake -v
 sudo add-apt-repository --yes ppa:beineri/opt-qt-5.10.1-xenial
+sudo apt-get -qq update
 sudo apt-get install -qq qt510-meta-full
 echo "Done !"
 
