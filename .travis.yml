@@ -17,8 +17,8 @@ matrix:
           - /opt/qt510/bin/qt510-env.sh
           - chmod +x get-pyqt5-linux.sh
           - ./get-pyqt5-linux.sh
-          - locate pyqt5
-          - locate PyQt5
+          - mlocate pyqt5
+          - mlocate PyQt5
       - os: osx
         language: generic
         sudo: true
