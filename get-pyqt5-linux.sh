@@ -6,9 +6,9 @@ echo "=========== Install QT5 ==========="
 #sudo ./qt-opensource-linux-x64-5.10.1.run
 #qtchooser -print-env
 #qmake -v
-sudo add-apt-repository --yes ppa:beineri/opt-qt-5.10.1-xenial
-travis wait 20 sudo apt-get update -qq
-sudo apt-get install -qq qt510-meta-full
+#sudo add-apt-repository --yes ppa:beineri/opt-qt-5.10.1-xenial
+#sudo apt-get update -qq
+#sudo apt-get install -qq qt510-meta-full
 echo "Done !"
 
 echo "=========== Install SIP ==========="

@@ -11,8 +11,9 @@ matrix:
         virtualenv:
           system_site_packages: true
         before_install:
+          - sudo add-apt-repository --yes ppa:beineri/opt-qt-5.10.1-xenial
           - sudo apt-get update
-          - sudo apt-get install -y msgpack-python python-gevent python-dev build-essential libgl1-mesa-dev
+          - sudo apt-get install -y msgpack-python python-gevent python-dev build-essential libgl1-mesa-dev qt510-meta-full
           - chmod +x get-pyqt5-linux.sh
           - ./get-pyqt5-linux.sh
       - os: osx
