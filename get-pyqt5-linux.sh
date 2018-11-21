@@ -1,11 +1,12 @@
 #!/bin/bash
 
 echo "=========== Install QT5 ==========="
-sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
-sudo apt-get update -qq
-
-# Install Qt5, QtMultimedia and QtSvg
-sudo apt-get install -qq qtdeclarative5-dev libqt5svg5-dev qtmultimedia5-dev
+wget http://download.qt.io/official_releases/qt/5.10/5.10.1/qt-opensource-linux-x64-5.10.1.run
+chmod +x qt-opensource-linux-x64-5.10.1.run
+sudo ./qt-opensource-linux-x64-5.10.1.run
+qtchooser -print-env
+qmake -v
+echo "Done !"
 
 echo "=========== Install SIP ==========="
 wget https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.13/sip-4.19.13.tar.gz
