@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "=========== Install QT5 ==========="
-wget http://download.qt.io/official_releases/qt/5.10/5.10.1/qt-opensource-linux-x64-5.10.1.run
+wget -nv http://download.qt.io/official_releases/qt/5.10/5.10.1/qt-opensource-linux-x64-5.10.1.run
 chmod +x qt-opensource-linux-x64-5.10.1.run
 sudo ./qt-opensource-linux-x64-5.10.1.run
 qtchooser -print-env
@@ -9,7 +9,7 @@ qmake -v
 echo "Done !"
 
 echo "=========== Install SIP ==========="
-wget https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.13/sip-4.19.13.tar.gz
+wget -nv https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.13/sip-4.19.13.tar.gz
 tar -xvzf sip-4.19.13.tar.gz
 cd sip-4.19.13
 python configure.py
@@ -20,7 +20,7 @@ echo "Done !"
 cd ..
 
 echo "=========== Install PyQt5 ==========="
-wget https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.10.1/PyQt5_gpl-5.10.1.tar.gz
+wget -nv https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.10.1/PyQt5_gpl-5.10.1.tar.gz
 tar -xvzf PyQt5_gpl-5.10.1.tar.gz
 cd PyQt5_gpl-5.10.1
 python configure.py --confirm-license --disable=QtNfc --qmake=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
