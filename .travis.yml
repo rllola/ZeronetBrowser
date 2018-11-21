@@ -8,8 +8,6 @@ matrix:
         python: "2.7"
         sudo: required
         dist: xenial
-        virtualenv:
-          system_site_packages: true
         before_install:
           - sudo add-apt-repository --yes ppa:beineri/opt-qt-5.10.1-xenial
           - sudo apt-get update
@@ -20,6 +18,7 @@ matrix:
           - /opt/qt510/bin/qt510-env.sh
           - chmod +x get-pyqt5-linux.sh
           - ./get-pyqt5-linux.sh
+          - locate pyqt5
       - os: osx
         language: generic
         sudo: true
@@ -35,6 +34,7 @@ install:
 script:
   - python test.py
   - pyinstaller browser.spec
+  - ls ./dist/ZeronetBrowser
 
 before_deploy:
   - zip -r build-$TRAVIS_OS_NAME.zip dist/ZeronetBrowser
