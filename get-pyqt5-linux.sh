@@ -1,16 +1,5 @@
 #!/bin/bash
 
-echo "=========== Install QT5 ==========="
-#wget -nv http://download.qt.io/official_releases/qt/5.10/5.10.1/qt-opensource-linux-x64-5.10.1.run
-#chmod +x qt-opensource-linux-x64-5.10.1.run
-#sudo ./qt-opensource-linux-x64-5.10.1.run
-qtchooser -print-env
-qmake -v
-#sudo add-apt-repository --yes ppa:beineri/opt-qt-5.10.1-xenial
-#sudo apt-get update -qq
-#sudo apt-get install -qq qt510-meta-full
-echo "Done !"
-
 echo "=========== Install SIP ==========="
 wget -nv https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.13/sip-4.19.13.tar.gz
 tar -xvzf sip-4.19.13.tar.gz
