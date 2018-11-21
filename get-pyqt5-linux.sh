@@ -2,6 +2,7 @@
 
 echo "=========== Install QT5 ==========="
 wget -nv http://download.qt.io/official_releases/qt/5.10/5.10.1/qt-opensource-linux-x64-5.10.1.run
+export DISPLAY=:0 
 chmod +x qt-opensource-linux-x64-5.10.1.run
 sudo ./qt-opensource-linux-x64-5.10.1.run
 qtchooser -print-env
