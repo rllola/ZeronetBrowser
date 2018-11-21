@@ -8,7 +8,7 @@ echo "=========== Install QT5 ==========="
 #qmake -v
 sudo add-apt-repository --yes ppa:beineri/opt-qt-5.10.1-xenial
 sudo apt-get update
-sudo apt-get install -qq qt57-meta-full
+sudo apt-get install -qq qt510-meta-full
 echo "Done !"
 
 echo "=========== Install SIP ==========="
