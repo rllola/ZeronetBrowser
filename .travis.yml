@@ -30,12 +30,13 @@ matrix:
 install:
   - sudo pip install --verbose pyinstaller
   - ls /usr/local/lib/python2.7/dist-packages/
-  - locate PyQt5
+  #- locate PyQt5
   - sudo pip install --upgrade setuptools
   - echo "import zeronet" > ZeroNet/src/__init__.py
 script:
   - python test.py
   - pyinstaller browser.spec
+  - cat ./build/browser/Analysis-00.toc
   - ls ./dist/ZeronetBrowser
 
 before_deploy:
