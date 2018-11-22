@@ -4,11 +4,12 @@ git:
 matrix:
     include:
       - os: linux
-        language: python
+        language: generic
         python: "2.7"
         sudo: required
         dist: xenial
         before_install:
+          - python -V
           - sudo add-apt-repository --yes ppa:beineri/opt-qt-5.10.1-xenial
           - sudo apt-get update
           - sudo apt-get install -y msgpack-python python-gevent python-dev build-essential libgl1-mesa-dev mlocate qt510-meta-minimal qt510webengine
@@ -35,7 +36,7 @@ install:
   - echo "import zeronet" > ZeroNet/src/__init__.py
 script:
   - python test.py
-  - pyinstaller browser.spec -p /home/travis/virtualenv/python2.7.15/lib/python2.7/site-packages/
+  - pyinstaller browser.spec
   - cat ./build/browser/Analysis-00.toc
   - ls ./dist/ZeronetBrowser
 
