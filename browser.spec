@@ -9,10 +9,10 @@ datas = Tree('ZeroNet', prefix='ZeroNet', excludes=['.github','*.pyc', 'data', '
 datas += Tree('icons', prefix='icons', excludes=[])
 
 a = Analysis(['launch.py'],
-             pathex=['/home/lola/Workspace/ZeroNet/Browser/ZeroNet/src', '/home/lola/Workspace/ZeroNet/Browser/ZeroNet/plugins', '/home/lola/Workspace/ZeroNet/Browser/ZeroNet/src/lib', '/home/lola/Workspace/ZeroNet/Browser'],
+             #pathex=['/home/lola/Workspace/ZeroNet/Browser/ZeroNet/src', '/home/lola/Workspace/ZeroNet/Browser/ZeroNet/plugins', '/home/lola/Workspace/ZeroNet/Browser/ZeroNet/src/lib', '/home/lola/Workspace/ZeroNet/Browser'],
              binaries=[],
              datas=[],
-             hiddenimports=['gevent', 'ConfigParser', 'json', 'sqlite3', 'PyQt5', 'msgpack', 'setuptools', 'cgi', 'xml.dom', 'posixpath', 'logging.handlers'],
+             hiddenimports=['gevent', 'ConfigParser', 'json', 'sqlite3', 'msgpack', 'setuptools', 'cgi', 'xml.dom', 'posixpath', 'logging.handlers'],
              #hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],

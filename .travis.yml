@@ -4,15 +4,22 @@ git:
 matrix:
     include:
       - os: linux
-        language: python
+        language: generic
         python: "2.7"
         sudo: required
         dist: xenial
-        virtualenv:
-          system_site_packages: true
         before_install:
+          - python -V
+          - sudo add-apt-repository --yes ppa:beineri/opt-qt-5.10.1-xenial
           - sudo apt-get update
-          - sudo apt-get install -y python-pyqt5 msgpack-python python-gevent python-dev
+          - sudo apt-get install -y msgpack-python python-gevent python-dev build-essential libgl1-mesa-dev mlocate qt510-meta-minimal qt510webengine
+          - sudo updatedb
+          - sudo chmod +x /opt/qt510/bin/qt510-env.sh
+          - ls /opt/qt510/
+          - /opt/qt510/bin/qt510-env.sh
+          - chmod +x get-pyqt5-linux.sh
+          - ./get-pyqt5-linux.sh
+          - locate pyqt5
       - os: osx
         language: generic
         sudo: true
@@ -22,12 +29,16 @@ matrix:
           - pip install msgpack gevent
 
 install:
-  - sudo pip install pyinstaller pyinstaller-hooks
+  - sudo pip install --verbose pyinstaller
+  - ls /home/travis/virtualenv/python2.7.15/lib/python2.7/site-packages
+  #- locate PyQt5
   - sudo pip install --upgrade setuptools
   - echo "import zeronet" > ZeroNet/src/__init__.py
 script:
   - python test.py
   - pyinstaller browser.spec
+  - cat ./build/browser/Analysis-00.toc
+  - ls ./dist/ZeronetBrowser
 
 before_deploy:
   - zip -r build-$TRAVIS_OS_NAME.zip dist/ZeronetBrowser
