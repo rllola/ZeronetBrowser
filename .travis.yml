@@ -12,13 +12,14 @@ matrix:
           - sudo add-apt-repository --yes ppa:beineri/opt-qt-5.10.1-xenial
           - sudo apt-get update
           - sudo apt-get install -y msgpack-python python-gevent python-dev build-essential libgl1-mesa-dev mlocate qt510-meta-minimal qt510webengine
+          - sudo updatedb
           - sudo chmod +x /opt/qt510/bin/qt510-env.sh
           - ls /opt/qt510/
           - /opt/qt510/bin/qt510-env.sh
           - chmod +x get-pyqt5-linux.sh
           - ./get-pyqt5-linux.sh
-          - mlocate pyqt5
-          - mlocate PyQt5
+          - locate pyqt5
+          - locate PyQt5
       - os: osx
         language: generic
         sudo: true
