@@ -44,6 +44,7 @@ if platform.startswith("linux"):
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
+               a.datas,
                datas,
                strip=False,
                upx=True,
