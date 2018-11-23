@@ -41,6 +41,8 @@ if platform.startswith("linux"):
     # linux; add .desktop
     datas += [('install.sh', 'install.sh', 'DATA')]
 
+print(a.datas)
+
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
