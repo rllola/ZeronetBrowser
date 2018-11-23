@@ -27,7 +27,7 @@ matrix:
 install:
   - sudo pip install pyinstaller
   - sudo pip install --upgrade setuptools
-  - echo "import zeronet" > ZeroNet/src/__init__.py
+  - echo "import zeronet" > ZeroNet/__init__.py
 script:
   - python test.py
   - pyinstaller browser.spec
