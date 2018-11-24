@@ -18,3 +18,9 @@ Create a file inside ZeroNet folder
 import main
 import Config
 ```
+
+## QtWebEngineProcess Error
+
+```
+QTWEBENGINEPROCESS_PATH=$PWD/PyQt5/Qt/libexec/QtWebEngineProcess ./ZeronetBrowser
+```
