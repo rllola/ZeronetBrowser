@@ -53,4 +53,4 @@ coll = COLLECT(exe,
                datas,
                strip=False,
                upx=True,
-               name='browser')
+               name='ZeronetBrowser')
