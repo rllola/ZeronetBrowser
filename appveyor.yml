@@ -20,6 +20,7 @@ init:
   - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent enum34 cffi pypiwin32
 
 install:
+  - git submodule update --init --recursive
   - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
   - curl -LO https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.13/sip-4.19.13.zip
   - 7z x sip-4.19.13.zip

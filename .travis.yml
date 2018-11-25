@@ -11,7 +11,7 @@ matrix:
         before_install:
           - sudo add-apt-repository --yes ppa:beineri/opt-qt-5.10.1-xenial
           - sudo apt-get update
-          - sudo apt-get install -y msgpack-python python-gevent python-dev build-essential libgl1-mesa-dev qt510-meta-minimal qt510webengine mlocate
+          - sudo apt-get install -y msgpack-python python-gevent python-dev build-essential libgl1-mesa-dev qt510-meta-minimal qt510webengine qt510svg mlocate
           - sudo updatedb
           - sudo chmod +x /opt/qt510/bin/qt510-env.sh
           - /opt/qt510/bin/qt510-env.sh
