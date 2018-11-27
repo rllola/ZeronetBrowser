@@ -48,8 +48,6 @@ if platform.startswith("win32"):
         if 'QtWebEngineProcess' in data[0]:
             a.datas[a.datas.index(data)] = (u'PyQt5\\Qt\\bin\\'+data[0].split('\\')[-1], data[1], data[2])
 
-if platform.startswith
-
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
