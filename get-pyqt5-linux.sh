@@ -7,6 +7,7 @@ cd sip-4.19.13
 python configure.py --sip-module=PyQt5.sip --no-tools
 make -j 8
 sudo make install
+ls
 echo "Done !"
 
 cd ..
@@ -18,7 +19,7 @@ cd PyQt5_gpl-5.11.2
 echo $PATH
 echo $PYTHONPATH
 ls /usr/lib/python2.7/dist-packages/PyQt5
-python configure.py --confirm-license --disable=QtNfc --qmake=/opt/qt511/bin/qmake --sip=/usr/share/sip
+python configure.py --confirm-license --disable=QtNfc --qmake=/opt/qt511/bin/qmake --sip=/usr/lib/python2.7/dist-packages/PyQt5
 make -j 8
 sudo make install
 echo "Done !"
