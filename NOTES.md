@@ -24,3 +24,7 @@ import Config
 ```
 QTWEBENGINEPROCESS_PATH=$PWD/PyQt5/Qt/libexec/QtWebEngineProcess ./ZeronetBrowser
 ```
+
+## What else to try
+
+Try with Qt 5.10
