@@ -5,6 +5,7 @@ import os.path
 from MainWindow import MainWindow
 from ZeroNet import zeronet
 from PyQt5.QtWidgets import QApplication
+from PyQt5.QtCore import QLibraryInfo
 from multiprocessing import Process
 import time
 
@@ -20,6 +21,8 @@ if __name__ == '__main__':
 
     # Start the PyQt application
     app = QApplication(sys.argv)
+    print QLibraryInfo.location(QLibraryInfo.LibraryExecutablesPath)
+
     mainWindow = MainWindow()
     app.exec_()
 

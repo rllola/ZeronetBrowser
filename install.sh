@@ -20,5 +20,4 @@ mkdir ~/.local/share/ZeronetBrowser
 cp -a . ~/.local/share/ZeronetBrowser
 cd ~/.local/share/ZeronetBrowser
 ln -s $PWD/ZeronetBrowser $HOME/.local/bin/ZeronetBrowser
-sudo cp -r $PWD/PyQt5/Qt/* /opt/qt510
 echo "Done !"

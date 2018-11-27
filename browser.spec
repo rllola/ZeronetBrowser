@@ -37,6 +37,8 @@ exe = EXE(pyz,
           upx=True,
           console=True )
 
+datas += [('qt.conf', 'qt.conf', 'DATA')]
+
 if platform.startswith("linux"):
     # linux; add .desktop
     datas += [('install.sh', 'install.sh', 'DATA')]
@@ -45,6 +47,8 @@ if platform.startswith("win32"):
     for data in a.datas:
         if 'QtWebEngineProcess' in data[0]:
             a.datas[a.datas.index(data)] = (u'PyQt5\\Qt\\bin\\'+data[0].split('\\')[-1], data[1], data[2])
+
+if platform.startswith
 
 coll = COLLECT(exe,
                a.binaries,

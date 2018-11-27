@@ -29,7 +29,7 @@ matrix:
           - pip install msgpack gevent
 
 install:
-  - sudo pip install pyinstaller
+  - sudo pip install pyinstaller cffi
   - sudo pip install --upgrade setuptools
   - echo "import zeronet" > ZeroNet/__init__.py
 script:
