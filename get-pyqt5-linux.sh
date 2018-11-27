@@ -4,7 +4,7 @@ echo "=========== Install SIP ==========="
 wget -nv https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.13/sip-4.19.13.tar.gz
 tar -xvzf sip-4.19.13.tar.gz
 cd sip-4.19.13
-python configure.py --sip-module=PyQt5.sip --no-tools
+python configure.py --sip-module=PyQt5.sip
 make -j 8
 sudo make install
 echo "Done !"
