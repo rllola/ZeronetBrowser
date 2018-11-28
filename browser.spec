@@ -12,11 +12,7 @@ a = Analysis(['launch.py'],
              #pathex=['/home/lola/Workspace/ZeroNet/Browser/ZeroNet/src', '/home/lola/Workspace/ZeroNet/Browser/ZeroNet/plugins', '/home/lola/Workspace/ZeroNet/Browser/ZeroNet/src/lib', '/home/lola/Workspace/ZeroNet/Browser'],
              binaries=[],
              datas=[],
-<<<<<<< HEAD
-             hiddenimports=['gevent', 'ConfigParser', 'json', 'sqlite3', 'msgpack', 'setuptools', 'cgi', 'xml.dom', 'posixpath', 'logging.handlers', 'argparse'],
-=======
-             hiddenimports=['gevent', 'ConfigParser', 'json', 'sqlite3', 'PyQt5', 'msgpack', 'setuptools', 'cgi', 'xml.dom', 'posixpath'],
->>>>>>> vagrantfile
+             hiddenimports=['gevent', 'ConfigParser', 'json', 'sqlite3', 'msgpack', 'setuptools', 'cgi', 'xml.dom', 'posixpath', 'logging.handlers', 'argparse', 'enum'],
              #hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],

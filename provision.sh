@@ -12,8 +12,11 @@ sudo apt-get update
 # Install Qt5, QtWebEngine and QtSvg
 sudo apt-get install -y msgpack-python python-gevent python-dev build-essential libgl1-mesa-dev qt511-meta-minimal qt511webengine qt511svg mlocate
 
-chmod +x ./get-pyst5-linux.sh
+chmod +x ./get-pyqt5-linux.sh
 ./get-pyqt5-linux.sh
 
 echo "===== INSTALL PYINSTALLER ====="
+#export LC_ALL="en_US.UTF-8"
+#export LC_CTYPE="en_US.UTF-8"
+#sudo dpkg-reconfigure locales
 sudo pip install pyinstaller
