@@ -60,7 +60,7 @@ if __name__ == '__main__':
     print('Qt5 Prefix path:\n\t%s' % \
             QtCore.QLibraryInfo.location(QtCore.QLibraryInfo.PrefixPath))
     print("Qt5 app.libraryPaths():\n\t%s" % "\n\t".join((app.libraryPaths())))
-    #mainWindow = MainWindow()
+    mainWindow = MainWindow()
     app.exec_()
 
     # Shutdown Zeronet
