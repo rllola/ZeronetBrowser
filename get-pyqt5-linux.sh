@@ -7,6 +7,7 @@ cd sip-4.19.13
 python configure.py --sip-module=PyQt5.sip --no-tools
 make -j 8
 sudo make install
+echo " " > /usr/lib/python2.7/dist-packages/PyQt5/__init__.py
 echo "Done !"
 
 cd ..
@@ -16,9 +17,6 @@ wget -nv https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.11.2/PyQt5_gpl
 tar -xvzf PyQt5_gpl-5.11.2.tar.gz
 cd PyQt5_gpl-5.11.2
 ls /usr/lib/python2.7/dist-packages
-echo $PYTHONPATH
-python -c "import sys; print(sys.path)"
-export PYTHONPATH=$PYTHONPATH:/usr/lib/python2.7/dist-packages
 python configure.py --confirm-license --disable=QtNfc --qmake=/opt/qt511/bin/qmake -n PyQt5.sip
 make -j 8
 sudo make install
