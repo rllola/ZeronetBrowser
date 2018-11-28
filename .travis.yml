@@ -11,13 +11,14 @@ matrix:
         before_install:
           - sudo add-apt-repository --yes ppa:beineri/opt-qt-5.11.2-xenial
           - sudo apt-get update
-          - sudo apt-get install -y msgpack-python python-gevent python-dev build-essential libgl1-mesa-dev qt511-meta-minimal qt511webengine qt511svg mlocate
-          - sudo updatedb
+          - sudo apt-get install -y msgpack-python python-gevent python-dev build-essential libgl1-mesa-dev qt511-meta-minimal qt511webengine qt511svg
           - sudo chmod +x /opt/qt511/bin/qt511-env.sh
           - /opt/qt511/bin/qt511-env.sh
           - chmod +x get-pyqt5-linux.sh
           - ./get-pyqt5-linux.sh
-          - mlocate QtWebEngineProcess
+        after_success:
+          - cp ./dist/ZeronetBrowser/PyQt5/Qt/resources/* ./dist/ZeronetBrowser/PyQt5/Qt/libexec/
+          - cp -r ./dist/ZeronetBrowser/PyQt5/Qt/translations/qtwebengine_locales/ ./dist/ZeronetBrowser/PyQt5/Qt/libexec/
       - os: osx
         language: generic
         sudo: true
@@ -35,8 +36,6 @@ install:
 script:
   - python test.py
   - pyinstaller browser.spec
-  - cp ./dist/ZeronetBrowser/PyQt5/Qt/resources/* ./dist/ZeronetBrowser/PyQt5/Qt/libexec/
-  - cp -r ./dist/ZeronetBrowser/PyQt5/Qt/translations/ ./dist/ZeronetBrowser/PyQt5/Qt/libexec/
 
 before_deploy:
   - zip -r build-$TRAVIS_OS_NAME.zip dist/ZeronetBrowser

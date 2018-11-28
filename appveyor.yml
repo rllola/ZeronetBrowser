@@ -24,9 +24,10 @@ install:
   - curl -LO https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.13/sip-4.19.13.zip
   - 7z x sip-4.19.13.zip
   - cd sip-4.19.13
-  - python configure.py --sip-module PyQt5.sip --no-tools
+  - python configure.py --sip-module PyQt5.sip
   - nmake
   - nmake install
+  - copy NUL C:\Python27-x64\Lib\site-packages\PyQt5\__init__.py
   - cd ..
   - curl -LO https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.11.2/PyQt5_gpl-5.11.2.zip
   - 7z x PyQt5_gpl-5.11.2.zip
