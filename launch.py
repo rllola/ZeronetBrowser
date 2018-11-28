@@ -55,6 +55,8 @@ if __name__ == '__main__':
             QtCore.QLibraryInfo.location(QtCore.QLibraryInfo.ImportsPath))
     print('Qt5 Plugins path:\n\t%s' % \
             QtCore.QLibraryInfo.location(QtCore.QLibraryInfo.PluginsPath))
+    print('Qt5 Translations path:\n\t%s' % \
+            QtCore.QLibraryInfo.location(QtCore.QLibraryInfo.TranslationsPath))
     print('Qt5 Settings path:\n\t%s' % \
             QtCore.QLibraryInfo.location(QtCore.QLibraryInfo.SettingsPath))
     print('Qt5 Prefix path:\n\t%s' % \
