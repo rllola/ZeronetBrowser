@@ -27,11 +27,10 @@ install:
   - python configure.py --sip-module PyQt5.sip
   - nmake
   - nmake install
-  - copy NUL C:\Python27-x64\Lib\site-packages\PyQt5\__init__.py
   - cd ..
-  - curl -LO https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.11.2/PyQt5_gpl-5.11.2.zip
-  - 7z x PyQt5_gpl-5.11.2.zip
-  - cd PyQt5_gpl-5.11.2
+  - curl -LO https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.11.3/PyQt5_gpl-5.11.3.zip
+  - 7z x PyQt5_gpl-5.11.3.zip
+  - cd PyQt5_gpl-5.11.3
   - python configure.py --confirm-license --disable=QtNfc --qmake=C:\Qt\5.11.2\msvc2017_64\bin\qmake.exe
   - nmake
   - nmake install
