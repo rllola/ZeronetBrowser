@@ -9,25 +9,29 @@ matrix:
         sudo: required
         dist: xenial
         before_install:
-          - sudo add-apt-repository --yes ppa:beineri/opt-qt-5.10.1-xenial
+          - sudo add-apt-repository --yes ppa:beineri/opt-qt-5.11.2-xenial
           - sudo apt-get update
-          - sudo apt-get install -y msgpack-python python-gevent python-dev build-essential libgl1-mesa-dev qt510-meta-minimal qt510webengine qt510svg mlocate
-          - sudo updatedb
-          - sudo chmod +x /opt/qt510/bin/qt510-env.sh
-          - /opt/qt510/bin/qt510-env.sh
+          - sudo apt-get install -y msgpack-python python-gevent python-dev build-essential libgl1-mesa-dev qt511-meta-minimal qt511webengine qt511svg
+          - sudo chmod +x /opt/qt511/bin/qt511-env.sh
+          - /opt/qt511/bin/qt511-env.sh
           - chmod +x get-pyqt5-linux.sh
           - ./get-pyqt5-linux.sh
-          - mlocate QtWebEngineProcess
+        after_success:
+          - cp ./dist/ZeronetBrowser/PyQt5/Qt/resources/* ./dist/ZeronetBrowser/PyQt5/Qt/libexec/
+          - cp -r ./dist/ZeronetBrowser/PyQt5/Qt/translations/qtwebengine_locales/ ./dist/ZeronetBrowser/PyQt5/Qt/libexec/
       - os: osx
         language: generic
         sudo: true
         before_install:
-          - brew install sip --without-python
-          - travis_wait 30 brew install pyqt5 --without-python
-          - pip install msgpack gevent
+          - pip install msgpack gevent enum34
+          - brew install qt5
+          - sudo /usr/libexec/locate.updatedb
+          - locate qt5
+          - chmod +x ./get-pyqt5-osx.sh
+          - ./get-pyqt5-osx.sh
 
 install:
-  - sudo pip install pyinstaller
+  - sudo pip install pyinstaller cffi
   - sudo pip install --upgrade setuptools
   - echo "import zeronet" > ZeroNet/__init__.py
 script:
