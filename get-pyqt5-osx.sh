@@ -16,7 +16,8 @@ echo "=========== Install PyQt5 ==========="
 wget -nv https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.11.2/PyQt5_gpl-5.11.2.tar.gz
 tar -xvzf PyQt5_gpl-5.11.2.tar.gz
 cd PyQt5_gpl-5.11.2
-python configure.py --confirm-license --disable=QtNfc --qmake=/usr/local/opt/qt5/bin/qmake -n PyQt5.sip --sip=/usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/bin
+ls /usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/bin/
+python configure.py --confirm-license --disable=QtNfc --qmake=/usr/local/opt/qt5/bin/qmake -n PyQt5.sip --sip=/usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/bin/qmake
 make -j 8
 sudo make install
 echo "Done !"
