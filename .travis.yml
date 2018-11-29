@@ -23,10 +23,10 @@ matrix:
         language: generic
         sudo: true
         before_install:
-          - brew install sip --without-python
-          - travis_wait 30 brew install pyqt5 --without-python
+          - brew install qt5
           - sudo /usr/libexec/locate.updatedb
-          - locate QtWebEngineProcess
+          - locate qt5
+          - ./get-pyqt5-osx.sh
           - pip install msgpack gevent
 
 install:
