@@ -12,7 +12,7 @@ a = Analysis(['launch.py'],
              #pathex=['/home/lola/Workspace/ZeroNet/Browser/ZeroNet/src', '/home/lola/Workspace/ZeroNet/Browser/ZeroNet/plugins', '/home/lola/Workspace/ZeroNet/Browser/ZeroNet/src/lib', '/home/lola/Workspace/ZeroNet/Browser'],
              binaries=[],
              datas=[],
-             hiddenimports=['gevent', 'ConfigParser', 'json', 'sqlite3', 'msgpack', 'setuptools', 'cgi', 'xml.dom', 'posixpath', 'logging.handlers', 'argparse'],
+             hiddenimports=['gevent', 'ConfigParser', 'json', 'sqlite3', 'msgpack', 'setuptools', 'cgi', 'xml.dom', 'posixpath', 'logging.handlers', 'argparse', 'enum'],
              #hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
@@ -36,6 +36,8 @@ exe = EXE(pyz,
           strip=False,
           upx=True,
           console=True )
+
+datas += [('qt.conf', 'qt.conf', 'DATA')]
 
 if platform.startswith("linux"):
     # linux; add .desktop

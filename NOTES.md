@@ -19,8 +19,10 @@ import main
 import Config
 ```
 
-## QtWebEngineProcess Error
+# Qt 5.11.2
 
-```
-QTWEBENGINEPROCESS_PATH=$PWD/PyQt5/Qt/libexec/QtWebEngineProcess ./ZeronetBrowser
-```
+Using Qt 5.11 because 5.10.1 qt.conf is broken and for windows
+
+## PyQT 5.11.3 (Windows)
+
+Using PyQt5 5.11.3 because of compile bug

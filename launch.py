@@ -19,9 +19,6 @@ if __name__ == '__main__':
 
     time.sleep(5)
 
-    print os.environ['PATH']
-    print sys.path
-
     # Start the PyQt application
     app = QApplication(sys.argv)
     mainWindow = MainWindow()
