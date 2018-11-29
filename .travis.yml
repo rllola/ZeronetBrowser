@@ -26,6 +26,7 @@ matrix:
           - brew install qt5
           - sudo /usr/libexec/locate.updatedb
           - locate qt5
+          - chmod +x ./get-pyqt5-osx.sh
           - ./get-pyqt5-osx.sh
           - pip install msgpack gevent
 
