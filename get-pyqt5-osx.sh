@@ -7,7 +7,7 @@ cd sip-4.19.13
 python configure.py --sip-module=PyQt5.sip
 make -j 8
 sudo make install
-sudo touch /usr/lib/python2.7/dist-packages/PyQt5/__init__.py
+sudo touch /usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/PyQt5/__init__.py
 echo "Done !"
 
 cd ..
