@@ -43,7 +43,7 @@ test_script:
   - python test.py
   - pyinstaller browser.spec
 
-before_deploy:
+after_test:
   - 7z a build-windows.zip dist/ZeronetBrowser/*
 
 deploy:
