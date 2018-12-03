@@ -106,7 +106,10 @@ class MainWindow(QMainWindow):
         # Instead of browser it should be called WebView !
         browser = Browser()
         browser.urlChanged.connect(lambda qurl, browser=browser: self.update_url_bar(qurl, browser))
-        return self.tabs.addTab(browser, label)
+        indexTab = self.tabs.addTab(browser, label)
+        # We need to update the url !
+        self.tabs.currentWidget().setUrl(QUrl(qurl))
+        return indexTab
 
     def close_tab(self, index):
         if self.tabs.count() == 1:
