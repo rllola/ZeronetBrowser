@@ -45,6 +45,8 @@ test_script:
   - pyinstaller browser.spec
 
 after_test:
+  - copy .\dist\ZeronetBrowser\PyQt5\Qt\resources\* .\dist\ZeronetBrowser\PyQt5\Qt\bin\
+  - copy .\dist\ZeronetBrowser\PyQt5\Qt\translations\qtwebengine_locales\ .\dist\ZeronetBrowser\PyQt5\Qt\bin\
   - 7z a build-windows.zip dist/ZeronetBrowser/*
 
 deploy:
