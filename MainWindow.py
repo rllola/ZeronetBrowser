@@ -28,9 +28,6 @@ class MainWindow(QMainWindow):
         self.tabs.setCornerWidget(self.add_tab_button)
 
 
-        # Add new tab
-        self.add_new_tab("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/", "Home")
-
         # Navigation bar
         self.navigation = NavigationBar()
         self.navigation.url_bar.returnPressed.connect(self.navigate_to_url)
@@ -48,6 +45,9 @@ class MainWindow(QMainWindow):
 
         # Home
         self.navigation.home_btn.triggered.connect(self.go_home)
+
+        # Add new tab
+        self.add_new_tab("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/", "Home")
 
         # Get everything fitting in the main window
         self.addToolBar(self.navigation)
