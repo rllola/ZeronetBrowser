@@ -74,7 +74,6 @@ if __name__ == '__main__':
     if zeronet_path:
         # See if it is already running
         try:
-            print "OK"
             lock = openLocked("%s/lock.pid" % os.path.join(zeronet_path,'data'), "w")
             lock.close()
             # Create a process for Zeronet using this version of ZeroNet

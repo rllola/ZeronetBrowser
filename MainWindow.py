@@ -99,14 +99,14 @@ class MainWindow(QMainWindow):
         self.tabs.currentWidget().setUrl(QUrl("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/"))
 
     def new_tab_clicked(self):
-        index = self.add_new_tab("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/", "Home")
-        self.tabs.setCurrentIndex(index)
+        self.add_new_tab("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/", "Home")
 
     def add_new_tab(self, qurl, label):
         # Instead of browser it should be called WebView !
         browser = Browser()
         browser.urlChanged.connect(lambda qurl, browser=browser: self.update_url_bar(qurl, browser))
         indexTab = self.tabs.addTab(browser, label)
+        self.tabs.setCurrentIndex(indexTab)
         # We need to update the url !
         self.tabs.currentWidget().setUrl(QUrl(qurl))
         return indexTab
