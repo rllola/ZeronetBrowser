@@ -8,6 +8,11 @@ from PyQt5.QtCore import QUrl
 class MainWindow(QMainWindow):
 
     def __init__(self, *args, **kwargs):
+        url = "http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/"
+        if "url" in kwargs:
+            url = kwargs["url"]
+            print url
+            del kwargs["url"]
         super(MainWindow,self).__init__(*args, **kwargs)
 
         # Tabs
@@ -47,7 +52,7 @@ class MainWindow(QMainWindow):
         self.navigation.home_btn.triggered.connect(self.go_home)
 
         # Add new tab
-        self.add_new_tab("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/", "Home")
+        self.add_new_tab(url, "Home")
 
         # Get everything fitting in the main window
         self.addToolBar(self.navigation)
@@ -108,6 +113,16 @@ class MainWindow(QMainWindow):
         indexTab = self.tabs.addTab(browser, label)
         self.tabs.setCurrentIndex(indexTab)
         # We need to update the url !
+        if qurl.startswith('zero://') :
+            # ZeroNet protocol
+            url_array = qurl.split('/')
+            qurl = 'http://127.0.0.1:43110/' + url_array[2]
+        elif qurl.startswith('http://'):
+            # http protocol
+            pass
+        else :
+            # Nothing mentionned
+            qurl = 'http://127.0.0.1:43110/' + qurl
         self.tabs.currentWidget().setUrl(QUrl(qurl))
         return indexTab
 
