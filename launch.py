@@ -27,6 +27,11 @@ def openLocked(path, mode="w"):
 if __name__ == '__main__':
     freeze_support()
 
+    url = None
+    if len(sys.argv) > 1 and sys.argv[1].startswith('zero:'):
+        url = sys.argv[1]
+        sys.argv.pop(1)
+
     p = None
 
     config = ConfigParser.ConfigParser()
@@ -88,9 +93,13 @@ if __name__ == '__main__':
 
     time.sleep(5)
 
+    kwargs = {}
+    if url :
+        kwargs = {"url": url}
+
     # Start the PyQt application
     app = QApplication(sys.argv)
-    mainWindow = MainWindow()
+    mainWindow = MainWindow(**kwargs)
     app.exec_()
 
     if p:
