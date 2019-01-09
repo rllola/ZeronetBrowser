@@ -3,7 +3,7 @@
 import sys
 import os
 import ConfigParser
-from MainWindow import MainWindow
+from src.MainWindow import MainWindow
 from PyQt5.QtWidgets import QApplication
 from multiprocessing import Process, freeze_support
 from ZeroNet import zeronet
