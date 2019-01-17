@@ -1,4 +1,4 @@
-# ZeroNet Browser
+# <img src="logotype.png" alt="ZeroNet Browser" title="ZeroNet Browser"/>
 
 [![Build Status](https://travis-ci.org/rllola/ZeronetBrowser.svg?branch=master)](https://travis-ci.org/rllola/ZeronetBrowser)
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/rllola/ZeronetBrowser?branch=master&svg=true)](https://ci.appveyor.com/project/rllola/zeronetbrowser/)
