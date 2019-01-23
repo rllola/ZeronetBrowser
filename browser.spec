@@ -65,4 +65,5 @@ coll = COLLECT(exe,
 
 app = BUNDLE(coll,
              name='ZeronetBrowser.app',
-             icon=icon)
+             icon=icon,
+             bundle_identifier=None)
