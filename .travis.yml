@@ -8,6 +8,10 @@ matrix:
         python: "2.7"
         sudo: required
         dist: xenial
+        cache:
+          pip: true
+          directories:
+            - /opt/qt511
         before_install:
           - sudo add-apt-repository --yes ppa:beineri/opt-qt-5.11.2-xenial
           - sudo apt-get update
@@ -21,6 +25,7 @@ matrix:
           - cp -r ./dist/ZeronetBrowser/PyQt5/Qt/translations/qtwebengine_locales/ ./dist/ZeronetBrowser/PyQt5/Qt/libexec/
       - os: osx
         language: generic
+        cache: pip
         sudo: true
         before_install:
           - pip install msgpack gevent enum34
@@ -39,6 +44,7 @@ script:
   - pyinstaller browser.spec
 
 before_deploy:
+  - ls
   - zip -r build-$TRAVIS_OS_NAME.zip dist/ZeronetBrowser
 deploy:
   provider: releases
