@@ -11,7 +11,6 @@ class MainWindow(QMainWindow):
         url = "http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/"
         if "url" in kwargs:
             url = kwargs["url"]
-            print url
             del kwargs["url"]
         super(MainWindow,self).__init__(*args, **kwargs)
 
@@ -61,6 +60,9 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("ZeroNet Browser")
         self.setWindowIcon(QIcon("icons/zeronet-logo.svg"))
         self.showMaximized()
+
+    def contextMenuEvent(self, event):
+        print event
 
     def update_url_bar(self, q, browser=None):
 
