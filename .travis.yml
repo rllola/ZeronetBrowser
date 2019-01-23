@@ -11,7 +11,8 @@ matrix:
         cache:
           pip: true
           directories:
-            - /opt/qt511
+            - $HOME/sip-4.19.13
+            - $HOME/PyQt5_gpl-5.11.2
         before_install:
           - sudo add-apt-repository --yes ppa:beineri/opt-qt-5.11.2-xenial
           - sudo apt-get update
@@ -25,7 +26,11 @@ matrix:
           - cp -r ./dist/ZeronetBrowser/PyQt5/Qt/translations/qtwebengine_locales/ ./dist/ZeronetBrowser/PyQt5/Qt/libexec/
       - os: osx
         language: generic
-        cache: pip
+        cache:
+          pip: true
+          directories:
+            - $HOME/sip-4.19.13
+            - $HOME/PyQt5_gpl-5.11.2
         sudo: true
         before_install:
           - pip install msgpack gevent enum34
@@ -46,7 +51,7 @@ script:
   - ls dist/ZeronetBrowser
 
 before_deploy:
-  - zip -r build-$TRAVIS_OS_NAME.zip dist/ZeronetBrowser
+  - zip -r build-$TRAVIS_OS_NAME.zip dist
 deploy:
   provider: releases
   skip_cleanup: true
