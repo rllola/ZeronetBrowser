@@ -26,11 +26,16 @@ a = Analysis(['launch.py'],
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 
+icon = None
+if platform.startswith("darwin"):
+    icon = 'icons/zeronet-logo.icns'
+
 exe = EXE(pyz,
           a.scripts,
           [],
           exclude_binaries=True,
           name='ZeronetBrowser',
+          icon=icon,
           debug=True,
           bootloader_ignore_signals=False,
           strip=False,
@@ -56,3 +61,10 @@ coll = COLLECT(exe,
                strip=False,
                upx=True,
                name='ZeronetBrowser')
+
+
+app = BUNDLE(coll,
+             name='ZeronetBrowser.app',
+             icon=icon,
+             # https://github.com/pyinstaller/pyinstaller/blob/b78bfe530cdc2904f65ce098bdf2de08c9037abb/PyInstaller/hooks/hook-PyQt5.QtWebEngineWidgets.py#L24
+             bundle_identifier='org.qt-project.Qt.QtWebEngineCore')
