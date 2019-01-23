@@ -41,8 +41,8 @@ install:
   - echo "import zeronet" > ZeroNet/__init__.py
 script:
   - python test.py
-  - pyinstaller browser.spec
-  - ls
+  - pyinstaller --onefile --windowed browser.spec
+  - ls dist/
   - ls dist/ZeronetBrowser
 
 before_deploy:
