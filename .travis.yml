@@ -42,9 +42,10 @@ install:
 script:
   - python test.py
   - pyinstaller browser.spec
+  - ls
+  - ls dist/ZeronetBrowser
 
 before_deploy:
-  - ls
   - zip -r build-$TRAVIS_OS_NAME.zip dist/ZeronetBrowser
 deploy:
   provider: releases
