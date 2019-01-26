@@ -24,6 +24,8 @@ matrix:
         after_success:
           - cp ./dist/ZeronetBrowser/PyQt5/Qt/resources/* ./dist/ZeronetBrowser/PyQt5/Qt/libexec/
           - cp -r ./dist/ZeronetBrowser/PyQt5/Qt/translations/qtwebengine_locales/ ./dist/ZeronetBrowser/PyQt5/Qt/libexec/
+        before_deploy:
+          - zip -r build-$TRAVIS_OS_NAME.zip dist
       - os: osx
         language: generic
         cache:
@@ -39,7 +41,8 @@ matrix:
           - locate qt5
           - chmod +x ./get-pyqt5-osx.sh
           - ./get-pyqt5-osx.sh
-
+        before_deploy:
+          - zip -r build-$TRAVIS_OS_NAME.zip dist/ZeronetBrowser.app
 install:
   - sudo pip install pyinstaller cffi
   - sudo pip install --upgrade setuptools
@@ -50,8 +53,6 @@ script:
   - ls dist/
   - ls dist/ZeronetBrowser
 
-before_deploy:
-  - zip -r build-$TRAVIS_OS_NAME.zip dist
 deploy:
   provider: releases
   skip_cleanup: true
