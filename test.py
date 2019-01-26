@@ -7,7 +7,7 @@ class TestBuild(unittest.TestCase):
 
     def test_pyqt5(self):
         # Need access to screen
-        # app = QtWidgets.QApplication(sys.argv)
+        app = QApplication(sys.argv)
         pass
 
     def test_import_qtwebengine(self):
