@@ -43,7 +43,7 @@ exe = EXE(pyz,
           console=True )
 
 if platform.startswith("darwin"):
-  datas += [('qt-osx.conf', 'qt.conf', 'DATA')]
+  datas += [('qt.conf', 'qt-osx.conf', 'DATA')]
 
 if platform.startswith("linux"):
     # linux; add .desktop
