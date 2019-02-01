@@ -28,6 +28,8 @@ matrix:
           - zip -r build-$TRAVIS_OS_NAME.zip dist
       - os: osx
         language: generic
+        services:
+          - xvfb
         cache:
           pip: true
           directories:
@@ -37,14 +39,15 @@ matrix:
         before_install:
           - pip install msgpack gevent enum34
           - brew install qt5
-          - sudo /usr/libexec/locate.updatedb
-          - locate qt5
           - chmod +x ./get-pyqt5-osx.sh
           - ./get-pyqt5-osx.sh
+        after_script:
+          - ./dist/ZeronetBrowser.app/Contents/MacOS/ZeronetBrowser
         before_deploy:
           - zip -r build-$TRAVIS_OS_NAME.zip dist/ZeronetBrowser.app
 install:
-  - sudo pip install pyinstaller cffi
+  - pip install git+https://github.com/pyinstaller/pyinstaller.git
+  - sudo pip install cffi
   - sudo pip install --upgrade setuptools
   - echo "import zeronet" > ZeroNet/__init__.py
 script:
