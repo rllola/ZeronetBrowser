@@ -41,8 +41,8 @@ matrix:
           - brew install qt5
           - chmod +x ./get-pyqt5-osx.sh
           - ./get-pyqt5-osx.sh
-        after_script:
-          - ./dist/ZeronetBrowser.app/Contents/MacOS/ZeronetBrowser
+        #after_script:
+        #  - ./dist/ZeronetBrowser.app/Contents/MacOS/ZeronetBrowser
         before_deploy:
           - zip -r build-$TRAVIS_OS_NAME.zip dist/ZeronetBrowser.app
 install:
