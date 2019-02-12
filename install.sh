@@ -10,6 +10,7 @@ Exec=$HOME/.local/share/ZeronetBrowser/ZeronetBrowser %u
 Path=$HOME/.local/share/ZeronetBrowser/
 Icon=$HOME/.local/share/ZeronetBrowser/icons/zeronet-logo.svg
 Terminal=true
+Type=Application
 Categories=Application;Network;
 MimeType=x-scheme-handler/zero;
 EOF
@@ -20,6 +21,6 @@ mkdir ~/.local/share/ZeronetBrowser
 cp -a . ~/.local/share/ZeronetBrowser
 cd ~/.local/share/ZeronetBrowser
 ln -s $PWD/ZeronetBrowser $HOME/.local/bin/ZeronetBrowser
-sudo cp -r $PWD/PyQt5/Qt/* /opt/qt510
+#sudo cp -r $PWD/PyQt5/Qt/* /opt/qt511
 xdg-mime default zeronet-browser.desktop x-scheme-handler/zero
 echo "Done !"
