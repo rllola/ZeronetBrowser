@@ -1,6 +1,6 @@
 from Browser import Browser
 from NavigationBar import NavigationBar
-from PyQt5.QtWebEngineWidgets import QWebEngineView
+from PyQt5.QtWebEngineWidgets import QWebEngineView,QWebEnginePage
 from PyQt5.QtWidgets import QMainWindow, QToolBar, QTabWidget, QToolButton
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QUrl
@@ -108,9 +108,22 @@ class MainWindow(QMainWindow):
     def new_tab_clicked(self):
         self.add_new_tab("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/", "Home")
 
+    def open_in_new_tab(self):
+        tab = self.tabs.currentWidget()
+        page = tab.page()
+        context = page.contextMenuData()
+        qurl = context.linkUrl()
+        self.add_new_tab(qurl.toString(), "Home")
+
     def add_new_tab(self, qurl, label):
         # Instead of browser it should be called WebView !
         browser = Browser()
+
+        # Triggered open in new tab
+        openLinkInNewTabAction = browser.pageAction(QWebEnginePage.OpenLinkInNewTab)
+        openLinkInNewTabAction.triggered.connect(self.open_in_new_tab)
+        self.addAction(openLinkInNewTabAction)
+
         browser.urlChanged.connect(lambda qurl, browser=browser: self.update_url_bar(qurl, browser))
         indexTab = self.tabs.addTab(browser, label)
         self.tabs.setCurrentIndex(indexTab)
