@@ -9,7 +9,7 @@ matrix:
         sudo: required
         dist: xenial
         before_install:
-          - sudo add-apt-repository --yes ppa:beineri/opt-qt-5.11.2-xenial
+          - sudo add-apt-repository --yes ppa:beineri/opt-qt-5.11.3-xenial
           - sudo apt-get update
           - sudo apt-get install -y msgpack-python python-gevent python-dev build-essential libgl1-mesa-dev qt511-meta-minimal qt511webengine qt511svg
           - sudo chmod +x /opt/qt511/bin/qt511-env.sh
