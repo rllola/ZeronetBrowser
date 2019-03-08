@@ -126,9 +126,10 @@ class MainWindow(QMainWindow):
 
         browser.urlChanged.connect(lambda qurl, browser=browser: self.update_url_bar(qurl, browser))
         indexTab = self.tabs.addTab(browser, label)
+        # Maybe change current index after loading?
         self.tabs.setCurrentIndex(indexTab)
         # We need to update the url !
-        if qurl.startswith('zero://') :
+        if qurl.startswith('zero://'):
             # ZeroNet protocol
             url_array = qurl.split('/')
             qurl = 'http://127.0.0.1:43110/' + url_array[2]
@@ -138,8 +139,24 @@ class MainWindow(QMainWindow):
         else :
             # Nothing mentionned
             qurl = 'http://127.0.0.1:43110/' + qurl
-        self.tabs.currentWidget().setUrl(QUrl(qurl))
+
+        currentTab = self.tabs.currentWidget()
+        currentTab.loadFinished.connect(self.page_loaded)
+        index = self.tabs.currentIndex()
+        currentTab.titleChanged.connect(lambda title, index=index : self.tabs.setTabText(index, title))
+        currentTab.iconChanged.connect(lambda icon, index=index : self.tabs.setTabIcon(index, icon))
+
+        currentTab.setUrl(QUrl(qurl))
         return indexTab
+
+    def page_loaded(self, ok):
+        if ok:
+            currentTab = self.tabs.currentWidget()
+            index = self.tabs.currentIndex()
+            label = currentTab.title()
+            icon = currentTab.icon()
+            self.tabs.setTabIcon(index, icon)
+            self.tabs.setTabText(index, label)
 
     def close_tab(self, index):
         if self.tabs.count() == 1:
