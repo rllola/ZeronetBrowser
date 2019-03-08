@@ -6,7 +6,7 @@ sudo apt install -y python-pip msgpack-python python-gevent python-dev
 sudo pip install enum34
 
 echo "===== INSTALL PYQT5 ====="
-sudo add-apt-repository --yes ppa:beineri/opt-qt-5.11.2-xenial
+sudo add-apt-repository --yes ppa:beineri/opt-qt-5.11.3-xenial
 sudo apt-get update
 
 # Install Qt5, QtWebEngine and QtSvg

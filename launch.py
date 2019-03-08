@@ -27,6 +27,11 @@ def openLocked(path, mode="w"):
 if __name__ == '__main__':
     freeze_support()
 
+    print "sys.prefix=" + sys.prefix
+    print "sys.path=" + ''.join(sys.path)
+    if hasattr(sys,"_MEIPASS"):
+        print "sys._MEIPASS=" + sys._MEIPASS
+
     url = None
     if len(sys.argv) > 1 and sys.argv[1].startswith('zero:'):
         url = sys.argv[1]
@@ -96,6 +101,12 @@ if __name__ == '__main__':
     kwargs = {}
     if url :
         kwargs = {"url": url}
+
+    print "sys.prefix=" + sys.prefix
+    print "sys.path=" + ''.join(sys.path)
+    if hasattr(sys,"_MEIPASS"):
+        print "sys._MEIPASS=" + sys._MEIPASS
+
 
     # Start the PyQt application
     app = QApplication(sys.argv)
