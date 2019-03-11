@@ -43,6 +43,7 @@ install:
   - python configure.py --qmake=C:\Qt\5.12\msvc2017_64\bin\qmake.exe
   - nmake
   - nmake install
+  - cd ..
   - echo "import zeronet" > ZeroNet/__init__.py
   - SET PYTHONPATH=C:\Python27-x64\Lib\site-packages;C:\Python27-x64\libs;%PYTHONPATH%
 
