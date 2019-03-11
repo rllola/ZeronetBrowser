@@ -3,8 +3,10 @@
 import sys
 import os
 import ConfigParser
-from src.MainWindow import MainWindow
+
+from PyQt5.QtCore import QLibraryInfo, QCoreApplication
 from PyQt5.QtWidgets import QApplication
+from src.MainWindow import MainWindow
 from multiprocessing import Process, freeze_support
 from ZeroNet import zeronet
 import time
@@ -26,11 +28,6 @@ def openLocked(path, mode="w"):
 
 if __name__ == '__main__':
     freeze_support()
-
-    print "sys.prefix=" + sys.prefix
-    print "sys.path=" + ''.join(sys.path)
-    if hasattr(sys,"_MEIPASS"):
-        print "sys._MEIPASS=" + sys._MEIPASS
 
     url = None
     if len(sys.argv) > 1 and sys.argv[1].startswith('zero:'):
@@ -101,12 +98,6 @@ if __name__ == '__main__':
     kwargs = {}
     if url :
         kwargs = {"url": url}
-
-    print "sys.prefix=" + sys.prefix
-    print "sys.path=" + ''.join(sys.path)
-    if hasattr(sys,"_MEIPASS"):
-        print "sys._MEIPASS=" + sys._MEIPASS
-
 
     # Start the PyQt application
     app = QApplication(sys.argv)
