@@ -28,7 +28,7 @@ matrix:
           - locate qt5
           - chmod +x ./get-pyqt5-osx.sh
           - ./get-pyqt5-osx.sh
-          - export DYLD_LIBRARY_PATH=/usr/local/opt/qt5/lib:$DYLD_LIBRARY_PATH
+          - export DYLD_LIBRARY_PATH=/usr/local/opt/qt5/lib
 
 install:
   - sudo pip install pyinstaller cffi

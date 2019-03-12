@@ -33,7 +33,7 @@ echo "=========== Install PyQtWebEngine ==========="
 wget -nv https://www.riverbankcomputing.com/static/Downloads/PyQtWebEngine/PyQtWebEngine_gpl-$QT5_VERSION.tar.gz
 tar -xvzf PyQtWebEngine_gpl-$QT5_VERSION.tar.gz
 cd PyQtWebEngine_gpl-$QT5_VERSION
-DYLD_LIBRARY_PATH=/usr/local/opt/qt5/lib python configure.py --qmake=/usr/local/opt/qt5/bin/qmake
+DYLD_LIBRARY_PATH=/usr/local/opt/qt5/lib python configure.py --qmake=/usr/local/opt/qt5/bin/qmake --sip=/usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/bin/sip
 make -j $NP
 sudo make install
 echo "Done !"
