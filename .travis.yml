@@ -17,7 +17,7 @@ matrix:
           - chmod +x get-pyqt5-linux.sh
           - ./get-pyqt5-linux.sh
           - printenv
-          - export LD_LIBRARY_PATH=/opt/qt512/lib:$LD_LIBRARY_PATH
+          - export LD_LIBRARY_PATH=/opt/qt512/lib:/opt/qt512/plugins/platforms
       - os: osx
         language: generic
         sudo: true
