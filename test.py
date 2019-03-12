@@ -1,5 +1,6 @@
 import unittest
 import sys
+import os
 
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QLibraryInfo
