@@ -16,7 +16,8 @@ matrix:
           - /opt/qt512/bin/qt512-env.sh
           - chmod +x get-pyqt5-linux.sh
           - ./get-pyqt5-linux.sh
-          - export LD_LIBRARY_PATH=/opt/qt512/lib
+          - printenv
+          - export LD_LIBRARY_PATH=/opt/qt512/lib:$LD_LIBRARY_PATH
       - os: osx
         language: generic
         sudo: true
@@ -27,7 +28,7 @@ matrix:
           - locate qt5
           - chmod +x ./get-pyqt5-osx.sh
           - ./get-pyqt5-osx.sh
-          - export DYLD_LIBRARY_PATH=/usr/local/opt/qt5/lib
+          - export DYLD_LIBRARY_PATH=/usr/local/opt/qt5/lib:$DYLD_LIBRARY_PATH
 
 install:
   - sudo pip install pyinstaller cffi
