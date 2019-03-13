@@ -8,17 +8,18 @@ matrix:
         python: "2.7"
         sudo: required
         dist: xenial
+        services:
+          - xvfb
         before_install:
-          - sudo add-apt-repository --yes ppa:beineri/opt-qt-5.11.3-xenial
+          - sudo add-apt-repository --yes ppa:beineri/opt-qt-5.12.0-xenial
           - sudo apt-get update
-          - sudo apt-get install -y msgpack-python python-gevent python-dev build-essential libgl1-mesa-dev qt511-meta-minimal qt511webengine qt511svg
-          - sudo chmod +x /opt/qt511/bin/qt511-env.sh
-          - /opt/qt511/bin/qt511-env.sh
+          - sudo apt-get install -y msgpack-python python-gevent python-dev build-essential libgl1-mesa-dev qt512-meta-minimal qt512webengine qt512svg
+          - sudo chmod +x /opt/qt512/bin/qt512-env.sh
+          - /opt/qt512/bin/qt512-env.sh
           - chmod +x get-pyqt5-linux.sh
           - ./get-pyqt5-linux.sh
-        after_success:
-          - cp ./dist/ZeronetBrowser/PyQt5/Qt/resources/* ./dist/ZeronetBrowser/PyQt5/Qt/libexec/
-          - cp -r ./dist/ZeronetBrowser/PyQt5/Qt/translations/qtwebengine_locales/ ./dist/ZeronetBrowser/PyQt5/Qt/libexec/
+          - printenv
+          - export LD_LIBRARY_PATH=/opt/qt512/lib:/opt/qt512/plugins/platforms
       - os: osx
         language: generic
         sudo: true
@@ -29,6 +30,7 @@ matrix:
           - locate qt5
           - chmod +x ./get-pyqt5-osx.sh
           - ./get-pyqt5-osx.sh
+          - export DYLD_LIBRARY_PATH=/usr/local/opt/qt5/lib
 
 install:
   - sudo pip install pyinstaller cffi

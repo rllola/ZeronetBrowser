@@ -13,9 +13,9 @@ artifacts:
 build: off
 
 init:
-  - cmd: copy C:\windows\system32\libeay32.dll C:\Qt\5.11.3\msvc2017_64\bin
-  - cmd: copy C:\windows\system32\ssleay32.dll C:\Qt\5.11.3\msvc2017_64\bin
-  - SET PATH=%PYTHON%;%PYTHON%\Scripts;C:\Qt\5.11.3\msvc2017_64\bin;%PATH%
+  - cmd: copy C:\windows\system32\libeay32.dll C:\Qt\5.12\msvc2017_64\bin
+  - cmd: copy C:\windows\system32\ssleay32.dll C:\Qt\5.12\msvc2017_64\bin
+  - SET PATH=%PYTHON%;%PYTHON%\Scripts;C:\Qt\5.12\msvc2017_64\bin;%PATH%
   - python -m pip install --upgrade pip setuptools
   - python -m pip install pyinstaller pyinstaller-hooks msgpack gevent enum34 cffi pypiwin32
 
@@ -23,17 +23,24 @@ install:
   - git submodule update --init --recursive
   - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
   - set CL=/MP
-  - curl -LO https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.13/sip-4.19.13.zip
-  - 7z x sip-4.19.13.zip
-  - cd sip-4.19.13
+  - curl -LO https://www.riverbankcomputing.com/static/Downloads/sip/sip-4.19.14.zip
+  - 7z x sip-4.19.14.zip
+  - cd sip-4.19.14
   - python configure.py --sip-module PyQt5.sip
   - nmake
   - nmake install
   - cd ..
-  - curl -LO https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.11.3/PyQt5_gpl-5.11.3.zip
-  - 7z x PyQt5_gpl-5.11.3.zip
-  - cd PyQt5_gpl-5.11.3
-  - python configure.py --confirm-license --disable=QtNfc --qmake=C:\Qt\5.11.3\msvc2017_64\bin\qmake.exe
+  - curl -LO https://www.riverbankcomputing.com/static/Downloads/PyQt5/PyQt5_gpl-5.12.zip
+  - 7z x PyQt5_gpl-5.12.zip
+  - cd PyQt5_gpl-5.12
+  - python configure.py --confirm-license --no-docstrings --no-designer-plugin --no-tools --enable=QtWidgets --enable=QtCore --enable=QtGui --enable=QtPrintSupport --enable=QtPositioning --enable=QtNetwork --enable=QtQuick --enable=QtQuickWidgets --enable=QtWebChannel --enable=QtQml --qmake=C:\Qt\5.12\msvc2017_64\bin\qmake.exe --verbose
+  - nmake
+  - nmake install
+  - cd ..
+  - curl -LO https://www.riverbankcomputing.com/static/Downloads/PyQtWebEngine/PyQtWebEngine_gpl-5.12.zip
+  - 7z x PyQtWebEngine_gpl-5.12.zip
+  - cd PyQtWebEngine_gpl-5.12
+  - python configure.py --qmake=C:\Qt\5.12\msvc2017_64\bin\qmake.exe
   - nmake
   - nmake install
   - cd ..
@@ -45,8 +52,8 @@ test_script:
   - pyinstaller browser.spec
 
 after_test:
-  - copy .\dist\ZeronetBrowser\PyQt5\Qt\resources\* .\dist\ZeronetBrowser\PyQt5\Qt\bin\
-  - copy .\dist\ZeronetBrowser\PyQt5\Qt\translations\qtwebengine_locales\ .\dist\ZeronetBrowser\PyQt5\Qt\bin\
+  #- copy .\dist\ZeronetBrowser\PyQt5\Qt\resources\* .\dist\ZeronetBrowser\PyQt5\Qt\bin\
+  #- copy .\dist\ZeronetBrowser\PyQt5\Qt\translations\qtwebengine_locales\ .\dist\ZeronetBrowser\PyQt5\Qt\bin\
   - 7z a build-windows.zip dist/ZeronetBrowser/*
 
 deploy:
