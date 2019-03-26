@@ -23,7 +23,7 @@ install:
   - cd ..
   - pip3 install pyinstaller PyQt5-sip PyQt5 PyQtWebEngine
 script:
-  - python test.py
+  - python3 test.py
   - pyinstaller browser.spec
 
 before_deploy:
