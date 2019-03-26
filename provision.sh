@@ -2,7 +2,7 @@
 
 echo "===== INSTALL DEPENDENCIES ====="
 sudo apt update
-sudo apt install -y python3-pip libgl1-mesa-glx libnss3 libxcomposite-dev libxcursor-dev libxi6 libxtst6 libasound2 libegl1-mesa
+sudo apt install -y python3-pip libgl1-mesa-glx libnss3 libxcomposite-dev libxcursor-dev libxi6 libxtst6 libasound2 libegl1-mesa libfontconfig1 libxkbcommon-x11-0
 
 echo "===== INSTALL PYQT5 ====="
 pip3 install PyQt5-sip PyQt5 PyQtWebEngine
