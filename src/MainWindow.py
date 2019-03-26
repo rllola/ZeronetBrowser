@@ -1,5 +1,5 @@
-from Browser import Browser
-from NavigationBar import NavigationBar
+from .Browser import Browser
+from .NavigationBar import NavigationBar
 from PyQt5.QtWebEngineWidgets import QWebEngineView,QWebEnginePage
 from PyQt5.QtWidgets import QMainWindow, QToolBar, QTabWidget, QToolButton
 from PyQt5.QtGui import QIcon
@@ -62,7 +62,7 @@ class MainWindow(QMainWindow):
         self.showMaximized()
 
     def contextMenuEvent(self, event):
-        print event
+        print(event)
 
     def update_url_bar(self, q, browser=None):
 

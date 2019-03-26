@@ -2,7 +2,7 @@
 
 import sys
 import os
-import ConfigParser
+import configparser
 
 from PyQt5.QtCore import QLibraryInfo, QCoreApplication
 from PyQt5.QtWidgets import QApplication
@@ -13,18 +13,22 @@ import time
 import imp
 
 # See if it is lock or not
-def openLocked(path, mode="w"):
-    if os.name == "posix":
-        import fcntl
-        f = open(path, mode)
-        fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
-    elif os.name == "nt":
-        import msvcrt
-        f = open(path, mode)
-        msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, -1)
-    else:
-        f = open(path, mode)
+def openLocked(path, mode="wb"):
+    try:
+        if os.name == "posix":
+            import fcntl
+            f = open(path, mode)
+            fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        elif os.name == "nt":
+            import msvcrt
+            f = open(path, mode)
+            msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, 1)
+        else:
+            f = open(path, mode)
+    except (IOError, PermissionError, BlockingIOError) as err:
+        raise BlockingIOError("Unable to lock file: %s" % err)
     return f
+
 
 if __name__ == '__main__':
     freeze_support()
@@ -36,13 +40,13 @@ if __name__ == '__main__':
 
     p = None
 
-    config = ConfigParser.ConfigParser()
+    config = configparser.ConfigParser()
     config.read('browser.conf')
 
     if not config.has_section('global'):
         config.add_section('global')
 
-        answer = raw_input("Do you already have ZeroNet installed somewhere ? (Y\\N) \n")
+        answer = input("Do you already have ZeroNet installed somewhere ? (Y\\N) \n")
 
         if (answer == 'Y'):
             home = os.path.expanduser("~")
@@ -52,7 +56,7 @@ if __name__ == '__main__':
                     for dir in dirs:
                         if dir.startswith('ZeroNet'):
                             path = os.path.join(root, dir)
-                            answer = raw_input("Is it this path correct "+path+" ?")
+                            answer = input("Is it this path correct "+path+" ?")
                             if (answer == 'Y'):
                                 if (os.path.exists(path) and os.path.isdir(path)):
                                     zeronet_path = path
@@ -65,10 +69,10 @@ if __name__ == '__main__':
         else:
             config.set('global', 'zeronet_path', '')
 
-        with open('browser.conf', 'wb') as configfile:
+        with open('browser.conf', 'w') as configfile:
             config.write(configfile)
 
-        print "Please restart to load the config"
+        print("Please restart to load the config")
         sys.exit(0)
     else:
         zeronet_path = config.get('global', 'zeronet_path')
@@ -76,7 +80,7 @@ if __name__ == '__main__':
             try:
                 zeronet = imp.load_source('zeronet', os.path.join(zeronet_path, 'zeronet.py'))
             except:
-                print "Error - Couldn't load ZeroNet from given path. Loading local ZeroNet."
+                print("Error - Couldn't load ZeroNet from given path. Loading local ZeroNet.")
 
     if zeronet_path:
         # See if it is already running
@@ -86,8 +90,9 @@ if __name__ == '__main__':
             # Create a process for Zeronet using this version of ZeroNet
             p = Process(target=zeronet.main)
             p.start()
-        except IOError as err:
-            print "Can't open lock file, your ZeroNet client is probably already running, opening browser without starting Zeronet in the background..."
+        except BlockingIOError as err:
+            print(err)
+            print("Can't open lock file, your ZeroNet client is probably already running, opening browser without starting Zeronet in the background...")
     else:
         # Create a process for Zeronet
         p = Process(target=zeronet.main)
