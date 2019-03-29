@@ -11,33 +11,20 @@ matrix:
         services:
           - xvfb
         before_install:
-          - sudo add-apt-repository --yes ppa:beineri/opt-qt-5.12.0-xenial
-          - sudo apt-get update
-          - sudo apt-get install -y msgpack-python python-gevent python-dev build-essential libgl1-mesa-dev qt512-meta-minimal qt512webengine qt512svg
-          - sudo chmod +x /opt/qt512/bin/qt512-env.sh
-          - /opt/qt512/bin/qt512-env.sh
-          - chmod +x get-pyqt5-linux.sh
-          - ./get-pyqt5-linux.sh
-          - printenv
-          - export LD_LIBRARY_PATH=/opt/qt512/lib:/opt/qt512/plugins/platforms
+          - sudo apt-get install -y python3-pip libgl1-mesa-glx libnss3 libxcomposite-dev libxcursor-dev libxi6 libxtst6 libasound2 libegl1-mesa libxkbcommon-x11-0
+          - export QT_QPA_PLATFORM=offscreen
       - os: osx
         language: generic
         sudo: true
-        before_install:
-          - pip install msgpack gevent enum34
-          - brew install qt5
-          - sudo /usr/libexec/locate.updatedb
-          - locate qt5
-          - chmod +x ./get-pyqt5-osx.sh
-          - ./get-pyqt5-osx.sh
-          - export DYLD_LIBRARY_PATH=/usr/local/opt/qt5/lib
 
 install:
-  - sudo pip install pyinstaller cffi
-  - sudo pip install --upgrade setuptools
-  - echo "import zeronet" > ZeroNet/__init__.py
+  - pip3 install setuptools
+  - cd ./ZeroNet
+  - pip3 install -r requirements.txt
+  - cd ..
+  - pip3 install pyinstaller PyQt5-sip PyQt5 PyQtWebEngine
 script:
-  - python test.py
+  - python3 test.py
   - pyinstaller browser.spec
 
 before_deploy:

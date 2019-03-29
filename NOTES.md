@@ -26,3 +26,12 @@ Using Qt 5.11 because 5.10.1 qt.conf is broken and for windows
 ## PyQT 5.11.3 (Windows)
 
 Using PyQt5 5.11.3 because of compile bug
+
+
+## PYTHON3
+
+```
+$ pip3 install PyQt5-sip PyQt5 PyQtWebEngine
+$ cd ZeroNet
+$ pip3 install -r requirements.txt
+```

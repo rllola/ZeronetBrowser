@@ -1,3 +1,4 @@
 [submodule "ZeroNet"]
 	path = ZeroNet
 	url = https://github.com/HelloZeroNet/ZeroNet.git
+  branch = py3
