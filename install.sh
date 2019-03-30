@@ -15,6 +15,11 @@ Categories=Application;Network;
 MimeType=x-scheme-handler/zero;
 EOF
 
+cat > zeronet.conf << EOF
+[global]
+data_dir = $HOME/.zeronet/
+EOF
+
 cp ./.desktop ~/.local/share/applications/zeronet-browser.desktop
 chmod +x ~/.local/share/applications/zeronet-browser.desktop
 mkdir ~/.local/share/ZeronetBrowser
