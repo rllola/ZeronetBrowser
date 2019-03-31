@@ -41,5 +41,9 @@ class NavigationBar(QToolBar):
         self.url_bar = QLineEdit()
         self.addWidget(self.url_bar)
 
+        # Menu button
+        self.menu_btn = QAction( QIcon(os.path.join('icons','190-menu.svg')), 'Menu', self)
+        self.addAction(self.menu_btn)
+
         # We dont want it to move elsewhere
         self.setMovable(False)
