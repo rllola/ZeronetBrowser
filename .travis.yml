@@ -5,7 +5,7 @@ matrix:
     include:
       - os: linux
         language: generic
-        python: "2.7"
+        python: "3.7"
         sudo: required
         dist: xenial
         services:
@@ -15,6 +15,7 @@ matrix:
           - export QT_QPA_PLATFORM=offscreen
       - os: osx
         language: generic
+        env: TOXENV=py37
         sudo: true
 
 install:
@@ -25,7 +26,7 @@ install:
   - pip3 install pyinstaller PyQt5-sip PyQt5 PyQtWebEngine
 script:
   - python3 test.py
-  - pyinstaller browser.spec
+  - pyinstaller --onefile --windowed browser.spec
 
 before_deploy:
   - zip -r build-$TRAVIS_OS_NAME.zip dist/ZeronetBrowser

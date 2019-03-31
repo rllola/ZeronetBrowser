@@ -23,6 +23,10 @@ a = Analysis(['launch.py'],
              cipher=block_cipher,
              noarchive=False)
 
+icon = None
+if platform.startswith("darwin"):
+  icon = "icons/zeronet-logo.icns"
+
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 
@@ -36,8 +40,6 @@ exe = EXE(pyz,
           strip=False,
           upx=True,
           console=True )
-
-datas += [('qt.conf', 'qt.conf', 'DATA')]
 
 if platform.startswith("linux"):
     # linux; add .desktop
@@ -56,3 +58,8 @@ coll = COLLECT(exe,
                strip=False,
                upx=True,
                name='ZeronetBrowser')
+
+app = BUNDLE(coll,
+  name='ZeronetBrowser.app',
+  icon=icon,
+  bundle_identifier=None)
