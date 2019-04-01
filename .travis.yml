@@ -19,13 +19,14 @@ matrix:
         sudo: true
 
 install:
-  - pip3 install setuptools
+  - pip -V
+  - pip install setuptools
   - cd ./ZeroNet
-  - pip3 install -r requirements.txt
+  - pip install -r requirements.txt
   - cd ..
-  - pip3 install pyinstaller PyQt5-sip PyQt5 PyQtWebEngine
+  - pip install pyinstaller PyQt5-sip PyQt5 PyQtWebEngine
 script:
-  - python3 test.py
+  - python test.py
   - pyinstaller --onefile --windowed browser.spec
 
 before_deploy:
