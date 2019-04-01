@@ -17,6 +17,8 @@ matrix:
         language: generic
         env: TOXENV=py37
         sudo: true
+        before_install:
+          - brew install tree
 
 install:
   - pip3 install setuptools
@@ -26,7 +28,8 @@ install:
   - pip3 install pyinstaller PyQt5-sip PyQt5 PyQtWebEngine
 script:
   - python3 test.py
-  - pyinstaller --onefile --windowed browser.spec
+  - pyinstaller --windowed browser.spec
+  - tree dist/
 
 before_deploy:
   - zip -r build-$TRAVIS_OS_NAME.zip dist/ZeronetBrowser
