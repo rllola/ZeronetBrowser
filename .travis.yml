@@ -31,7 +31,6 @@ install:
 script:
   - python3 test.py
   - pyinstaller --windowed browser.spec
-  - tree dist/
 
 before_deploy:
   - zip -r build-$TRAVIS_OS_NAME.zip dist/ZeronetBrowser
