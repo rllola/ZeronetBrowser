@@ -35,8 +35,6 @@ script:
   - python3 test.py
   - pyinstaller --windowed browser.spec
 
-before_deploy:
-  - zip -r build-$TRAVIS_OS_NAME.zip dist/ZeronetBrowser
 deploy:
   provider: releases
   skip_cleanup: true
