@@ -6,3 +6,5 @@ dist/
 ubuntu-xenial-16.04-cloudimg-console.log
 browser.conf
 __pycache__
+*.deb
+pkg-debian/usr/share/ZeronetBrowser

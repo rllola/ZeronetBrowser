@@ -1,0 +1,2 @@
+#!/bin/sh
+ln -s /usr/share/ZeronetBrowser/ZeronetBrowser /usr/bin/ZeronetBrowser
