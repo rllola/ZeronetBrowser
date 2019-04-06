@@ -1,0 +1,4 @@
+#!/bin/sh
+
+rm -rf /usr/share/ZeronetBrowser/ZeroNet
+rm /usr/bin/ZeronetBrowser
