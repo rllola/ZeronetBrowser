@@ -1,8 +1,0 @@
-Package: ZeronetBrowser
-Version: 0.2.2
-Architecture: all
-Essential: no
-Section: web
-Priority: optional
-Maintainer: Lola Rigaut-Luczak
-Description: Browser for Zeronet.
