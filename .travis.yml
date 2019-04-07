@@ -14,13 +14,17 @@ matrix:
           - sudo apt-get install -y python3-pip libgl1-mesa-glx libnss3 libxcomposite-dev libxcursor-dev libxi6 libxtst6 libasound2 libegl1-mesa libxkbcommon-x11-0
           - export QT_QPA_PLATFORM=offscreen
         before_deploy:
-          - zip -r build-$TRAVIS_OS_NAME.zip dist/ZeronetBrowser
+          - ./scripts/generate_deb_files.sh
+          - export FILE=ZeronetBrowser_${TRAVIS_TAG}_i386.deb
+          - mv dist/ZeronetBrowser pkg-debian/usr/share/
+          - dpkg -b pkg-debian/ $FILE
       - os: osx
         language: generic
         env: TOXENV=py37
         sudo: true
         before_deploy:
-          - zip -r build-$TRAVIS_OS_NAME.zip dist/ZeronetBrowser.app
+          - export FILE=ZeronetBrowser_${TRAVIS_TAG}_darwin.zip
+          - zip -r $FILE dist/ZeronetBrowser.app
 
 install:
   - pip3 install setuptools
@@ -32,14 +36,12 @@ script:
   - python3 test.py
   - pyinstaller --windowed browser.spec
 
-before_deploy:
-  - zip -r build-$TRAVIS_OS_NAME.zip dist/ZeronetBrowser
 deploy:
   provider: releases
   skip_cleanup: true
   api_key:
     secure: $GH_TOKEN
   file:
-    - build-$TRAVIS_OS_NAME.zip
+    - $FILE
   on:
     tags: true
