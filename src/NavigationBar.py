@@ -1,8 +1,9 @@
-from PyQt5.QtWidgets import QToolBar, QLineEdit, QAction, QShortcut
+from PyQt5.QtWidgets import QToolBar, QLineEdit, QAction, QShortcut, QToolButton, QMenu
 from PyQt5.QtGui import QIcon, QKeySequence
 from PyQt5.QtCore import QSize
 
 import os
+import sys
 
 class NavigationBar(QToolBar):
 
@@ -42,8 +43,23 @@ class NavigationBar(QToolBar):
         self.addWidget(self.url_bar)
 
         # Menu button
-        self.menu_btn = QAction( QIcon(os.path.join('icons','190-menu.svg')), 'Menu', self)
-        self.addAction(self.menu_btn)
+        self.menu = QMenu(self)
+        self.edit_config_action = QAction('Edit config file', self)
+        self.edit_config_action.triggered.connect(self.edit_zeronet_config_file)
+        self.menu.addAction(self.edit_config_action)
+        tool_button = QToolButton(self)
+        tool_button.setStyleSheet("QToolButton::menu-indicator { image: none; }")
+        tool_button.setIcon(QIcon(os.path.join('icons','190-menu.svg')))
+        tool_button.setMenu(self.menu)
+        tool_button.setPopupMode(QToolButton.InstantPopup)
+        self.addWidget(tool_button)
+        #self.addAction(self.button_menu)
 
         # We dont want it to move elsewhere
         self.setMovable(False)
+
+
+    def edit_zeronet_config_file(self):
+        print(sys.argv)
+        if "--config_file" in sys.argv:
+            print("lol")

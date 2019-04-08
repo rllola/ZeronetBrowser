@@ -47,11 +47,8 @@ if __name__ == '__main__':
 
     if sys.platform.startswith("linux") and not os.environ.get("DEV"):
         conf_path = os.path.join(os.sep, os.path.expanduser("~"), ".zeronet", "zeronet.conf")
-        print(conf_path)
-        print(sys.argv)
         sys.argv.append("--config_file")
         sys.argv.append(conf_path)
-        print(sys.argv)
         config.read(conf_path)
     else:
         config.read(os.path.join(os.sep, os.getcwd(), "ZeroNet", "zeronet.conf"))
