@@ -77,8 +77,11 @@ if __name__ == '__main__':
     time.sleep(5)
 
     kwargs = {}
-    if url :
+    if url:
         kwargs = {"url": url}
+
+    if zeronet_path:
+        kwargs = {"zeronet_path": zeronet_path}
 
     # Start the PyQt application
     app = QApplication(sys.argv)

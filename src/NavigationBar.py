@@ -45,7 +45,6 @@ class NavigationBar(QToolBar):
         # Menu button
         self.menu = QMenu(self)
         self.edit_config_action = QAction('Edit config file', self)
-        self.edit_config_action.triggered.connect(self.edit_zeronet_config_file)
         self.menu.addAction(self.edit_config_action)
         tool_button = QToolButton(self)
         tool_button.setStyleSheet("QToolButton::menu-indicator { image: none; }")
@@ -57,9 +56,3 @@ class NavigationBar(QToolBar):
 
         # We dont want it to move elsewhere
         self.setMovable(False)
-
-
-    def edit_zeronet_config_file(self):
-        print(sys.argv)
-        if "--config_file" in sys.argv:
-            print("lol")
