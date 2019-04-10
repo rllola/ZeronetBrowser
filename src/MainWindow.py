@@ -5,6 +5,10 @@ from PyQt5.QtWidgets import QMainWindow, QToolBar, QTabWidget, QToolButton
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QUrl
 
+import subprocess
+import os
+import sys
+
 class MainWindow(QMainWindow):
 
     def __init__(self, *args, **kwargs):
@@ -12,6 +16,11 @@ class MainWindow(QMainWindow):
         if "url" in kwargs:
             url = kwargs["url"]
             del kwargs["url"]
+
+        if "zeronet_path" in kwargs:
+            self.zeronet_path = kwargs["zeronet_path"]
+            del kwargs["zeronet_path"]
+
         super(MainWindow,self).__init__(*args, **kwargs)
 
         # Tabs
@@ -49,6 +58,9 @@ class MainWindow(QMainWindow):
 
         # Home
         self.navigation.home_btn.triggered.connect(self.go_home)
+
+        # Menu: Edit config action
+        self.navigation.edit_config_action.triggered.connect(self.edit_zeronet_config_file)
 
         # Add new tab
         self.add_new_tab(url, "Home")
@@ -163,3 +175,13 @@ class MainWindow(QMainWindow):
             self.tabs.currentWidget().setUrl(QUrl("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/"))
             return
         self.tabs.removeTab(index)
+
+    def edit_zeronet_config_file(self):
+        filepath = os.path.join(os.sep, self.zeronet_path, "zeronet.conf")
+
+        if sys.platform.startswith('darwin'):       # macOS
+            subprocess.run(['open', filepath])
+        elif sys.platform.startswith('win'):    # Windows
+            os.startfile(filepath)
+        else:                                   # linux variants
+            subprocess.run(['xdg-open', filepath])

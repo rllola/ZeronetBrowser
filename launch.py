@@ -47,11 +47,8 @@ if __name__ == '__main__':
 
     if sys.platform.startswith("linux") and not os.environ.get("DEV"):
         conf_path = os.path.join(os.sep, os.path.expanduser("~"), ".zeronet", "zeronet.conf")
-        print(conf_path)
-        print(sys.argv)
         sys.argv.append("--config_file")
         sys.argv.append(conf_path)
-        print(sys.argv)
         config.read(conf_path)
     else:
         config.read(os.path.join(os.sep, os.getcwd(), "ZeroNet", "zeronet.conf"))
@@ -59,12 +56,12 @@ if __name__ == '__main__':
     try:
         zeronet_path = config.get('global', 'data_dir')
     except configparser.Error:
-        zeronet_path = os.path.join(os.sep, os.getcwd(), "ZeroNet", "data")
+        zeronet_path = os.path.join(os.sep, os.getcwd(), "ZeroNet")
 
     if zeronet_path:
         # See if it is already running
         try:
-            lock = openLocked(os.path.join(os.sep, zeronet_path, "lock.pid"), "w")
+            lock = openLocked(os.path.join(os.sep, zeronet_path, "data", "lock.pid"), "w")
             lock.close()
             # Create a process for Zeronet using this version of ZeroNet
             p = Process(target=zeronet.main)
@@ -80,8 +77,11 @@ if __name__ == '__main__':
     time.sleep(5)
 
     kwargs = {}
-    if url :
+    if url:
         kwargs = {"url": url}
+
+    if zeronet_path:
+        kwargs = {"zeronet_path": zeronet_path}
 
     # Start the PyQt application
     app = QApplication(sys.argv)
