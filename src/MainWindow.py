@@ -180,8 +180,8 @@ class MainWindow(QMainWindow):
         filepath = os.path.join(os.sep, self.zeronet_path, "zeronet.conf")
 
         if sys.platform.startswith('darwin'):       # macOS
-            subprocess.call(('open', filepath))
+            subprocess.run(['open', filepath])
         elif sys.platform.startswith('win'):    # Windows
             os.startfile(filepath)
         else:                                   # linux variants
-            subprocess.call(('xdg-open', filepath))
+            subprocess.run(['xdg-open', filepath])

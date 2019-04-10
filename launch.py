@@ -56,12 +56,12 @@ if __name__ == '__main__':
     try:
         zeronet_path = config.get('global', 'data_dir')
     except configparser.Error:
-        zeronet_path = os.path.join(os.sep, os.getcwd(), "ZeroNet", "data")
+        zeronet_path = os.path.join(os.sep, os.getcwd(), "ZeroNet")
 
     if zeronet_path:
         # See if it is already running
         try:
-            lock = openLocked(os.path.join(os.sep, zeronet_path, "lock.pid"), "w")
+            lock = openLocked(os.path.join(os.sep, zeronet_path, "data", "lock.pid"), "w")
             lock.close()
             # Create a process for Zeronet using this version of ZeroNet
             p = Process(target=zeronet.main)
