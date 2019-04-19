@@ -41,21 +41,21 @@ ZeroNet Browser run on Linux, Windows and Mac OS*. You can download the release 
 
 ## Development
 
-You will need python 2.7.
+You will need python 3.
 
 ### Setup
 
-Install Python 2.7, PyQt 5.11.2 (see provision.sh) and pip.
+Install Python 3, PyQt 5 (see provision.sh) and pip.
 
 ```
-$ pip install msgpack gevent enum34 pyinstaller cffi
-$ pip install --upgrade setuptools
+$ pip3 install PyQt5-sip PyQt5 PyQtWebEngine pyinstaller
+$ cd ./Browser/ZeroNet && pip3 install -r requirements.txt
 ```
 
 1,2,3... Code!
 
 ```
-python launch.py
+python3 launch.py
 ```
 
 ### Vagrantfile
