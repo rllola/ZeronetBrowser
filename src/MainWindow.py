@@ -2,7 +2,7 @@ from .Browser import Browser
 from .NavigationBar import NavigationBar
 from PyQt5.QtWebEngineWidgets import QWebEngineView,QWebEnginePage
 from PyQt5.QtWidgets import QMainWindow, QToolBar, QTabWidget, QToolButton
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QWindow
 from PyQt5.QtCore import QUrl
 
 import subprocess
@@ -120,12 +120,23 @@ class MainWindow(QMainWindow):
     def new_tab_clicked(self):
         self.add_new_tab("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/", "Home")
 
-    def open_in_new_tab(self):
+    def get_link_url_from_context_menu(self):
         tab = self.tabs.currentWidget()
         page = tab.page()
         context = page.contextMenuData()
         qurl = context.linkUrl()
-        self.add_new_tab(qurl.toString(), "Home")
+        return qurl.url()
+
+    def open_in_new_tab(self):
+        url = self.get_link_url_from_context_menu()
+        self.add_new_tab(url, "Home")
+
+    # Doesnt feel right to have it here but it is working
+    def open_in_new_window(self):
+        url = self.get_link_url_from_context_menu()
+        kwargs = {"url": url}
+        self.window = self.__class__(**kwargs)
+
 
     def add_new_tab(self, qurl, label):
         # Instead of browser it should be called WebView !
@@ -133,7 +144,9 @@ class MainWindow(QMainWindow):
 
         # Triggered open in new tab
         openLinkInNewTabAction = browser.pageAction(QWebEnginePage.OpenLinkInNewTab)
+        openLinkInNewWindowAction = browser.pageAction(QWebEnginePage.OpenLinkInNewWindow)
         openLinkInNewTabAction.triggered.connect(self.open_in_new_tab)
+        openLinkInNewWindowAction.triggered.connect(self.open_in_new_window)
         self.addAction(openLinkInNewTabAction)
 
         browser.urlChanged.connect(lambda qurl, browser=browser: self.update_url_bar(qurl, browser))
