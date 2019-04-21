@@ -22,9 +22,13 @@ matrix:
         language: generic
         env: TOXENV=py37
         sudo: true
+        before_install:
+          - npm install -g create-dmg
         before_deploy:
-          - export FILE=ZeronetBrowser_${TRAVIS_TAG}_darwin.zip
-          - zip -r $FILE dist/ZeronetBrowser.app
+          - export FILE=ZeronetBrowser_${TRAVIS_TAG}.zip
+          - cd dist
+          - create-dmg 'ZeronetBrowser.app'
+          - ls
 
 install:
   - pip3 install setuptools
