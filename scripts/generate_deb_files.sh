@@ -12,6 +12,8 @@ Maintainer: Lola Rigaut-Luczak
 Description: Browser for Zeronet.
 EOF
 
+mkdir -p $PWD/pkg-debian/usr/share/applications/
+
 echo "====== GENERATE .DESKTOP FILE ======"
 cat > $PWD/pkg-debian/usr/share/applications/zeronet-browser.desktop << EOF
 [Desktop Entry]
