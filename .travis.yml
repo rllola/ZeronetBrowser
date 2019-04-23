@@ -25,7 +25,10 @@ matrix:
         before_install:
           - brew upgrade node
           - node -v
+          - nvm install --lts
+          - nvm use --lts
           - nvm current
+          - node -v
           - npm install -g create-dmg
         before_deploy:
           - export FILE=ZeronetBrowser_${TRAVIS_TAG}.zip
