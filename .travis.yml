@@ -25,10 +25,10 @@ matrix:
         before_deploy:
           - nvm install --lts
           - nvm use --lts
-          - npm install -g create-dmg || true
+          - npm install -g create-dmg
           - export FILE=ZeronetBrowser_${TRAVIS_TAG}.zip
           - cd dist
-          - create-dmg 'ZeronetBrowser.app'
+          - create-dmg 'ZeronetBrowser.app' || true
           - ls
 
 install:
