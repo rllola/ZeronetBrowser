@@ -26,10 +26,14 @@ matrix:
           - nvm install --lts
           - nvm use --lts
           - npm install -g create-dmg
-          - export FILE='ZeronetBrowser ${TRAVIS_TAG/v}.dmg'
+          - export FILE=ZeronetBrowser_${TRAVIS_TAG}.dmg
           - cd dist
           - create-dmg 'ZeronetBrowser.app' || true
+          - mv 'ZeronetBrowser 0.0.0.dmg' $FILE
           - ls
+          - cd ZeronetBrowser.app
+          - ls
+          - cd ..
 
 install:
   - pip3 install setuptools

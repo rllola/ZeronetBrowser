@@ -60,6 +60,8 @@ coll = COLLECT(exe,
                upx=True,
                name='ZeronetBrowser')
 
+print(os.environ['TRAVIS_TAG'][1:])
+
 app = BUNDLE(coll,
   name='ZeronetBrowser.app',
   icon=icon,
