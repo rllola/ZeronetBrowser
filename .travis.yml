@@ -36,6 +36,7 @@ matrix:
           - cd ZeronetBrowser.app/Contents
           - ls
           - cd ../..
+          - cat Info.plist
           - zip -r $FILE dist/ZeronetBrowser.app
 
 install:
