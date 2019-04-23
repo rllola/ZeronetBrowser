@@ -60,12 +60,11 @@ coll = COLLECT(exe,
                upx=True,
                name='ZeronetBrowser')
 
-print(os.environ['TRAVIS_TAG'][1:])
-
 app = BUNDLE(coll,
   name='ZeronetBrowser.app',
   icon=icon,
   bundle_identifier=None,
   info_plist={
-    'CFBundleVersion': os.environ['TRAVIS_TAG'][1:]
+    'CFBundleVersion': os.environ['TRAVIS_TAG'][1:],
+    'CFBundleShortVersionString': os.environ['TRAVIS_TAG'][1:]
   })
