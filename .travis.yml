@@ -32,9 +32,9 @@ matrix:
           - create-dmg 'ZeronetBrowser.app' || true
           - mv 'ZeronetBrowser 0.0.0.dmg' $FILE
           - ls
-          - cd ZeronetBrowser.app
+          - cd ZeronetBrowser.app/Contents
           - ls
-          - cd ..
+          - cd ../..
 
 install:
   - pip3 install setuptools
