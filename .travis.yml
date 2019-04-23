@@ -22,15 +22,10 @@ matrix:
         language: generic
         env: TOXENV=py37
         sudo: true
-        before_install:
-          - brew upgrade node
-          - node -v
+        before_deploy:
           - nvm install --lts
           - nvm use --lts
-          - nvm current
-          - node -v
-          - npm install -g create-dmg
-        before_deploy:
+          - npm install -g create-dmg || true
           - export FILE=ZeronetBrowser_${TRAVIS_TAG}.zip
           - cd dist
           - create-dmg 'ZeronetBrowser.app'
