@@ -2,6 +2,7 @@
 
 from PyInstaller.utils.hooks import collect_data_files
 from sys import platform
+import os
 
 block_cipher = None
 
@@ -59,7 +60,16 @@ coll = COLLECT(exe,
                upx=True,
                name='ZeronetBrowser')
 
+version = '0.0.0'
+
+if os.environ.get('TRAVIS_TAG') == True:
+    version = os.environ['TRAVIS_TAG'][1:]
+
 app = BUNDLE(coll,
   name='ZeronetBrowser.app',
   icon=icon,
-  bundle_identifier=None)
+  bundle_identifier=None,
+  info_plist={
+    'CFBundleVersion': version,
+    'CFBundleShortVersionString': version
+  })

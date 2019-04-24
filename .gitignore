@@ -8,3 +8,5 @@ browser.conf
 __pycache__
 *.deb
 pkg-debian/usr/share/ZeronetBrowser
+pkg-debian/DEBIAN/control
+pkg-debian/usr/
