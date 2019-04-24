@@ -1,12 +1,16 @@
 #!/bin/sh
 ln -s /usr/share/ZeronetBrowser/ZeronetBrowser /usr/bin/ZeronetBrowser
 xdg-mime default zeronet-browser.desktop x-scheme-handler/zero
-mkdir $HOME/.zeronet
+mkdir -p $HOME/.zeronet/data
 chown $SUDO_USER:$SUDO_USER $HOME/.zeronet
+chown $SUDO_USER:$SUDO_USER $HOME/.zeronet/data
+
+touch $HOME/.zeronet/data/lock.pid
+chown $SUDO_USER:$SUDO_USER $HOME/.zeronet/data/lock.pid
 
 cat > $HOME/.zeronet/zeronet.conf << EOF
 [global]
-data_dir = $HOME/.zeronet/
+data_dir = $HOME/.zeronet
 EOF
 
 chown $SUDO_USER:$SUDO_USER $HOME/.zeronet/zeronet.conf
