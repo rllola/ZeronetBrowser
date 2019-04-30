@@ -67,6 +67,7 @@ coll = COLLECT(exe,
 version = '0.0.0'
 
 if os.environ.get('TRAVIS_TAG') == True:
+    print(os.environ['TRAVIS_TAG'])
     version = os.environ['TRAVIS_TAG'][1:]
 
 app = BUNDLE(coll,
