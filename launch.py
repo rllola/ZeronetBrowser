@@ -50,6 +50,11 @@ if __name__ == '__main__':
         sys.argv.append("--config_file")
         sys.argv.append(conf_path)
         config.read(conf_path)
+    elif sys.platform.startswith("win") and not os.environ.get("DEV"):
+        conf_path = os.path.join(os.sep, os.path.expanduser("~"), "AppData","Roaming", "Zeronet Browser", "zeronet.conf")
+        sys.argv.append("--config_file")
+        sys.argv.append(conf_path)
+        config.read(conf_path)
     else:
         config.read(os.path.join(os.sep, os.getcwd(), "ZeroNet", "zeronet.conf"))
 
@@ -81,7 +86,7 @@ if __name__ == '__main__':
         kwargs = {"url": url}
 
     if zeronet_path:
-        kwargs = {"zeronet_path": zeronet_path}
+        kwargs["zeronet_path"] = zeronet_path
 
     # Start the PyQt application
     app = QApplication(sys.argv)

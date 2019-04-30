@@ -32,13 +32,14 @@ test_script:
 after_test:
   #- copy .\dist\ZeronetBrowser\PyQt5\Qt\resources\* .\dist\ZeronetBrowser\PyQt5\Qt\bin\
   #- copy .\dist\ZeronetBrowser\PyQt5\Qt\translations\qtwebengine_locales\ .\dist\ZeronetBrowser\PyQt5\Qt\bin\
-  - 7z a build-windows.zip dist/ZeronetBrowser/*
+  #- 7z a build-windows.zip dist/ZeronetBrowser/*
+  - C:\Program Files (x86)\NSIS\makensis.exe zeronetbrowser.nsi
 
 deploy:
   provider: GitHub
   auth_token:
     secure: 6eX2olaIxe4TsfETod+SYOyDsIKwmDivjirb7RPvl/Zd4zYW3dzGr4MieJ2BP89P # your encrypted token from GitHub
-  artifact: build-windows.zip
+  artifact: ZeronetBrowser_${APPVEYOR_REPO_TAG_NAME}_setup.exe.exe
   prerelease: true
   force_update: true
   on:

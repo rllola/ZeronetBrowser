@@ -10,3 +10,4 @@ __pycache__
 pkg-debian/usr/share/ZeronetBrowser
 pkg-debian/DEBIAN/control
 pkg-debian/usr/
+*.exe
