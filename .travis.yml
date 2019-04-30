@@ -31,6 +31,7 @@ matrix:
           - ls
           - export FILE=ZeronetBrowser_${TRAVIS_TAG}.dmg
           - create-dmg 'ZeronetBrowser.app' || true
+          - ls
           - mv ZeronetBrowser\ ${TRAVIS_TAG/v}.dmg $FILE
 
 install:
