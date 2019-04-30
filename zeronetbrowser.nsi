@@ -1,7 +1,7 @@
 !define ZIP2EXE_COMPRESSOR_ZLIB
 !define ZIP2EXE_INSTALLDIR "$PROGRAMFILES\Zeronet Browser"
 !define ZIP2EXE_NAME "Zeronet Browser"
-!define ZIP2EXE_OUTFILE "ZeronetBrowser_${APPVEYOR_REPO_TAG_NAME}_setup.exe"
+!define ZIP2EXE_OUTFILE "ZeronetBrowser_${TAG}_setup.exe"
 
 !define MUI_ICON "icons\zeronet-logo.ico"
 
