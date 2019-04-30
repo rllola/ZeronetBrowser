@@ -8,16 +8,16 @@
 !define APPNAME "Zeronet Browser"
 !define DESCRIPTION "A browser for ZeroNet"
 # These three must be integers
-!define VERSIONMAJOR 0
-!define VERSIONMINOR 0
-!define VERSIONBUILD 2
+!define VERSIONMAJOR ${MAJOR}
+!define VERSIONMINOR ${MINOR}
+!define VERSIONBUILD ${BUILD}
 # These will be displayed by the "Click here for support information" link in "Add/Remove Programs"
 # It is possible to use "mailto:" links in here to open the email client
 !define HELPURL "https://github.com/rllola/ZeronetBrowser/" # "Support Information" link
 !define UPDATEURL "https://github.com/rllola/ZeronetBrowser/releases" # "Product Updates" link
 !define ABOUTURL "https://github.com/rllola/ZeronetBrowser/" # "Publisher" link
 # This is the size (in kB) of all the files copied into "Program Files"
-!define INSTALLSIZE 285017
+!define INSTALLSIZE ${SIZE}
 
 !include "${NSISDIR}\Contrib\zip2exe\Base.nsh"
 !include "${NSISDIR}\Contrib\zip2exe\Modern.nsh"
