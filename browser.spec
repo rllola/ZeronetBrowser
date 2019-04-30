@@ -70,6 +70,8 @@ if os.environ.get('TRAVIS_TAG') == True:
     print(os.environ['TRAVIS_TAG'])
     version = os.environ['TRAVIS_TAG'][1:]
 
+print(version)
+
 app = BUNDLE(coll,
   name='ZeronetBrowser.app',
   icon=icon,
