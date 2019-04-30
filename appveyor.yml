@@ -9,7 +9,7 @@ environment:
       PATH: C:\Program Files (x86)\NSIS\;%PATH%
 
 artifacts:
-  - path: ZeronetBrowser_${APPVEYOR_REPO_TAG_NAME}_setup.exe
+  - path: ZeronetBrowser_%APPVEYOR_REPO_TAG_NAME%_setup.exe
 
 build: off
 
@@ -40,7 +40,7 @@ deploy:
   provider: GitHub
   auth_token:
     secure: 6eX2olaIxe4TsfETod+SYOyDsIKwmDivjirb7RPvl/Zd4zYW3dzGr4MieJ2BP89P # your encrypted token from GitHub
-  artifact: ZeronetBrowser_${APPVEYOR_REPO_TAG_NAME}_setup.exe
+  artifact: ZeronetBrowser_%APPVEYOR_REPO_TAG_NAME%_setup.exe
   prerelease: true
   force_update: true
   on:
