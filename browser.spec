@@ -67,10 +67,7 @@ coll = COLLECT(exe,
 version = '0.0.0'
 
 if os.environ.get('TRAVIS_TAG'):
-    print(os.environ['TRAVIS_TAG'])
     version = os.environ['TRAVIS_TAG'][1:]
-
-print(version)
 
 app = BUNDLE(coll,
   name='ZeronetBrowser.app',
