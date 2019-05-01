@@ -30,14 +30,14 @@ test_script:
   - python test.py
   - pyinstaller browser.spec
 
-before_deploy:
+after_test:
   #- copy .\dist\ZeronetBrowser\PyQt5\Qt\resources\* .\dist\ZeronetBrowser\PyQt5\Qt\bin\
   #- copy .\dist\ZeronetBrowser\PyQt5\Qt\translations\qtwebengine_locales\ .\dist\ZeronetBrowser\PyQt5\Qt\bin\
   #- 7z a build-windows.zip dist/ZeronetBrowser/*
   - ps: $size = [math]::floor((Get-ChildItem dist\ -Recurse | Measure-Object -Sum Length | Select-Object -ExpandProperty Sum)/1000)
-  - ps: $tag = $env:APPVEYOR_REPO_TAG_NAME
+  - ps: if ($env:APPVEYOR_REPO_TAG_NAME) { $tag = $env:APPVEYOR_REPO_TAG_NAME } else { $tag="v0.0.0" }
   - ps: $major, $minor, $build = $tag.substring(1).split(".")
-  - makensis.exe /DTAG=%APPVEYOR_REPO_TAG_NAME% /DSIZE=$size /DMAJOR=$major /DMINOR=$minor /DBUILD=$build zeronetbrowser.nsi
+  - ps: makensis.exe /DTAG=$tag /DSIZE=$size /DMAJOR=$major /DMINOR=$minor /DBUILD=$build zeronetbrowser.nsi
 
 deploy:
   provider: GitHub
