@@ -3,6 +3,7 @@
 import sys
 import os
 import configparser
+import errno
 
 from PyQt5.QtCore import QLibraryInfo, QCoreApplication
 from PyQt5.QtWidgets import QApplication
@@ -11,6 +12,31 @@ from multiprocessing import Process, freeze_support
 from ZeroNet import zeronet
 import time
 import imp
+
+def osx_first_run():
+    zeronet_browser_path = os.path.join(os.sep, os.path.expanduser("~"), "Library", "Application Support", "Zeronet Browser")
+
+    try:
+        os.makedirs(zeronet_browser_path)
+    except OSError as e:
+        if e.errno != errno.EEXIST:
+            raise
+
+    try:
+        os.makedirs(os.path.join(os.sep, zeronet_browser_path, "data"))
+    except OSError as e:
+        if e.errno != errno.EEXIST:
+            raise
+
+    # Create lock.pid file
+    open(os.path.join(os.sep, zeronet_browser_path, "data", "lock.pid"), "w").close()
+
+    # Create zeronet.conf file
+    f = open(os.path.join(os.sep, zeronet_browser_path, "zeronet.conf"), 'w')
+    f.write("[global]\n")
+    f.write("data_dir = {} \n".format(os.path.join(os.sep, zeronet_browser_path, "data")))
+    f.close()
+
 
 # See if it is lock or not
 def openLocked(path, mode="wb"):
@@ -52,6 +78,13 @@ if __name__ == '__main__':
         config.read(conf_path)
     elif sys.platform.startswith("win") and not os.environ.get("DEV"):
         conf_path = os.path.join(os.sep, os.path.expanduser("~"), "AppData","Roaming", "Zeronet Browser", "zeronet.conf")
+        sys.argv.append("--config_file")
+        sys.argv.append(conf_path)
+        config.read(conf_path)
+    elif sys.platform.startswith("darwin") and not os.environ.get("DEV"):
+        conf_path = os.path.join(os.sep, os.path.expanduser("~"), "Library", "Application Support", "Zeronet Browser", "zeronet.conf")
+        if not os.path.isfile(conf_path):
+            osx_first_run()
         sys.argv.append("--config_file")
         sys.argv.append(conf_path)
         config.read(conf_path)
