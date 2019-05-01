@@ -31,7 +31,7 @@ def osx_first_run():
             raise
 
     # Create lock.pid file
-    file(os.path.join(os.sep, zeronet_browser_path, "data", "lock.pid"), "w")
+    open(os.path.join(os.sep, zeronet_browser_path, "data", "lock.pid"), "w").close()
     print("Created lock.pid")
 
     # Create zeronet.conf file
