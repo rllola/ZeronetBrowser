@@ -18,28 +18,24 @@ def osx_first_run():
 
     try:
         os.makedirs(zeronet_browser_path)
-        print("Created Zeronet Browser folder")
     except OSError as e:
         if e.errno != errno.EEXIST:
             raise
 
     try:
         os.makedirs(os.path.join(os.sep, zeronet_browser_path, "data"))
-        print("Created Zeronet Browser data folder")
     except OSError as e:
         if e.errno != errno.EEXIST:
             raise
 
     # Create lock.pid file
     open(os.path.join(os.sep, zeronet_browser_path, "data", "lock.pid"), "w").close()
-    print("Created lock.pid")
 
     # Create zeronet.conf file
     f = open(os.path.join(os.sep, zeronet_browser_path, "zeronet.conf"), 'w')
     f.write("[global]\n")
     f.write("data_dir = {} \n".format(os.path.join(os.sep, zeronet_browser_path, "data")))
     f.close()
-    print("Created zeronet.conf")
 
 
 # See if it is lock or not
