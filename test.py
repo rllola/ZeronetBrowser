@@ -2,7 +2,7 @@ import unittest
 import sys
 import os
 
-from .launch import osx_first_run
+from launch import osx_first_run
 
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QLibraryInfo
