@@ -52,8 +52,8 @@ class TestBuild(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    print(os.platform)
-    if os.platform.startwith("darwin"):
+    print(sys.platform)
+    if sys.platform.startwith("darwin"):
         osx_first_run()
 
     unittest.main()
