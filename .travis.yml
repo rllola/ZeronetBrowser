@@ -26,6 +26,7 @@ matrix:
           - nvm install --lts
           - nvm use --lts
           - npm install -g create-dmg
+          - cd dist/
           - export FILE=ZeronetBrowser_${TRAVIS_TAG}.dmg
           - create-dmg 'ZeronetBrowser.app' || true
           - mv ZeronetBrowser\ ${TRAVIS_TAG/v}.dmg $FILE

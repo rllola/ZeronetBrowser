@@ -28,6 +28,9 @@ icon = None
 if platform.startswith("darwin"):
   icon = "icons/zeronet-logo.icns"
 
+if platform.startswith("win"):
+  icon = "icons\zeronet-logo.ico"
+
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 
@@ -40,6 +43,7 @@ exe = EXE(pyz,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
+          icon=icon,
           console=True )
 
 if platform.startswith("linux"):
@@ -62,7 +66,7 @@ coll = COLLECT(exe,
 
 version = '0.0.0'
 
-if os.environ.get('TRAVIS_TAG') == True:
+if os.environ.get('TRAVIS_TAG'):
     version = os.environ['TRAVIS_TAG'][1:]
 
 app = BUNDLE(coll,

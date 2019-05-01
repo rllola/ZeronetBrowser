@@ -6,9 +6,10 @@ image: Visual Studio 2017
 environment:
   matrix:
     - PYTHON: "C:\\Python37-x64"
+      PATH: C:\Program Files (x86)\NSIS\;%PATH%
 
 artifacts:
-  - path: build-windows.zip
+  - path: ZeronetBrowser_%APPVEYOR_REPO_TAG_NAME%_setup.exe
 
 build: off
 
@@ -29,16 +30,20 @@ test_script:
   - python test.py
   - pyinstaller browser.spec
 
-after_test:
+before_deploy:
   #- copy .\dist\ZeronetBrowser\PyQt5\Qt\resources\* .\dist\ZeronetBrowser\PyQt5\Qt\bin\
   #- copy .\dist\ZeronetBrowser\PyQt5\Qt\translations\qtwebengine_locales\ .\dist\ZeronetBrowser\PyQt5\Qt\bin\
-  - 7z a build-windows.zip dist/ZeronetBrowser/*
+  #- 7z a build-windows.zip dist/ZeronetBrowser/*
+  - ps: $size = [math]::floor((Get-ChildItem dist\ -Recurse | Measure-Object -Sum Length | Select-Object -ExpandProperty Sum)/1000)
+  - ps: $tag = $env:APPVEYOR_REPO_TAG_NAME
+  - ps: $major, $minor, $build = $tag.substring(1).split(".")
+  - makensis.exe /DTAG=%APPVEYOR_REPO_TAG_NAME% /DSIZE=$size /DMAJOR=$major /DMINOR=$minor /DBUILD=$build zeronetbrowser.nsi
 
 deploy:
   provider: GitHub
   auth_token:
     secure: 6eX2olaIxe4TsfETod+SYOyDsIKwmDivjirb7RPvl/Zd4zYW3dzGr4MieJ2BP89P # your encrypted token from GitHub
-  artifact: build-windows.zip
+  artifact: ZeronetBrowser_%APPVEYOR_REPO_TAG_NAME%_setup.exe
   prerelease: true
   force_update: true
   on:
