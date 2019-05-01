@@ -2,6 +2,8 @@ import unittest
 import sys
 import os
 
+from .launch import osx_first_run
+
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QLibraryInfo
 
@@ -51,3 +53,6 @@ class TestBuild(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+    if os.platform.startwith("darwin"):
+        osx_first_run()
