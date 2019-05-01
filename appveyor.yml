@@ -37,7 +37,7 @@ before_deploy:
   - ps: $size = [math]::floor((Get-ChildItem dist\ -Recurse | Measure-Object -Sum Length | Select-Object -ExpandProperty Sum)/1000)
   - ps: $tag = $env:APPVEYOR_REPO_TAG_NAME
   - ps: $major, $minor, $build = $tag.substring(1).split(".")
-  - makensis.exe /DTAG=%APPVEYOR_REPO_TAG_NAME% /DSIZE=$size /DMAJOR=$major /DMINOR=$minor /DBUILD=$build zeronetbrowser.nsi
+  - ps: makensis.exe /DTAG=$tag /DSIZE=$size /DMAJOR=$major /DMINOR=$minor /DBUILD=$build zeronetbrowser.nsi
 
 deploy:
   provider: GitHub
