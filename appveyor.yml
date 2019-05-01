@@ -36,7 +36,8 @@ after_test:
   #- 7z a build-windows.zip dist/ZeronetBrowser/*
   - ps: $size = [math]::floor((Get-ChildItem dist\ -Recurse | Measure-Object -Sum Length | Select-Object -ExpandProperty Sum)/1000)
   - ps: $tag = $env:APPVEYOR_REPO_TAG_NAME
-  - ps: $major, $minor, $build = $tag.substring(1).split(".")
+  - ps: echo $tag
+  - ps: $major, $minor, $build = $env:APPVEYOR_REPO_TAG_NAME.substring(1).split(".")
   - makensis.exe /DTAG=%APPVEYOR_REPO_TAG_NAME% /DSIZE=$size /DMAJOR=$major /DMINOR=$minor /DBUILD=$build zeronetbrowser.nsi
 
 deploy:
