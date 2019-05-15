@@ -52,6 +52,14 @@ class TestBuild(unittest.TestCase):
 
         if sys.platform.startswith("darwin"):
             osx_first_run()
+            conf_path = os.path.join(os.sep, os.path.expanduser("~"), "Library", "Application Support", "Zeronet Browser", "zeronet.conf")
+            print(conf_path)
+            config.read(conf_path)
+            try:
+                zeronet_path = config.get('global', 'data_dir')
+            except configparser.Error:
+                zeronet_path = os.path.join(os.sep, os.getcwd(), "ZeroNet")
+            print(zeronet_path)
         else:
             pass
 
