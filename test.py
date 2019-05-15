@@ -48,7 +48,7 @@ class TestBuild(unittest.TestCase):
         app.exec_()
 
     def test_macos_first_run(self):
-        from .launch import osx_first_run
+        from launch import osx_first_run
 
         if sys.platform.startswith("darwin"):
             osx_first_run()
