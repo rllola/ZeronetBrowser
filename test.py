@@ -47,6 +47,13 @@ class TestBuild(unittest.TestCase):
             lambda ok: QTimer.singleShot(5000, app.quit))
         app.exec_()
 
+    def test_macos_first_run(self):
+        from .launch import osx_first_run
+
+        if sys.platform.startswith("darwin"):
+            osx_first_run()
+        else:
+            pass
 
 
 if __name__ == '__main__':
