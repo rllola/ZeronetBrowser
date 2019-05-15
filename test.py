@@ -48,9 +48,9 @@ class TestBuild(unittest.TestCase):
         app.exec_()
 
     def test_macos_first_run(self):
-        from launch import osx_first_run
+        from launch import osx_first_run, openLocked
         import configparser
-        
+
         config = configparser.ConfigParser()
 
         if sys.platform.startswith("darwin"):
@@ -63,6 +63,8 @@ class TestBuild(unittest.TestCase):
             except configparser.Error:
                 zeronet_path = os.path.join(os.sep, os.getcwd(), "ZeroNet")
             print(zeronet_path)
+            lock = openLocked(os.path.join(os.sep, zeronet_path, "data", "lock.pid"), "w")
+            lock.close()
         else:
             pass
 
