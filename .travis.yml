@@ -39,7 +39,6 @@ install:
   - pip3 install pyinstaller PyQt5-sip PyQt5 PyQtWebEngine
 script:
   - python3 test.py
-  - ls $HOME/Library/Application\ Support/Zeronet\ Browser/data
   - pyinstaller --windowed browser.spec
 
 deploy:
