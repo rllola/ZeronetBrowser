@@ -34,7 +34,7 @@ def osx_first_run():
     # Create zeronet.conf file
     f = open(os.path.join(os.sep, zeronet_browser_path, "zeronet.conf"), 'w')
     f.write("[global]\n")
-    f.write("data_dir = {} \n".format(os.path.join(os.sep, zeronet_browser_path, "data")))
+    f.write("data_dir = {} \n".format(zeronet_browser_path))
     f.close()
 
 

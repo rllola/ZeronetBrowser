@@ -47,6 +47,24 @@ class TestBuild(unittest.TestCase):
             lambda ok: QTimer.singleShot(5000, app.quit))
         app.exec_()
 
+    def test_macos_first_run(self):
+        from launch import osx_first_run, openLocked
+        import configparser
+
+        config = configparser.ConfigParser()
+
+        if sys.platform.startswith("darwin"):
+            osx_first_run()
+            conf_path = os.path.join(os.sep, os.path.expanduser("~"), "Library", "Application Support", "Zeronet Browser", "zeronet.conf")
+            config.read(conf_path)
+            try:
+                zeronet_path = config.get('global', 'data_dir')
+            except configparser.Error:
+                zeronet_path = os.path.join(os.sep, os.getcwd(), "ZeroNet")
+            lock = openLocked(os.path.join(os.sep, zeronet_path, "data", "lock.pid"), "w")
+            lock.close()
+        else:
+            pass
 
 
 if __name__ == '__main__':
