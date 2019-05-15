@@ -14,7 +14,6 @@ import time
 import imp
 
 def osx_first_run():
-    print(os.path.expanduser("~"))
     zeronet_browser_path = os.path.join(os.sep, os.path.expanduser("~"), "Library", "Application Support", "Zeronet Browser")
 
     try:
