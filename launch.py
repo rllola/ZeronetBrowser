@@ -59,6 +59,10 @@ def openLocked(path, mode="wb"):
 if __name__ == '__main__':
     freeze_support()
 
+    # Adding plugin repo (The plugins could placed somewhere else)
+    app_dir = os.path.dirname(os.path.abspath(__file__))
+    sys.path.insert(0, os.path.join(app_dir,"ZeroNet"))  # Imports relative to ZeroNet
+
     url = None
     if len(sys.argv) > 1 and sys.argv[1].startswith('zero:'):
         url = sys.argv[1]
@@ -102,14 +106,14 @@ if __name__ == '__main__':
             lock = openLocked(os.path.join(os.sep, zeronet_path, "data", "lock.pid"), "w")
             lock.close()
             # Create a process for Zeronet using this version of ZeroNet
-            p = Process(target=zeronet.main)
+            p = Process(target=zeronet.start)
             p.start()
         except BlockingIOError as err:
             print(err)
             print("Can't open lock file, your ZeroNet client is probably already running, opening browser without starting Zeronet in the background...")
     else:
         # Create a process for Zeronet
-        p = Process(target=zeronet.main)
+        p = Process(target=zeronet.start)
         p.start()
 
     time.sleep(5)
