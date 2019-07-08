@@ -39,9 +39,9 @@ ${EndIf}
 section "install"
 
   # Create a user directory for the site and data
-  CreateDirectory "$APPDATA\${APPNAME}\data"
+  CreateDirectory "$APPDATA\${APPNAME}"
 
-  FileOpen $0 "$APPDATA\${APPNAME}\data\lock.pid" w
+  FileOpen $0 "$APPDATA\${APPNAME}\lock.pid" w
   FileClose $0
 
   FileOpen $0 "$APPDATA\${APPNAME}\zeronet.conf" w
