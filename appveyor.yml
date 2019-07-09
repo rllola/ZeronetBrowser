@@ -27,7 +27,7 @@ install:
   - cd ..
 
 test_script:
-  - python test.py
+  #- python test.py
   - pyinstaller browser.spec
 
 after_test:
