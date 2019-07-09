@@ -19,7 +19,7 @@ print("DataPath : " + QLibraryInfo.location(QLibraryInfo.DataPath))
 print("TranslationsPath : " + QLibraryInfo.location(QLibraryInfo.TranslationsPath))
 print("ExamplesPath : " + QLibraryInfo.location(QLibraryInfo.ExamplesPath))
 print("TestsPath : " + QLibraryInfo.location(QLibraryInfo.TestsPath))
-print("SettingsPath : " + QLibraryInfo.location(QLibraryInfo.SettingsPath))
+#print("SettingsPath : " + QLibraryInfo.location(QLibraryInfo.SettingsPath))
 
 class TestBuild(unittest.TestCase):
 
