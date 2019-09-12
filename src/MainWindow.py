@@ -12,7 +12,10 @@ import sys
 class MainWindow(QMainWindow):
 
     def __init__(self, *args, **kwargs):
-        url = "http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/"
+        self.homepage = kwargs["homepage"]
+        del kwargs["homepage"]
+
+        url = "http://127.0.0.1:43110/%s/" % self.homepage
         if "url" in kwargs:
             url = kwargs["url"]
             del kwargs["url"]
@@ -115,10 +118,10 @@ class MainWindow(QMainWindow):
         self.tabs.currentWidget().setUrl(QUrl(url))
 
     def go_home(self):
-        self.tabs.currentWidget().setUrl(QUrl("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/"))
+        self.tabs.currentWidget().setUrl(QUrl("http://127.0.0.1:43110/%s/" % self.homepage))
 
     def new_tab_clicked(self):
-        self.add_new_tab("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/", "Home")
+        self.add_new_tab("http://127.0.0.1:43110/%s/" % self.homepage, "Home")
 
     def get_link_url_from_context_menu(self):
         tab = self.tabs.currentWidget()
@@ -185,7 +188,7 @@ class MainWindow(QMainWindow):
 
     def close_tab(self, index):
         if self.tabs.count() == 1:
-            self.tabs.currentWidget().setUrl(QUrl("http://127.0.0.1:43110/1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D/"))
+            self.tabs.currentWidget().setUrl(QUrl("http://127.0.0.1:43110/%s/" % self.homepage))
             return
         self.tabs.removeTab(index)
 

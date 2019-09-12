@@ -125,6 +125,8 @@ if __name__ == '__main__':
     if zeronet_path:
         kwargs["zeronet_path"] = zeronet_path
 
+    kwargs["homepage"] = config.get('global', 'homepage', fallback='1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D')
+
     # Start the PyQt application
     app = QApplication(sys.argv)
     mainWindow = MainWindow(**kwargs)
