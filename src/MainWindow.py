@@ -19,6 +19,7 @@ class MainWindow(QMainWindow):
         del kwargs["zeronet_base_url"]
 
         url = "%s/%s/" % (self.zeronet_base_url, self.homepage)
+
         if "url" in kwargs:
             url = kwargs["url"]
             del kwargs["url"]
@@ -118,8 +119,6 @@ class MainWindow(QMainWindow):
             # Nothing mentionned
             url = self.zeronet_base_url + '/' + url
 
-        print("Go to: " + url)
-
         self.tabs.currentWidget().setUrl(QUrl(url))
 
     def go_home(self):
@@ -194,6 +193,7 @@ class MainWindow(QMainWindow):
     def close_tab(self, index):
         if self.tabs.count() == 1:
             self.tabs.currentWidget().setUrl(QUrl("%s/%s/" % (self.zeronet_base_url, self.homepage)))
+
             return
         self.tabs.removeTab(index)
 
