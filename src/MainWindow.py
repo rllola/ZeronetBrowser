@@ -15,7 +15,11 @@ class MainWindow(QMainWindow):
         self.homepage = kwargs["homepage"]
         del kwargs["homepage"]
 
-        url = "http://127.0.0.1:43110/%s/" % self.homepage
+        self.zeronet_base_url = kwargs["zeronet_base_url"]
+        del kwargs["zeronet_base_url"]
+
+        url = "%s/%s/" % (self.zeronet_base_url, self.homepage)
+
         if "url" in kwargs:
             url = kwargs["url"]
             del kwargs["url"]
@@ -107,21 +111,21 @@ class MainWindow(QMainWindow):
         if url.startswith('zero://') :
             # ZeroNet protocol
             url_array = url.split('/')
-            url = 'http://127.0.0.1:43110/' + url_array[2]
-        elif url.startswith('http://'):
+            url = self.zeronet_base_url + '/' + url_array[2]
+        elif url.startswith('http://') or url.startswith('https://'):
             # http protocol
             pass
         else :
             # Nothing mentionned
-            url = 'http://127.0.0.1:43110/' + url
+            url = self.zeronet_base_url + '/' + url
 
         self.tabs.currentWidget().setUrl(QUrl(url))
 
     def go_home(self):
-        self.tabs.currentWidget().setUrl(QUrl("http://127.0.0.1:43110/%s/" % self.homepage))
+        self.tabs.currentWidget().setUrl(QUrl("%s/%s/" % (self.zeronet_base_url, self.homepage)))
 
     def new_tab_clicked(self):
-        self.add_new_tab("http://127.0.0.1:43110/%s/" % self.homepage, "Home")
+        self.add_new_tab("%s/%s/" % (self.zeronet_base_url, self.homepage), "Home")
 
     def get_link_url_from_context_menu(self):
         tab = self.tabs.currentWidget()
@@ -160,13 +164,13 @@ class MainWindow(QMainWindow):
         if qurl.startswith('zero://'):
             # ZeroNet protocol
             url_array = qurl.split('/')
-            qurl = 'http://127.0.0.1:43110/' + url_array[2]
-        elif qurl.startswith('http://'):
+            qurl = self.zeronet_base_url + '/' + url_array[2]
+        elif qurl.startswith('http://') or qurl.startswith('https://'):
             # http protocol
             pass
         else :
             # Nothing mentionned
-            qurl = 'http://127.0.0.1:43110/' + qurl
+            qurl = self.zeronet_base_url + '/' + qurl
 
         currentTab = self.tabs.currentWidget()
         currentTab.loadFinished.connect(self.page_loaded)
@@ -188,7 +192,8 @@ class MainWindow(QMainWindow):
 
     def close_tab(self, index):
         if self.tabs.count() == 1:
-            self.tabs.currentWidget().setUrl(QUrl("http://127.0.0.1:43110/%s/" % self.homepage))
+            self.tabs.currentWidget().setUrl(QUrl("%s/%s/" % (self.zeronet_base_url, self.homepage)))
+
             return
         self.tabs.removeTab(index)
 

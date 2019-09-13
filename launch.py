@@ -9,7 +9,7 @@ from PyQt5.QtCore import QLibraryInfo, QCoreApplication
 from PyQt5.QtWidgets import QApplication
 from src.MainWindow import MainWindow
 from multiprocessing import Process, freeze_support
-from ZeroNet import zeronet
+
 import time
 import imp
 
@@ -100,21 +100,27 @@ if __name__ == '__main__':
     except configparser.Error:
         zeronet_path = os.path.join(os.getcwd(), "ZeroNet")
 
-    if zeronet_path:
-        # See if it is already running
-        try:
-            lock = openLocked(os.path.join(zeronet_path, "lock.pid"), "w")
-            lock.close()
-            # Create a process for Zeronet using this version of ZeroNet
+    use_internal_zeronet = config.getboolean('global', 'use_internal_zeronet', fallback=True)
+    zeronet_base_url = config.get('global', 'zeronet_base_url', fallback="http://127.0.0.1:43110")
+    zeronet_base_url = zeronet_base_url.rstrip("/")
+
+    if use_internal_zeronet:
+        from ZeroNet import zeronet
+        if zeronet_path:
+            # See if it is already running
+            try:
+                lock = openLocked(os.path.join(zeronet_path, "lock.pid"), "w")
+                lock.close()
+                # Create a process for Zeronet using this version of ZeroNet
+                p = Process(target=zeronet.start)
+                p.start()
+            except BlockingIOError as err:
+                print(err)
+                print("Can't open lock file, your ZeroNet client is probably already running, opening browser without starting Zeronet in the background...")
+        else:
+            # Create a process for Zeronet
             p = Process(target=zeronet.start)
             p.start()
-        except BlockingIOError as err:
-            print(err)
-            print("Can't open lock file, your ZeroNet client is probably already running, opening browser without starting Zeronet in the background...")
-    else:
-        # Create a process for Zeronet
-        p = Process(target=zeronet.start)
-        p.start()
 
     time.sleep(5)
 
@@ -126,6 +132,7 @@ if __name__ == '__main__':
         kwargs["zeronet_path"] = zeronet_path
 
     kwargs["homepage"] = config.get('global', 'homepage', fallback='1HeLLo4uzjaLetFx6NH3PMwFP3qbRbTf3D')
+    kwargs["zeronet_base_url"] = zeronet_base_url
 
     # Start the PyQt application
     app = QApplication(sys.argv)
