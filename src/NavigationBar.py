@@ -35,7 +35,7 @@ class NavigationBar(QToolBar):
         self.addAction(self.home_btn)
 
         # Styles
-        self.setStyleSheet("QToolBar { padding: 1ex; } QWidget { margin-right: 2ex; } QLineEdit { margin-right: 5ex; padding: 3px; padding-left: 3ex; }")
+        self.setStyleSheet("QToolBar { padding: 1ex; } QWidget { padding: 1ex; } QLineEdit { margin-left: 1ex; margin-right: 2ex; padding: 3px; padding-left: 2ex; }")
 
 
         #Url bar
