@@ -40,7 +40,7 @@ class MainWindow(QMainWindow):
         self.add_tab_button = QToolButton()
         self.add_tab_button.setText('+')
         self.add_tab_button.setStyleSheet(
-            'QToolButton {border: none; margin: 4px 20px 4px 0px; height: 480px; border-left: 1px solid lightgrey; padding: 0px 4px 0px 4px; font-weight: bold; color: #5d5b59}'
+            'QToolButton {border: none; margin: 4px 1ex 4px 0px; height: 480px; border-left: 1px solid lightgrey; padding: 0px 4px 0px 4px; font-weight: bold; color: #5d5b59}'
             'QToolButton:hover { background-color: lightgrey }'
             'QToolButton:pressed { background-color: grey }'
             )
