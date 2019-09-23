@@ -5,9 +5,11 @@ import os
 import configparser
 import errno
 
+print(sys.path)
+
 from PyQt5.QtCore import QLibraryInfo, QCoreApplication
 from PyQt5.QtWidgets import QApplication
-from src.MainWindow import MainWindow
+from src import MainWindow
 from multiprocessing import Process, freeze_support
 from ZeroNet import zeronet
 import time
