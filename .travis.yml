@@ -37,7 +37,7 @@ install:
   - pip3 install -r requirements.txt
   - cd ..
   - pip3 install pyinstaller PyQt5-sip PyQt5 PyQtWebEngine
-  - if [ -n "$TRAVIS_TAG" ]; ./scripts/bump_version.sh; fi 
+  - if [ -n "$TRAVIS_TAG" ]; ./scripts/bump_version.sh ; fi 
   - cat src/version.py
 script:
   - python3 test.py
