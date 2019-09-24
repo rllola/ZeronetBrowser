@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "====== BUMP VERSION ${TAG} ======"
+echo "====== BUMP VERSION ${TRAVIS_TAG} ======"
 cat > $PWD/src/version.py << EOF
-VERSION = '${TAG/v}'
+VERSION = '${TRAVIS_TAG/v}'
 EOF
