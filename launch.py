@@ -15,8 +15,6 @@ from multiprocessing import Process, freeze_support
 import time
 import imp
 
-print(VERSION)
-
 # version1 > version2 --> True (outdated)
 # Else --> False
 def compare_version(version1, version2):
@@ -168,7 +166,6 @@ if __name__ == '__main__':
         import requests
         r = requests.get('https://api.update.rocks/update/github.com/rllola/ZeronetBrowser/stable/linux/{}'.format(VERSION))
         response = r.json()
-        print(response)
         if response['url']:
             latest_version = response['url'].split('/')[-2][1:]
             if latest_version.startswith('v'):
