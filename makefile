@@ -1,3 +1,4 @@
+# Build a .deb package for test
 build:
 	pyinstaller browser.spec
 	mv dist/ZeronetBrowser pkg-debian/usr/share/

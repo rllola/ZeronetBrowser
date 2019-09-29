@@ -27,7 +27,7 @@ install:
   - cd ..
 
 test_script:
-  #- python test.py
+  - python scripts/bump_version.py
   - pyinstaller browser.spec
 
 after_test:

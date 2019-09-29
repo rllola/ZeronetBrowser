@@ -37,6 +37,8 @@ install:
   - pip3 install -r requirements.txt
   - cd ..
   - pip3 install pyinstaller PyQt5-sip PyQt5 PyQtWebEngine
+  - python3 scripts/bump_version.py
+  - cat src/version.py
 script:
   - python3 test.py
   - pyinstaller --windowed browser.spec

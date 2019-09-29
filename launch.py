@@ -8,10 +8,33 @@ import errno
 from PyQt5.QtCore import QLibraryInfo, QCoreApplication
 from PyQt5.QtWidgets import QApplication
 from src.MainWindow import MainWindow
+from src.version import VERSION
+from src.UpdateNotification import UpdateNotification
 from multiprocessing import Process, freeze_support
 
 import time
 import imp
+
+# version1 > version2 --> True (outdated)
+# Else --> False
+def compare_version(version1, version2):
+    version1 = version1.split('.')
+    version2 = version2.split('.')
+
+    if version1[0] > version2[0]:
+        return True
+    elif version2[0] > version1[0]:
+        return False
+    elif version1[1] > version2[1]:
+        return True
+    elif version2[1] > version1[1]:
+        return False
+    elif version1[2] > version2[2]:
+        return True
+    elif version2[2] > version1[2]:
+        return False
+    else:
+        return False
 
 def osx_first_run():
     zeronet_browser_path = os.path.join(os.path.expanduser("~"), "Library", "Application Support", "Zeronet Browser")
@@ -103,6 +126,7 @@ if __name__ == '__main__':
     use_internal_zeronet = config.getboolean('global', 'use_internal_zeronet', fallback=True)
     zeronet_base_url = config.get('global', 'zeronet_base_url', fallback="http://127.0.0.1:43110")
     zeronet_base_url = zeronet_base_url.rstrip("/")
+    auto_update = config.get('browser', 'auto_update', fallback=True)
 
     if use_internal_zeronet:
         from ZeroNet import zeronet
@@ -137,6 +161,19 @@ if __name__ == '__main__':
     # Start the PyQt application
     app = QApplication(sys.argv)
     mainWindow = MainWindow(**kwargs)
+
+    if auto_update and sys.platform.startswith('linux'):
+        import requests
+        r = requests.get('https://api.update.rocks/update/github.com/rllola/ZeronetBrowser/stable/linux/{}'.format(VERSION))
+        response = r.json()
+        if response['url']:
+            latest_version = response['url'].split('/')[-2][1:]
+            if latest_version.startswith('v'):
+                outdated = compare_version(latest_version, VERSION)
+                if outdated:
+                    update_dialog = UpdateNotification(response['url'])
+                    update_dialog.open()
+
     app.exec_()
 
     if p:
