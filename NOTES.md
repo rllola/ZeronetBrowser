@@ -19,6 +19,25 @@ import main
 import Config
 ```
 
+## Update for linux when installed using .deb
+
+Create a new group
+
+```
+sudo groupadd --system zeronet-browser
+```
+
+Add user to group
+```
+sudo usermod -a -G zeronet-browser $USER
+```
+
+Set the correct permission to our ZeroNet folder
+```
+sudo chgrp -R zeronet-browser /usr/share/ZeronetBrowser/ZeroNet
+sudo chmod -R g+w /usr/share/ZeronetBrowser/ZeroNet
+```
+
 # Qt 5.12
 
 Using QT 5.12
