@@ -19,7 +19,7 @@ init:
   - SET PATH=%PYTHON%;%PYTHON%\Scripts;C:\Qt\5.12\msvc2017_64\bin;%PATH%
   - ps: Start-FileDownload 'https://nsis.sourceforge.io/mediawiki/images/4/4a/AccessControl.zip'
   - 7z x AccessControl.zip
-  - ls AccessControl\Plugins
+  - ls
   - cmd: copy AccessControl\Plugins\AccessControl.dll C:\Program Files (x86)\NSIS\plugins\x86-ansi
   - cmd: copy AccessControl\Unicode\Plugins\AccessControl.dll C:\Program Files (x86)\NSIS\plugins\x86-unicode
   - python -m pip install --upgrade pip
