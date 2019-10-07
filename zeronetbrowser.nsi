@@ -85,6 +85,11 @@ section "install"
   WriteRegStr HKLM "Software\Classes\zero\shell\open" "Zeronet Browser" "Open ZeroNet page in Zeronet Browser"
   WriteRegStr HKLM "Software\Classes\zero\shell\open\command" "" "$INSTDIR\ZeronetBrowser.exe %1"
 
+  # Set permission for ZeroNet update
+  AccessControl::GrantOnFile \
+    "$INSTDIR\ZeroNet" "(BU)" "GenericRead + GenericWrite"
+  Pop $0
+
 sectionEnd
 
 # Uninstaller
