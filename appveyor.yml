@@ -17,7 +17,7 @@ init:
   - cmd: copy C:\windows\system32\libeay32.dll C:\Qt\5.12\msvc2017_64\bin
   - cmd: copy C:\windows\system32\ssleay32.dll C:\Qt\5.12\msvc2017_64\bin
   - SET PATH=%PYTHON%;%PYTHON%\Scripts;C:\Qt\5.12\msvc2017_64\bin;%PATH%
-  - curl "https://nsis.sourceforge.io/mediawiki/images/4/4a/AccessControl.zip" -OutFile "C:\tmp\AccessControl.zip"
+  - curl -v "https://nsis.sourceforge.io/mediawiki/images/4/4a/AccessControl.zip" -OutFile "C:\tmp\AccessControl.zip"
   - tar -xf C:\tmp\AccessControl.zip
   - ls C:\tmp\AccessControl\Plugins
   - cmd: copy C:\tmp\AccessControl\Plugins\AccessControl.dll C:\Program Files (x86)\NSIS\plugins\x86-ansi
