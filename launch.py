@@ -115,13 +115,20 @@ if __name__ == '__main__':
         sys.argv.append("--config_file")
         sys.argv.append(conf_path)
         config.read(conf_path)
+    elif os.environ.get("DEV"):
+        data_dir = os.path.join(os.sep, os.getcwd(), "data")
+        sys.argv.append("--data_dir")
+        sys.argv.append(data_dir)
     else:
         config.read(os.path.join(os.sep, os.getcwd(), "ZeroNet", "zeronet.conf"))
 
     try:
         zeronet_path = config.get('global', 'data_dir')
     except configparser.Error:
-        zeronet_path = os.path.join(os.getcwd(), "ZeroNet")
+        if data_dir:
+            zeronet_path = data_dir
+        else:
+            zeronet_path = os.path.join(os.getcwd(), "ZeroNet")
 
     use_internal_zeronet = config.getboolean('global', 'use_internal_zeronet', fallback=True)
     zeronet_base_url = config.get('global', 'zeronet_base_url', fallback="http://127.0.0.1:43110")
