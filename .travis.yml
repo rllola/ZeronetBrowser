@@ -15,7 +15,7 @@ matrix:
           - export QT_QPA_PLATFORM=offscreen
         before_deploy:
           - ./scripts/generate_deb_files.sh
-          - export FILE=ZeronetBrowser_${TRAVIS_TAG}_i386.deb
+          - export FILE=ZeronetBrowser_${TRAVIS_TAG}_amd64.deb
           - mv dist/ZeronetBrowser pkg-debian/usr/share/
           - dpkg -b pkg-debian/ $FILE
       - os: osx
