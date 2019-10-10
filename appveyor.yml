@@ -21,6 +21,11 @@ init:
   - python -m pip install pyinstaller msgpack gevent pypiwin32 PyQt5-sip PyQt5 PyQtWebEngine
 
 install:
+  - ps: Start-FileDownload 'https://nsis.sourceforge.io/mediawiki/images/4/4a/AccessControl.zip'
+  - 7z x AccessControl.zip -oC:\tmp\AccessControl\
+  - ls C:\tmp
+  - cmd: copy C:\tmp\AccessControl\Plugins\AccessControl.dll "C:\Program Files (x86)\NSIS\plugins\x86-ansi"
+  - cmd: copy C:\tmp\AccessControl\Unicode\Plugins\AccessControl.dll "C:\Program Files (x86)\NSIS\plugins\x86-unicode"
   - git submodule update --init --recursive
   - cd ZeroNet
   - python -m pip install -r requirements.txt

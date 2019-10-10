@@ -3,10 +3,11 @@ venv/
 build/
 dist/
 log/
-data/
+data/*
+!data/plugins.json
+!data/__plugins__/1Browser/*
 .vagrant/
-ubuntu-xenial-16.04-cloudimg-console.log
-browser.conf
+*.log
 __pycache__
 *.deb
 pkg-debian/usr/share/ZeronetBrowser
