@@ -32,6 +32,8 @@ install:
   - cd ..
 
 test_script:
+  - python test.py
+  - python test/first_run_test.py
   - python scripts/bump_version.py
   - pyinstaller browser.spec
 
