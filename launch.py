@@ -36,17 +36,9 @@ def compare_version(version1, version2):
     else:
         return False
 
-def osx_first_run():
-    zeronet_browser_path = os.path.join(os.path.expanduser("~"), "Library", "Application Support", "Zeronet Browser")
-
+def first_run(zeronet_browser_path):
     try:
         os.makedirs(zeronet_browser_path)
-    except OSError as e:
-        if e.errno != errno.EEXIST:
-            raise
-
-    try:
-        os.makedirs(os.path.join(zeronet_browser_path, "data"))
     except OSError as e:
         if e.errno != errno.EEXIST:
             raise
@@ -59,7 +51,6 @@ def osx_first_run():
     f.write("[global]\n")
     f.write("data_dir = {} \n".format(zeronet_browser_path))
     f.close()
-
 
 # See if it is lock or not
 def openLocked(path, mode="wb"):
@@ -98,36 +89,34 @@ if __name__ == '__main__':
     zeronet_path = None
     conf_path = None
 
-    if sys.platform.startswith("linux") and not os.environ.get("DEV"):
-        conf_path = os.path.join(os.sep, os.path.expanduser("~"), ".zeronet", "zeronet.conf")
-        sys.argv.append("--config_file")
-        sys.argv.append(conf_path)
-        config.read(conf_path)
-    elif sys.platform.startswith("win") and not os.environ.get("DEV"):
-        conf_path = os.path.join(os.sep, os.path.expanduser("~"), "AppData","Roaming", "Zeronet Browser", "zeronet.conf")
-        sys.argv.append("--config_file")
-        sys.argv.append(conf_path)
-        config.read(conf_path)
-    elif sys.platform.startswith("darwin") and not os.environ.get("DEV"):
-        conf_path = os.path.join(os.sep, os.path.expanduser("~"), "Library", "Application Support", "Zeronet Browser", "zeronet.conf")
-        if not os.path.isfile(conf_path):
-            osx_first_run()
-        sys.argv.append("--config_file")
-        sys.argv.append(conf_path)
-        config.read(conf_path)
-    elif os.environ.get("DEV"):
-        data_dir = os.path.join(os.sep, os.getcwd(), "data")
+    # Development mode
+    if os.environ.get("DEV"):
+        data_dir = os.path.join(os.getcwd(), "data")
         sys.argv.append("--data_dir")
         sys.argv.append(data_dir)
+        zeronet_path = data_dir
     else:
-        config.read(os.path.join(os.sep, os.getcwd(), "ZeroNet", "zeronet.conf"))
-
-    try:
-        zeronet_path = config.get('global', 'data_dir')
-    except configparser.Error:
-        if data_dir:
-            zeronet_path = data_dir
+        # Maybe people would like to pass their own browser dir path...
+        if sys.platform.startswith("linux"):
+            browser_dir_path = os.path.join(os.path.expanduser("~"), ".zeronet")
+        elif sys.platform.startswith("win"):
+            browser_dir_path = os.path.join(os.path.expanduser("~"), "AppData","Roaming", "Zeronet Browser")
+        elif sys.platform.startswith("darwin"):
+            browser_dir_path = os.path.join(os.path.expanduser("~"), "Library", "Application Support", "Zeronet Browser")
         else:
+            config.read(os.path.join(os.sep, os.getcwd(), "ZeroNet", "zeronet.conf"))
+
+        if browser_dir_path:
+            conf_path = os.path.join(browser_dir_path, "zeronet.conf")
+            if not os.path.isfile(conf_path):
+                first_run(browser_dir_path)
+            sys.argv.append("--config_file")
+            sys.argv.append(conf_path)
+            config.read(conf_path)
+
+        try:
+            zeronet_path = config.get('global', 'data_dir')
+        except configparser.Error:
             zeronet_path = os.path.join(os.getcwd(), "ZeroNet")
 
     use_internal_zeronet = config.getboolean('global', 'use_internal_zeronet', fallback=True)

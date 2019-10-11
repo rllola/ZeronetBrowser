@@ -1,5 +1,8 @@
 #!/bin/sh
+set -x
+
 ln -s /usr/share/ZeronetBrowser/ZeronetBrowser /usr/bin/ZeronetBrowser
+
 xdg-mime default zeronet-browser.desktop x-scheme-handler/zero
 mkdir -p $HOME/.zeronet/log
 chown $SUDO_USER:$SUDO_USER $HOME/.zeronet

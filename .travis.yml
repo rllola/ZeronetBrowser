@@ -41,6 +41,7 @@ install:
   - cat src/version.py
 script:
   - python3 test.py
+  - python3 test/first_run_test.py
   - pyinstaller --windowed browser.spec
 
 deploy:
