@@ -3,6 +3,3 @@
 	url = https://github.com/HelloZeroNet/ZeroNet.git
   branch = py3
 
-[submodule "data/__plugins__/1Browser/Browser"]
-	path = data/__plugins__/1Browser/Browser
-	url = https://github.com/rllola/zeronet-browser-plugin.git
