@@ -38,6 +38,26 @@ def compare_version(version1, version2):
     else:
         return False
 
+def install_browser_plugin(zeronet_browser_path):
+
+    if not os.path.isfile(os.path.join(zeronet_browser_path, "plugins.json")):
+        # Create zeronet.conf file
+        f = open(os.path.join(zeronet_browser_path, "plugins.json"), 'w')
+        plugins = {
+            "1AzHmVFhffXjZHexSn78nBpCTJ1wTqskpB": {
+                "Browser": {
+                    "enabled": True,
+                    "rev": 0
+                }
+            }
+        }
+        f.write(json.JSONEncoder().encode(plugins))
+        f.close()
+
+    # Copy plugin
+    shutil.copytree(os.path.join("data", "__plugins__"), os.path.join(zeronet_browser_path, "__plugins__"))
+
+
 def first_run(zeronet_browser_path):
     try:
         os.makedirs(zeronet_browser_path)
@@ -55,22 +75,7 @@ def first_run(zeronet_browser_path):
     f.write("log_dir = {} \n".format(os.path.join(zeronet_browser_path, "log")))
     f.close()
 
-    # Create zeronet.conf file
-    f = open(os.path.join(zeronet_browser_path, "plugins.json"), 'w')
-    plugins = {
-        "1AzHmVFhffXjZHexSn78nBpCTJ1wTqskpB": {
-            "Browser": {
-                "enabled": True,
-                "rev": 0
-            }
-        }
-    }
-    f.write(json.JSONEncoder().encode(plugins))
-    f.close()
-
-    # Copy plugin
-    shutil.copytree(os.path.join("data", "__plugins__"), os.path.join(zeronet_browser_path, "__plugins__"))
-
+    install_browser_plugin(zeronet_browser_path)
 
 # See if it is lock or not
 def openLocked(path, mode="wb"):
@@ -134,6 +139,9 @@ if __name__ == '__main__':
             sys.argv.append(conf_path)
             config.read(conf_path)
 
+            # Install plugin browser under __plugins__ (not built-in plugin)
+            if not os.path.isdir(os.path.join(browser_dir_path, "__plugins__")):
+                install_browser_plugin(browser_dir_path)
         try:
             zeronet_path = config.get('global', 'data_dir')
         except configparser.Error:
