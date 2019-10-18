@@ -4,6 +4,8 @@ import sys
 import os
 import configparser
 import errno
+import json
+import shutil
 
 from PyQt5.QtCore import QLibraryInfo, QCoreApplication
 from PyQt5.QtWidgets import QApplication
@@ -48,9 +50,27 @@ def first_run(zeronet_browser_path):
 
     # Create zeronet.conf file
     f = open(os.path.join(zeronet_browser_path, "zeronet.conf"), 'w')
-    f.write("[global]\n")
+    f.write("[global]copytree\n")
     f.write("data_dir = {} \n".format(zeronet_browser_path))
+    f.write("log_dir = {} \n".format(os.path.join(zeronet_browser_path, "log")))
     f.close()
+
+    # Create zeronet.conf file
+    f = open(os.path.join(zeronet_browser_path, "plugins.json"), 'w')
+    plugins = {
+        "1AzHmVFhffXjZHexSn78nBpCTJ1wTqskpB": {
+            "Browser": {
+                "enabled": True,
+                "rev": 0
+            }
+        }
+    }
+    f.write(json.JSONEncoder().encode(plugins))
+    f.close()
+
+    # Copy plugin
+    shutil.copytree(os.path.join("data", "__plugins__"), os.path.join(zeronet_browser_path, "__plugins__"))
+
 
 # See if it is lock or not
 def openLocked(path, mode="wb"):
