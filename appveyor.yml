@@ -4,7 +4,7 @@ platform:
 image: Visual Studio 2017
 
 environment:
-  matrix:
+  matrix: .gitignore 
     - PYTHON: "C:\\Python37-x64"
       PATH: C:\Program Files (x86)\NSIS\;%PATH%
 
@@ -32,6 +32,7 @@ install:
   - cd ..
 
 test_script:
+  - python test/first_run_test.py
   - python scripts/bump_version.py
   - pyinstaller browser.spec
 

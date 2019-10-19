@@ -1,24 +1,30 @@
 #!/bin/sh
+set -x
+
 ln -s /usr/share/ZeronetBrowser/ZeronetBrowser /usr/bin/ZeronetBrowser
-xdg-mime default zeronet-browser.desktop x-scheme-handler/zero
-mkdir -p $HOME/.zeronet/log
-chown $SUDO_USER:$SUDO_USER $HOME/.zeronet
-chown $SUDO_USER:$SUDO_USER $HOME/.zeronet/log
 
-touch $HOME/.zeronet/lock.pid
-chown $SUDO_USER:$SUDO_USER $HOME/.zeronet/lock.pid
+if [[ ! -v SUDO_USER ]]; then
 
-cat > $HOME/.zeronet/zeronet.conf << EOF
-[global]
-data_dir = $HOME/.zeronet
-log_dir = $HOME/.zeronet/log
+  xdg-mime default zeronet-browser.desktop x-scheme-handler/zero
+  mkdir -p $HOME/.zeronet/log
+  chown $SUDO_USER:$SUDO_USER $HOME/.zeronet
+  chown $SUDO_USER:$SUDO_USER $HOME/.zeronet/log
+
+  touch $HOME/.zeronet/lock.pid
+  chown $SUDO_USER:$SUDO_USER $HOME/.zeronet/lock.pid
+
+  cat > $HOME/.zeronet/zeronet.conf << EOF
+  [global]
+  data_dir = $HOME/.zeronet
+  log_dir = $HOME/.zeronet/log
 EOF
 
-chown $SUDO_USER:$SUDO_USER $HOME/.zeronet/zeronet.conf
+  chown $SUDO_USER:$SUDO_USER $HOME/.zeronet/zeronet.conf
 
-chown -R root:root /usr/share/ZeronetBrowser
+  chown -R root:root /usr/share/ZeronetBrowser
 
-groupadd --system zeronet-browser
-usermod -a -G zeronet-browser $SUDO_USER
-chgrp -R zeronet-browser /usr/share/ZeronetBrowser/ZeroNet
-chmod -R g+w /usr/share/ZeronetBrowser/ZeroNet
+  groupadd --system zeronet-browser
+  usermod -a -G zeronet-browser $SUDO_USER
+  chgrp -R zeronet-browser /usr/share/ZeronetBrowser/ZeroNet
+  chmod -R g+w /usr/share/ZeronetBrowser/ZeroNet
+fi

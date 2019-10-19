@@ -4,6 +4,8 @@ import sys
 import os
 import configparser
 import errno
+import json
+import shutil
 
 from PyQt5.QtCore import QLibraryInfo, QCoreApplication
 from PyQt5.QtWidgets import QApplication
@@ -36,17 +38,29 @@ def compare_version(version1, version2):
     else:
         return False
 
-def osx_first_run():
-    zeronet_browser_path = os.path.join(os.path.expanduser("~"), "Library", "Application Support", "Zeronet Browser")
+def install_browser_plugin(zeronet_browser_path):
 
+    if not os.path.isfile(os.path.join(zeronet_browser_path, "plugins.json")):
+        # Create zeronet.conf file
+        f = open(os.path.join(zeronet_browser_path, "plugins.json"), 'w')
+        plugins = {
+            "1AzHmVFhffXjZHexSn78nBpCTJ1wTqskpB": {
+                "Browser": {
+                    "enabled": True,
+                    "rev": 0
+                }
+            }
+        }
+        f.write(json.JSONEncoder().encode(plugins))
+        f.close()
+
+    # Copy plugin
+    shutil.copytree(os.path.join("data", "__plugins__"), os.path.join(zeronet_browser_path, "__plugins__"))
+
+
+def first_run(zeronet_browser_path):
     try:
         os.makedirs(zeronet_browser_path)
-    except OSError as e:
-        if e.errno != errno.EEXIST:
-            raise
-
-    try:
-        os.makedirs(os.path.join(zeronet_browser_path, "data"))
     except OSError as e:
         if e.errno != errno.EEXIST:
             raise
@@ -56,10 +70,12 @@ def osx_first_run():
 
     # Create zeronet.conf file
     f = open(os.path.join(zeronet_browser_path, "zeronet.conf"), 'w')
-    f.write("[global]\n")
+    f.write("[global]copytree\n")
     f.write("data_dir = {} \n".format(zeronet_browser_path))
+    f.write("log_dir = {} \n".format(os.path.join(zeronet_browser_path, "log")))
     f.close()
 
+    install_browser_plugin(zeronet_browser_path)
 
 # See if it is lock or not
 def openLocked(path, mode="wb"):
@@ -98,36 +114,37 @@ if __name__ == '__main__':
     zeronet_path = None
     conf_path = None
 
-    if sys.platform.startswith("linux") and not os.environ.get("DEV"):
-        conf_path = os.path.join(os.sep, os.path.expanduser("~"), ".zeronet", "zeronet.conf")
-        sys.argv.append("--config_file")
-        sys.argv.append(conf_path)
-        config.read(conf_path)
-    elif sys.platform.startswith("win") and not os.environ.get("DEV"):
-        conf_path = os.path.join(os.sep, os.path.expanduser("~"), "AppData","Roaming", "Zeronet Browser", "zeronet.conf")
-        sys.argv.append("--config_file")
-        sys.argv.append(conf_path)
-        config.read(conf_path)
-    elif sys.platform.startswith("darwin") and not os.environ.get("DEV"):
-        conf_path = os.path.join(os.sep, os.path.expanduser("~"), "Library", "Application Support", "Zeronet Browser", "zeronet.conf")
-        if not os.path.isfile(conf_path):
-            osx_first_run()
-        sys.argv.append("--config_file")
-        sys.argv.append(conf_path)
-        config.read(conf_path)
-    elif os.environ.get("DEV"):
-        data_dir = os.path.join(os.sep, os.getcwd(), "data")
+    # Development mode
+    if os.environ.get("DEV"):
+        data_dir = os.path.join(os.getcwd(), "data")
         sys.argv.append("--data_dir")
         sys.argv.append(data_dir)
+        zeronet_path = data_dir
     else:
-        config.read(os.path.join(os.sep, os.getcwd(), "ZeroNet", "zeronet.conf"))
-
-    try:
-        zeronet_path = config.get('global', 'data_dir')
-    except configparser.Error:
-        if data_dir:
-            zeronet_path = data_dir
+        # Maybe people would like to pass their own browser dir path...
+        if sys.platform.startswith("linux"):
+            browser_dir_path = os.path.join(os.path.expanduser("~"), ".zeronet")
+        elif sys.platform.startswith("win"):
+            browser_dir_path = os.path.join(os.path.expanduser("~"), "AppData","Roaming", "Zeronet Browser")
+        elif sys.platform.startswith("darwin"):
+            browser_dir_path = os.path.join(os.path.expanduser("~"), "Library", "Application Support", "Zeronet Browser")
         else:
+            config.read(os.path.join(os.sep, os.getcwd(), "ZeroNet", "zeronet.conf"))
+
+        if browser_dir_path:
+            conf_path = os.path.join(browser_dir_path, "zeronet.conf")
+            if not os.path.isfile(conf_path):
+                first_run(browser_dir_path)
+            sys.argv.append("--config_file")
+            sys.argv.append(conf_path)
+            config.read(conf_path)
+
+            # Install plugin browser under __plugins__ (not built-in plugin)
+            if not os.path.isdir(os.path.join(browser_dir_path, "__plugins__")):
+                install_browser_plugin(browser_dir_path)
+        try:
+            zeronet_path = config.get('global', 'data_dir')
+        except configparser.Error:
             zeronet_path = os.path.join(os.getcwd(), "ZeroNet")
 
     use_internal_zeronet = config.getboolean('global', 'use_internal_zeronet', fallback=True)

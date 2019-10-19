@@ -5,7 +5,7 @@ dist/
 log/
 data/*
 !data/plugins.json
-!data/__plugins__/1Browser/*
+!data/__plugins__/1AzHmVFhffXjZHexSn78nBpCTJ1wTqskpB/*
 .vagrant/
 *.log
 __pycache__
