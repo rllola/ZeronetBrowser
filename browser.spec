@@ -8,7 +8,7 @@ block_cipher = None
 
 datas = Tree('ZeroNet', prefix='ZeroNet', excludes=['.github','*.pyc', 'data', 'log'])
 datas += Tree('icons', prefix='icons', excludes=[])
-datas += Tree('data/__plugins__/1AzHmVFhffXjZHexSn78nBpCTJ1wTqskpB', prefix='__plugins__/1AzHmVFhffXjZHexSn78nBpCTJ1wTqskpB', excludes=['.git', '.gitignore'])
+datas += Tree('data/__plugins__/1AzHmVFhffXjZHexSn78nBpCTJ1wTqskpB', prefix='data/__plugins__/1AzHmVFhffXjZHexSn78nBpCTJ1wTqskpB', excludes=['.git', '.gitignore'])
 
 a = Analysis(['launch.py'],
              #pathex=['/home/lola/Workspace/ZeroNet/Browser/ZeroNet/src', '/home/lola/Workspace/ZeroNet/Browser/ZeroNet/plugins', '/home/lola/Workspace/ZeroNet/Browser/ZeroNet/src/lib', '/home/lola/Workspace/ZeroNet/Browser'],
