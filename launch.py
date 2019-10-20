@@ -54,7 +54,7 @@ def install_browser_plugin(zeronet_browser_path):
         f.close()
 
     # Copy plugin
-    shutil.copytree(os.path.join(os.getcwd(), "data", "__plugins__"), os.path.join(zeronet_browser_path, "__plugins__"))
+    shutil.copytree(os.path.join(os.getcwd(), "__plugins__"), os.path.join(zeronet_browser_path, "__plugins__"))
 
 
 def first_run(zeronet_browser_path):
