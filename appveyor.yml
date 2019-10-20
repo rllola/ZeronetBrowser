@@ -4,7 +4,7 @@ platform:
 image: Visual Studio 2017
 
 environment:
-  matrix: .gitignore 
+  matrix: 
     - PYTHON: "C:\\Python37-x64"
       PATH: C:\Program Files (x86)\NSIS\;%PATH%
 
