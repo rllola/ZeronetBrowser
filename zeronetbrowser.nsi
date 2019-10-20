@@ -55,7 +55,7 @@ section "install"
 
   # Start Menu
   createDirectory "$SMPROGRAMS\${APPNAME}"
-  createShortCut "$SMPROGRAMS\${APPNAME}\${APPNAME}.lnk" "$INSTDIR\${ZIP2EXE_OUTFILE}" "" "$INSTDIR\${MUI_ICON}"
+  createShortCut "$SMPROGRAMS\${APPNAME}\${APPNAME}.lnk" "$INSTDIR\ZeronetBrowser.exe" "" "$INSTDIR\${MUI_ICON}"
 
   # Registry information for add/remove programs
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}" "DisplayName" "${APPNAME} - ${DESCRIPTION}"
