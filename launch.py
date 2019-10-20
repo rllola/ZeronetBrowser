@@ -9,9 +9,9 @@ import shutil
 
 from PyQt5.QtCore import QLibraryInfo, QCoreApplication
 from PyQt5.QtWidgets import QApplication
-from source.MainWindow import MainWindow
-from source.version import VERSION
-from source.UpdateNotification import UpdateNotification
+from src.MainWindow import MainWindow
+from src.version import VERSION
+from src.UpdateNotification import UpdateNotification
 from multiprocessing import Process, freeze_support
 
 import time
