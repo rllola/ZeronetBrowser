@@ -9,13 +9,12 @@ import shutil
 
 from PyQt5.QtCore import QLibraryInfo, QCoreApplication
 from PyQt5.QtWidgets import QApplication
-from src.MainWindow import MainWindow
-from src.version import VERSION
-from src.UpdateNotification import UpdateNotification
+from source.MainWindow import MainWindow
+from source.version import VERSION
+from source.UpdateNotification import UpdateNotification
 from multiprocessing import Process, freeze_support
 
 import time
-import imp
 
 # version1 > version2 --> True (outdated)
 # Else --> False
@@ -55,7 +54,7 @@ def install_browser_plugin(zeronet_browser_path):
         f.close()
 
     # Copy plugin
-    shutil.copytree(os.path.join("data", "__plugins__"), os.path.join(zeronet_browser_path, "__plugins__"))
+    shutil.copytree(os.path.join(os.getcwd(), "data", "__plugins__"), os.path.join(zeronet_browser_path, "__plugins__"))
 
 
 def first_run(zeronet_browser_path):
@@ -97,6 +96,8 @@ def openLocked(path, mode="wb"):
 
 if __name__ == '__main__':
     freeze_support()
+
+    print("Start Browser")
 
     # Adding plugin repo (The plugins could placed somewhere else)
     app_dir = os.path.dirname(os.path.abspath(__file__))
