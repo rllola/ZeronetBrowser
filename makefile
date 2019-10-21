@@ -2,7 +2,7 @@
 build:
 	pyinstaller browser.spec
 	mv dist/ZeronetBrowser pkg-debian/usr/share/
-	dpkg -b pkg-debian ZeronetBrowser_test_i386.deb
+	dpkg -b pkg-debian ZeronetBrowser_test_amd64.deb
 
 clean:
 	rm -rf dist/ build/
