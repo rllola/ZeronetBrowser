@@ -8,7 +8,7 @@ groupadd --system zeronet-browser
 chgrp -R zeronet-browser /usr/share/ZeronetBrowser/ZeroNet
 chmod -R g+w /usr/share/ZeronetBrowser/ZeroNet
 
-if [[ ! -v $SUDO_USER ]]; then
+if [[ ! -z ${SUDO_USER+x} ]]; then
 
   xdg-mime default zeronet-browser.desktop x-scheme-handler/zero
   mkdir -p $HOME/.zeronet/log
