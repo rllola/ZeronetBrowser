@@ -69,7 +69,7 @@ def first_run(zeronet_browser_path):
 
     # Create zeronet.conf file
     f = open(os.path.join(zeronet_browser_path, "zeronet.conf"), 'w')
-    f.write("[global]copytree\n")
+    f.write("[global]\n")
     f.write("data_dir = {} \n".format(zeronet_browser_path))
     f.write("log_dir = {} \n".format(os.path.join(zeronet_browser_path, "log")))
     f.close()
