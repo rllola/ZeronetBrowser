@@ -4,7 +4,7 @@ platform:
 image: Visual Studio 2017
 
 environment:
-  matrix: 
+  matrix:
     - PYTHON: "C:\\Python37-x64"
       PATH: C:\Program Files (x86)\NSIS\;%PATH%
 
@@ -18,7 +18,7 @@ init:
   - cmd: copy C:\windows\system32\ssleay32.dll C:\Qt\5.12\msvc2017_64\bin
   - SET PATH=%PYTHON%;%PYTHON%\Scripts;C:\Qt\5.12\msvc2017_64\bin;%PATH%
   - python -m pip install --upgrade pip
-  - python -m pip install pyinstaller msgpack gevent pypiwin32 PyQt5-sip PyQt5 PyQtWebEngine
+  - python -m pip install pyinstaller msgpack gevent pypiwin32 PyQt5-sip PyQt5==5.12.3 PyQtWebEngine==5.12.1
 
 install:
   - ps: Start-FileDownload 'https://nsis.sourceforge.io/mediawiki/images/4/4a/AccessControl.zip'
