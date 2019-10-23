@@ -20,8 +20,8 @@ if [[ ! -z ${SUDO_USER+x} ]]; then
 
   cat > $HOME/.zeronet/zeronet.conf << EOF
 [global]
-  data_dir = $HOME/.zeronet
-  log_dir = $HOME/.zeronet/log
+data_dir = $HOME/.zeronet
+log_dir = $HOME/.zeronet/log
 EOF
 
   chown $SUDO_USER:$SUDO_USER $HOME/.zeronet/zeronet.conf
